@@ -101,7 +101,7 @@ public class AttributeManager {
 				query.append(" where id = " + attribute.getId());
 			else{
 				 if(attribute.getValue() != null)
-						condition.append(" and value = " + attribute.getValue() + "'");
+						condition.append("value = " + attribute.getValue() + "'");
 				if(attribute.getItemId() != -1){
 					 if( condition.length() > 0 )
 	                    	condition.append(" and ");
@@ -205,7 +205,7 @@ public class AttributeManager {
 	}
 
 	public AttributeType restoreHasType(Attribute attribute) throws DTException{
-		String selectTypeSql = "select at.id, at.name, at.category_id from item i, attribute a where a.attribute_type_id = at.id";
+		String selectTypeSql = "select at.id, at.name, at.category_id from attribute_type at, attribute a where a.attribute_type_id = at.id";
 		Statement stmt = null;
 		StringBuffer query = new StringBuffer(100);
 		StringBuffer condition = new StringBuffer(100);
@@ -220,9 +220,9 @@ public class AttributeManager {
 			else{
 				 if(attribute.getValue() != null)
 						condition.append(" and a.value = '" + attribute.getValue() + "'");
-				if(attribute.getItemId() != 0)
+				if(attribute.getItemId() != -1)
 					condition.append(" and a.item_id = '" + attribute.getItemId() + "'");
-				if(attribute.getAttributeType() != 0)
+				if(attribute.getAttributeType() != -1)
 					condition.append(" and a.attribute_type_id = '" + attribute.getAttributeType() + "'");
 				if(condition.length() > 0){
 					query.append(condition);

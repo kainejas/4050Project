@@ -51,6 +51,8 @@ public interface Auction
      */
     float getSellingPrice();
     
+    void setSellingPrice(float price);
+    
     // participates in associations with the other side having multiplicity of one
     /**
      * Return the identifier of the Item being sold at this Auction.

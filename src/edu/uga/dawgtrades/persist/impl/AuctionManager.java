@@ -25,8 +25,8 @@ public class AuctionManager {
 	}//end constructor
 	
 	public void save(Auction auction) throws DTException {
-		String 				insertAuctionSql = "insert into auction ( expirationDate, itemID, minPrice, sellingPrice ) values ( ?, ?, ?, ? )";
-		String 				updateAuctionSql = "update auction  set expirationDate = ?, set itemId = ?, set minPrice = ?, set sellingPrice = ? where id = ?";
+		String 				insertAuctionSql = "insert into auction ( expiration, itemID, min_price, selling_price ) values ( ?, ?, ?, ? )";
+		String 				updateAuctionSql = "update auction  set expiration = ?, set item_id = ?, set min_price = ?, set selling_price = ? where id = ?";
 		PreparedStatement 	stmt;
 		int					inscnt;
 		long				auctionId;
@@ -93,7 +93,7 @@ public class AuctionManager {
 	}//end save()
 	
 	public Iterator<Auction> restore(Auction auction) throws DTException {
-		String selectAuctionSql = "select id, expirationDate, itemId, minPrice, sellingPrice from auction";
+		String selectAuctionSql = "select id, expiration, item_id, min_price, selling_price from auction";
 		Statement stmt = null;
 		StringBuffer query = new StringBuffer(100);
 		StringBuffer condition = new StringBuffer(100);
@@ -107,9 +107,9 @@ public class AuctionManager {
 				query.append(" where id = " + auction.getId());
 			else {
 				if (auction.getItemId() != -1)
-					condition.append("itemId = '" + auction.getItemId() + "'");
+					condition.append(" where item_id = '" + auction.getItemId() + "'");
 				if (condition.length() > 0)
-					query.append(" where " + condition);
+					query.append(condition);
 			}
 		}
 		
@@ -150,7 +150,7 @@ public class AuctionManager {
 	}//end restore
 	
 	public Item restoreIsSoldAt(Auction auction) throws DTException {
-		String selectAuctionSql = "select i.id, i.expirationDate, i.itemId, i.minPrice, i.sellingPrice from item i, item a where a.item_id = i.id";
+		String selectAuctionSql = "select i.id, i.expiration, i.item_id, i.min_price, i.selling_price from item i, item a where a.item_id = i.id";
 		Statement stmt = null;
 		StringBuffer query = new StringBuffer(100);
 		StringBuffer condition = new StringBuffer(100);
@@ -164,23 +164,18 @@ public class AuctionManager {
 				query.append(" and a.id = " + auction.getId());
 			else {
 				if (auction.getExpiration() != null)
-					condition.append( " a.expirationDate = '" + auction.getExpiration() + "'");
+					condition.append( " and a.expiration = '" + auction.getExpiration() + "'");
 				
-				if (auction.getItemId() >= 0 && condition.length() == 0)
-					condition.append(" a.itemId = '" + auction.getItemId() + "'");
-				else if (condition.length() != 0)
-					condition.append(" AND a.itemId = '" + auction.getItemId() + "'");
+				if (auction.getItemId() >= 0 ) {
+					condition.append(" and a.item_id = '" + auction.getItemId() + "'");
+				}
 				
-				if (auction.getMinPrice() < 0 && condition.length() == 0)
-					condition.append(" a.minPrice = '" + auction.getMinPrice() + "'");
-				else if (condition.length() != 0)
-					condition.append(" AND a.minPrice = '" + auction.getMinPrice() + "'");
-				
-				if (auction.getSellingPrice() < 0 && condition.length() == 0)
-					condition.append(" a.sellingPrice = '" + auction.getSellingPrice() + "'");
-				else if (condition.length() != 0)
-					condition.append(" AND a.sellingPrice = '" + auction.getSellingPrice() + "'");
-				
+				if (auction.getMinPrice() > 0 ) {
+					condition.append(" and a.min_price = '" + auction.getMinPrice() + "'");
+				}
+				if (auction.getSellingPrice() > 0) {
+					condition.append(" and a.selling_price = '" + auction.getSellingPrice() + "'");
+				}
 				if (condition.length() > 0) {
 					query.append(condition);
 				}
@@ -200,7 +195,7 @@ public class AuctionManager {
 	}//end restoreIsSoldAt()
 	
 	public Bid restoreBids(Auction auction) throws DTException {
-		String selectAuctionSql = "select i.id, i.expirationDate, i.itemId, i.minPrice, i.sellingPrice from item i, item a where a.item_id = i.id";
+		String selectAuctionSql = "select b.id, b.amount, b.user_id, b.auction_id from bid b, auction a where b.auction_id = a.id";
 		Statement stmt = null;
 		StringBuffer query = new StringBuffer(100);
 		StringBuffer condition = new StringBuffer(100);
@@ -214,23 +209,18 @@ public class AuctionManager {
 				query.append(" and a.id = " + auction.getId());
 			else {
 				if (auction.getExpiration() != null)
-					condition.append( " a.expirationDate = '" + auction.getExpiration() + "'");
+					condition.append( " and a.expiration = '" + auction.getExpiration() + "'");
 				
-				if (auction.getItemId() >= 0 && condition.length() == 0)
-					condition.append(" a.itemId = '" + auction.getItemId() + "'");
-				else if (condition.length() != 0)
-					condition.append(" AND a.itemId = '" + auction.getItemId() + "'");
+				if (auction.getItemId() != -1 ){
+					condition.append(" and a.item_id = '" + auction.getItemId() + "'");
+				}
 				
-				if (auction.getMinPrice() < 0 && condition.length() == 0)
-					condition.append(" a.minPrice = '" + auction.getMinPrice() + "'");
-				else if (condition.length() != 0)
-					condition.append(" AND a.minPrice = '" + auction.getMinPrice() + "'");
-				
-				if (auction.getSellingPrice() < 0 && condition.length() == 0)
-					condition.append(" a.sellingPrice = '" + auction.getSellingPrice() + "'");
-				else if (condition.length() != 0)
-					condition.append(" AND a.sellingPrice = '" + auction.getSellingPrice() + "'");
-				
+				if (auction.getMinPrice() > 0 ) {
+					condition.append(" and a.min_price = '" + auction.getMinPrice() + "'");
+				}
+				if (auction.getSellingPrice() > 0) {
+					condition.append(" and a.selling_price = '" + auction.getSellingPrice() + "'");
+				}
 				if (condition.length() > 0) {
 					query.append(condition);
 				}

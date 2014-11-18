@@ -92,11 +92,14 @@ public class AttributeTypeManager {
 		if(attributeType != null){
 			if(attributeType.getId() >= 0)
 				query.append(" where id = " + attributeType.getId());
-			else if(attributeType.getName() != null)
-				query.append(" where name = " + attributeType.getName() + "'");
 			else{
-				if(attributeType.getCategoryId() != 0)
+				if(attributeType.getName() != null)
+					query.append("name = " + attributeType.getName() + "'");
+				if(attributeType.getCategoryId() != 0) {
+					if(condition.length() > 0)
+						condition.append(" and ");
 					condition.append("category_id = '" + attributeType.getCategoryId() + "'");
+				}
 				if(condition.length() > 0){
 					query.append(" where ");
 					query.append(condition);

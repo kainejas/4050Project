@@ -17,7 +17,7 @@ public class AuctionImpl extends Persistent implements Auction {
 		this.itemId = item.getId();
 		this.minPrice = minPrice;
 		this.expiration = expiration;
-		//TODO: sellingPrice = ????
+		this.sellingPrice = minPrice;
 	}
 
 	@Override
@@ -49,6 +49,11 @@ public class AuctionImpl extends Persistent implements Auction {
 	@Override
 	public float getSellingPrice() {
 		return this.sellingPrice;
+	}
+	
+	@Override
+	public void setSellingPrice(float price) {
+		this.sellingPrice = price;
 	}
 
 	@Override

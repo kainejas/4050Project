@@ -1,7 +1,6 @@
 package edu.uga.dawgtrades.persist.impl;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -34,9 +33,9 @@ public class CategoryManager {
 		try {
 			
 			if (!category.isPersistent())
-				stmt = (PreparedStatement) conn.prepareStatement(insertCategorySql);
+				stmt = conn.prepareStatement(insertCategorySql);
 			else
-				stmt = (PreparedStatement) conn.prepareStatement(updateCategorySql);
+				stmt = conn.prepareStatement(updateCategorySql);
 			
 			if (category.getName() != null)
 				stmt.setString(1, category.getName());
@@ -131,7 +130,7 @@ public class CategoryManager {
 			return;
 		
 		try {
-			stmt = (PreparedStatement) conn.prepareStatement(deleteCategorySql);
+			stmt = conn.prepareStatement(deleteCategorySql);
 			stmt.setLong(1,category.getId());
 			inscnt = stmt.executeUpdate();
 			if (inscnt == 1)
@@ -144,7 +143,7 @@ public class CategoryManager {
 		}
 	}//end delete
 	
-	public Category restoreParent(Category category) throws DTException {
+	public Category restoreHasChild(Category category) throws DTException {
 		String selectCategorySql = "select i.id, i.name, i.parentId from item i, category a where a.id = i.id";
 		Statement stmt = null;
 		StringBuffer query = new StringBuffer(100);
@@ -273,7 +272,7 @@ public class CategoryManager {
 		throw new DTException("CategoryManager.restoreParent: Could not restore persistent Category object.");
 	}//end restoreItem()
 	
-	public Iterator<Category> restoreChildren(Category category) throws DTException {
+	public Iterator<Category> restoreHasParent(Category category) throws DTException {
 		String selectCategorySql = "select i.id, i.name, i.parentId from item i, category a where a.id = i.id";
 		Statement stmt = null;
 		StringBuffer query = new StringBuffer(100);

@@ -192,7 +192,7 @@ public class PersistenceImpl implements Persistence{
 	
 	@Override
 	public Iterator<AttributeType> restoreDescribedBy(Category category) throws DTException{
-		return categoryManager.restoreDescribedBy(category);
+		return categoryManager.restoreAttributeTypes(category);
 	}
 	
 	@Override
@@ -202,7 +202,7 @@ public class PersistenceImpl implements Persistence{
 	
 	@Override
 	public Iterator<Item> restoreIsOfType(Category category) throws DTException{
-		return categoryManager.restoreIsOfType(category);
+		return categoryManager.restoreItems(category);
 	}
 	
 	@Override
