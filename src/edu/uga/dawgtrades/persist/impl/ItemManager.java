@@ -9,9 +9,13 @@ import java.util.Iterator;
 
 import java.sql.PreparedStatement;
 
+import edu.uga.dawgtrades.model.Attribute;
+import edu.uga.dawgtrades.model.Auction;
+import edu.uga.dawgtrades.model.Category;
 import edu.uga.dawgtrades.model.DTException;
 import edu.uga.dawgtrades.model.ObjectModel;
 import edu.uga.dawgtrades.model.Item;
+import edu.uga.dawgtrades.model.RegisteredUser;
 
 class ItemManager
 {
@@ -50,13 +54,13 @@ class ItemManager
             else
                 throw new DTException( "ItemManager.save: can't save an Item: description undefined" );
             
-            if( item.getOwnerId() != null )
-                stmt.setString( 3, item.getOwnerId() );
+            if( item.getOwnerId() != 0 )
+                stmt.setString( 3, Long.toString(item.getOwnerId()) );
             else
                 throw new DTException( "ItemManager.save: can't save an Item: user_id undefined" );
             
-            if( item.getCategoryId() != null )
-                stmt.setString( 4, item.getCategoryId() );
+            if( item.getCategoryId() != 0 )
+                stmt.setString( 4, Long.toString(item.getCategoryId()) );
             else
                 throw new DTException( "ItemManager.save: can't save an Item: category_id undefined" );
 
@@ -114,7 +118,7 @@ class ItemManager
                     condition.append( " name = '" + modelItem.getName() + "'" );
 
                 if( modelItem.getDescription() != null )
-                    condition.append( " description = '" + modeItem.getDescription() + "'" );
+                    condition.append( " description = '" + modelItem.getDescription() + "'" );
                 
                 if( modelItem.getOwnerId() != -1 )
                     condition.append( " user_id = '" + modelItem.getOwnerId() + "'" );
@@ -201,12 +205,12 @@ class ItemManager
                 else
                     condition.append( " AND i.description = '" + item.getDescription() + "'" );
                 
-                if( item.getOwnerId() != null && condition.length() == 0 )
+                if( item.getOwnerId() != 0 && condition.length() == 0 )
                     condition.append( " i.user_id = '" + item.getOwnerId() + "'" );
                 else
                     condition.append( " AND i.user_id = '" + item.getOwnerId() + "'" );
                 
-                if( item.getCategoryId() != null && condition.length() == 0 )
+                if( item.getCategoryId() != 0 && condition.length() == 0 )
                     condition.append( " i.category_id = '" + item.getCategoryId() + "'" );
                 else
                     condition.append( " AND i.category_id = '" + item.getCategoryId() + "'" );
@@ -315,12 +319,12 @@ class ItemManager
                 else
                     condition.append( " AND i.description = '" + item.getDescription() + "'" );
                 
-                if( item.getOwnerId() != null && condition.length() == 0 )
+                if( item.getOwnerId() != 0 && condition.length() == 0 )
                     condition.append( " i.user_id = '" + item.getOwnerId() + "'" );
                 else
                     condition.append( " AND i.user_id = '" + item.getOwnerId() + "'" );
                 
-                if( item.getCategoryId() != null && condition.length() == 0 )
+                if( item.getCategoryId() != 0 && condition.length() == 0 )
                     condition.append( " i.category_id = '" + item.getCategoryId() + "'" );
                 else
                     condition.append( " AND i.category_id = '" + item.getCategoryId() + "'" );
@@ -372,12 +376,12 @@ class ItemManager
                 else
                     condition.append( " AND i.description = '" + item.getDescription() + "'" );
                 
-                if( item.getOwnerId() != null && condition.length() == 0 )
+                if( item.getOwnerId() != 0 && condition.length() == 0 )
                     condition.append( " i.user_id = '" + item.getOwnerId() + "'" );
                 else
                     condition.append( " AND i.user_id = '" + item.getOwnerId() + "'" );
                 
-                if( item.getCategoryId() != null && condition.length() == 0 )
+                if( item.getCategoryId() != 0 && condition.length() == 0 )
                     condition.append( " i.category_id = '" + item.getCategoryId() + "'" );
                 else
                     condition.append( " AND i.category_id = '" + item.getCategoryId() + "'" );
