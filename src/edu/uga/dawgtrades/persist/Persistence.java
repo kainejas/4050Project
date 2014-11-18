@@ -117,6 +117,8 @@ public interface Persistence {
 	Auction restoreIsSoldAt(Item item) throws DTException;
 	
 	Auction restoreAuction(Bid bid) throws DTException;
-	RegisteredUser restoreBidder(RegisteredUser user) throws DTException;
+	
+
+	RegisteredUser restoreBidder(Bid bid) throws DTException;
 
 };

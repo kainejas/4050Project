@@ -30,5 +30,5 @@ public interface Membership
      * @return the date when the current price was set
      */
     Date getDate();
-    
+    void setDate(Date date);
 }

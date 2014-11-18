@@ -131,7 +131,7 @@ public class BidManager {
 		throw new DTException("BidManager.restore: Could not restore persistent Bid object");
 	}
 	
-	public Iterator<RegisteredUser> restoreBidder(Bid bid) 
+	public RegisteredUser restoreBidder(Bid bid) 
 		throws DTException {
 		
 		        String       selectPersonSql = "select r.id, r.username, r.first_name, r.last_name, r.password, r.email, r.phone, r.isAdmin, r.canText from registered_user r, bid b where b.user_id = r.id order by b.user_id desc";              
@@ -168,7 +168,7 @@ public class BidManager {
 		            //
 		            if( stmt.execute( query.toString() ) ) { // statement returned a result
 		                ResultSet r = stmt.getResultSet();
-		                return new RegisteredUserIterator( r, objectModel );
+		                return new RegisteredUserIterator( r, objectModel ).next();
 		            }
 		        }
 		        catch( Exception e ) {      // just in case...

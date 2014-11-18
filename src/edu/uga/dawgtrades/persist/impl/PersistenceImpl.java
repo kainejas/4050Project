@@ -245,5 +245,15 @@ public class PersistenceImpl implements Persistence{
 		return itemManager.restoreIsSoldAt(item);
 	}
 
+	@Override
+	public Auction restoreAuction(Bid bid) throws DTException {
+		return bidManager.restoreAuction(bid);
+	}
+
+	@Override
+	public RegisteredUser restoreBidder(Bid bid) throws DTException {
+		return bidManager.restoreBidder(bid);
+	}
+
 	
 }

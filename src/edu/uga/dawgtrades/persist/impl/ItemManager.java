@@ -6,12 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Iterator;
-
 import java.sql.PreparedStatement;
 
+import edu.uga.dawgtrades.model.Attribute;
+import edu.uga.dawgtrades.model.Auction;
+import edu.uga.dawgtrades.model.Category;
 import edu.uga.dawgtrades.model.DTException;
 import edu.uga.dawgtrades.model.ObjectModel;
 import edu.uga.dawgtrades.model.Item;
+import edu.uga.dawgtrades.model.RegisteredUser;
 
 class ItemManager
 {
@@ -50,13 +53,13 @@ class ItemManager
             else
                 throw new DTException( "ItemManager.save: can't save an Item: description undefined" );
             
-            if( item.getOwnerId() != null )
-                stmt.setString( 3, item.getOwnerId() );
+            if( item.getOwnerId() != -1 )
+                stmt.setLong( 3, item.getOwnerId() );
             else
                 throw new DTException( "ItemManager.save: can't save an Item: user_id undefined" );
             
-            if( item.getCategoryId() != null )
-                stmt.setString( 4, item.getCategoryId() );
+            if( item.getCategoryId() != -1 )
+                stmt.setLong( 4, item.getCategoryId() );
             else
                 throw new DTException( "ItemManager.save: can't save an Item: category_id undefined" );
 
@@ -114,7 +117,7 @@ class ItemManager
                     condition.append( " name = '" + modelItem.getName() + "'" );
 
                 if( modelItem.getDescription() != null )
-                    condition.append( " description = '" + modeItem.getDescription() + "'" );
+                    condition.append( " description = '" + modelItem.getDescription() + "'" );
                 
                 if( modelItem.getOwnerId() != -1 )
                     condition.append( " user_id = '" + modelItem.getOwnerId() + "'" );
@@ -194,22 +197,16 @@ class ItemManager
                 query.append( " and i.id = " + item.getId() );
             else {
                 if( item.getName() != null )
-                    condition.append( " i.name = '" + item.getName() + "'" );
+                    condition.append( " and i.name = '" + item.getName() + "'" );
                 
-                if( item.getDescription() != null && condition.length() == 0 )
-                    condition.append( " i.description = '" + item.getDescription() + "'" );
-                else
-                    condition.append( " AND i.description = '" + item.getDescription() + "'" );
-                
-                if( item.getOwnerId() != null && condition.length() == 0 )
-                    condition.append( " i.user_id = '" + item.getOwnerId() + "'" );
-                else
-                    condition.append( " AND i.user_id = '" + item.getOwnerId() + "'" );
-                
-                if( item.getCategoryId() != null && condition.length() == 0 )
-                    condition.append( " i.category_id = '" + item.getCategoryId() + "'" );
-                else
-                    condition.append( " AND i.category_id = '" + item.getCategoryId() + "'" );
+                if( item.getDescription() != null  )
+                    condition.append( " and i.description = '" + item.getDescription() + "'" );
+               
+                if( item.getOwnerId() != -1  )
+                    condition.append( " and i.user_id = '" + item.getOwnerId() + "'" );
+               
+                if( item.getCategoryId() != -1  )
+                    condition.append( " and i.category_id = '" + item.getCategoryId() + "'" );
                 
                 if( condition.length() > 0 ) {
                     query.append( condition );
@@ -251,23 +248,17 @@ class ItemManager
                 query.append( " and i.id = " + item.getId() );
             else {
                 if( item.getName() != null )
-                    condition.append( " i.name = '" + item.getName() + "'" );
+                    condition.append( " and i.name = '" + item.getName() + "'" );
                 
                 if( item.getDescription() != null && condition.length() == 0 )
-                    condition.append( " i.description = '" + item.getDescription() + "'" );
-                else
-                    condition.append( " AND i.description = '" + item.getDescription() + "'" );
+                    condition.append( " and i.description = '" + item.getDescription() + "'" );
                 
-                if( item.getOwnerId() != null && condition.length() == 0 )
-                    condition.append( " i.user_id = '" + item.getOwnerId() + "'" );
-                else
-                    condition.append( " AND i.user_id = '" + item.getOwnerId() + "'" );
-                
-                if( item.getCategoryId() != null && condition.length() == 0 )
-                    condition.append( " i.category_id = '" + item.getCategoryId() + "'" );
-                else
-                    condition.append( " AND i.category_id = '" + item.getCategoryId() + "'" );
-                
+                if( item.getOwnerId() != -1 && condition.length() == 0 )
+                    condition.append( " and i.user_id = '" + item.getOwnerId() + "'" );
+               
+                if( item.getCategoryId() != -1 && condition.length() == 0 )
+                    condition.append( " and i.category_id = '" + item.getCategoryId() + "'" );
+               
                 if( condition.length() > 0 ) {
                     query.append( condition );
                 }
@@ -308,23 +299,17 @@ class ItemManager
                 query.append( " and i.id = " + item.getId() );
             else {
                 if( item.getName() != null )
-                    condition.append( " i.name = '" + item.getName() + "'" );
+                    condition.append( " and i.name = '" + item.getName() + "'" );
                 
                 if( item.getDescription() != null && condition.length() == 0 )
-                    condition.append( " i.description = '" + item.getDescription() + "'" );
-                else
-                    condition.append( " AND i.description = '" + item.getDescription() + "'" );
-                
-                if( item.getOwnerId() != null && condition.length() == 0 )
-                    condition.append( " i.user_id = '" + item.getOwnerId() + "'" );
-                else
-                    condition.append( " AND i.user_id = '" + item.getOwnerId() + "'" );
-                
-                if( item.getCategoryId() != null && condition.length() == 0 )
-                    condition.append( " i.category_id = '" + item.getCategoryId() + "'" );
-                else
-                    condition.append( " AND i.category_id = '" + item.getCategoryId() + "'" );
-                
+                    condition.append( " and i.description = '" + item.getDescription() + "'" );
+                  
+                if( item.getOwnerId() != -1 && condition.length() == 0 )
+                    condition.append( " and i.user_id = '" + item.getOwnerId() + "'" );
+               
+                if( item.getCategoryId() != -1 && condition.length() == 0 )
+                    condition.append( " and i.category_id = '" + item.getCategoryId() + "'" );
+              
                 if( condition.length() > 0 ) {
                     query.append( condition );
                 }
@@ -365,22 +350,17 @@ class ItemManager
                 query.append( " and i.id = " + item.getId() );
             else {
                 if( item.getName() != null )
-                    condition.append( " i.name = '" + item.getName() + "'" );
+                    condition.append( " and i.name = '" + item.getName() + "'" );
                 
                 if( item.getDescription() != null && condition.length() == 0 )
-                    condition.append( " i.description = '" + item.getDescription() + "'" );
-                else
-                    condition.append( " AND i.description = '" + item.getDescription() + "'" );
-                
-                if( item.getOwnerId() != null && condition.length() == 0 )
-                    condition.append( " i.user_id = '" + item.getOwnerId() + "'" );
-                else
-                    condition.append( " AND i.user_id = '" + item.getOwnerId() + "'" );
-                
-                if( item.getCategoryId() != null && condition.length() == 0 )
-                    condition.append( " i.category_id = '" + item.getCategoryId() + "'" );
-                else
-                    condition.append( " AND i.category_id = '" + item.getCategoryId() + "'" );
+                    condition.append( " and i.description = '" + item.getDescription() + "'" );
+            
+                if( item.getOwnerId() != -1 && condition.length() == 0 )
+                    condition.append( " and i.user_id = '" + item.getOwnerId() + "'" );
+               
+                if( item.getCategoryId() != -1 && condition.length() == 0 )
+                    condition.append( " and i.category_id = '" + item.getCategoryId() + "'" );
+               
                 
                 if( condition.length() > 0 ) {
                     query.append( condition );

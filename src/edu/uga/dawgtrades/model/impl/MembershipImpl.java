@@ -28,4 +28,10 @@ public class MembershipImpl extends Persistent implements Membership {
 		return this.date;
 	}
 
+	@Override
+	public void setDate(Date date) {
+		this.date=date;
+		
+	}
+
 }
