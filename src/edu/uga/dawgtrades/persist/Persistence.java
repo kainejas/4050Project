@@ -23,7 +23,7 @@ import edu.uga.dawgtrades.model.Category;
 import edu.uga.dawgtrades.model.ExperienceReport;
 import edu.uga.dawgtrades.model.Item;
 
-interface Persistence {
+public interface Persistence {
 
 	void saveAttribute(Attribute attribute) throws DTException;
 
