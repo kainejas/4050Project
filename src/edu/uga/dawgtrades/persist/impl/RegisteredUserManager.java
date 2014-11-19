@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 
 import edu.uga.dawgtrades.model.Bid;
 import edu.uga.dawgtrades.model.DTException;
+import edu.uga.dawgtrades.model.ExperienceReport;
 import edu.uga.dawgtrades.model.Item;
 import edu.uga.dawgtrades.model.ObjectModel;
 import edu.uga.dawgtrades.model.RegisteredUser;
@@ -204,27 +205,19 @@ class RegisteredUserManager
                 query.append( " and r.username = '" + user.getName() + "'" );
             else {
                 if( user.getPassword() != null )
-                    condition.append( " r.password = '" + user.getPassword() + "'" );
+                    condition.append( " and r.password = '" + user.getPassword() + "'" );
 
-                if( user.getEmail() != null && condition.length() == 0 )
-                    condition.append( " r.email = '" + user.getEmail() + "'" );
-                else
-                    condition.append( " AND r.email = '" + user.getEmail() + "'" );
+                if( user.getEmail() != null  )
+                    condition.append( " and r.email = '" + user.getEmail() + "'" );
 
-                if( user.getFirstName() != null && condition.length() == 0 )
-                    condition.append( " r.firstname = '" + user.getFirstName() + "'" );
-                else
-                    condition.append( " AND r.firstname = '" + user.getFirstName() + "'" );
+                if( user.getFirstName() != null )
+                    condition.append( " and r.firstname = '" + user.getFirstName() + "'" );
 
-                if( user.getLastName() != null && condition.length() == 0 )
-                    condition.append( " r.lastname = '" + user.getLastName() + "'" );
-                else
-                    condition.append( " AND r.lastname = '" + user.getLastName() + "'" );
+                if( user.getLastName() != null )
+                    condition.append( " and r.lastname = '" + user.getLastName() + "'" );
 
-                if( user.getPhone() != null && condition.length() == 0 )
-                    condition.append( " r.phone = '" + user.getPhone() + "'" );
-                else
-                    condition.append( " AND r.phone = '" + user.getPhone() + "'" );
+                if( user.getPhone() != null  )
+                    condition.append( " and r.phone = '" + user.getPhone() + "'" );
                 
                 if( condition.length() > 0 ) {
                     query.append( condition );
@@ -270,27 +263,19 @@ class RegisteredUserManager
                 query.append( " and r.username = '" + user.getName() + "'" );
             else {
                 if( user.getPassword() != null )
-                    condition.append( " r.password = '" + user.getPassword() + "'" );
+                    condition.append( " and r.password = '" + user.getPassword() + "'" );
 
-                if( user.getEmail() != null && condition.length() == 0 )
-                    condition.append( " r.email = '" + user.getEmail() + "'" );
-                else
-                    condition.append( " AND r.email = '" + user.getEmail() + "'" );
-
-                if( user.getFirstName() != null && condition.length() == 0 )
-                    condition.append( " r.firstname = '" + user.getFirstName() + "'" );
-                else
-                    condition.append( " AND r.firstname = '" + user.getFirstName() + "'" );
-
-                if( user.getLastName() != null && condition.length() == 0 )
-                    condition.append( " r.lastname = '" + user.getLastName() + "'" );
-                else
-                    condition.append( " AND r.lastname = '" + user.getLastName() + "'" );
-
-                if( user.getPhone() != null && condition.length() == 0 )
-                    condition.append( " r.phone = '" + user.getPhone() + "'" );
-                else
-                    condition.append( " AND r.phone = '" + user.getPhone() + "'" );
+                if( user.getEmail() != null )
+                    condition.append( " and r.email = '" + user.getEmail() + "'" );
+              
+                if( user.getFirstName() != null )
+                    condition.append( " and r.firstname = '" + user.getFirstName() + "'" );
+               
+                if( user.getLastName() != null  )
+                    condition.append( " and r.lastname = '" + user.getLastName() + "'" );
+               
+                if( user.getPhone() != null  )
+                    condition.append( " and r.phone = '" + user.getPhone() + "'" );
                 
                 if( condition.length() > 0 ) {
                     query.append( condition );
@@ -315,6 +300,125 @@ class RegisteredUserManager
 
         throw new DTException( "RegisteredUserManager.restoreBids: Could not restore persistent Bid objects" );
     }
+    
+    public Iterator<ExperienceReport> restoreReviewerReports( RegisteredUser user ) 
+            throws DTException
+    {
+        String       selectUserSql = "select er.id, er.reviewer_id, er.reviewed_id, er.rating, er.report, er.date from experience_report er, registered_user r where er.reviewer_id = r.id";              
+        Statement    stmt = null;
+        StringBuffer query = new StringBuffer( 100 );
+        StringBuffer condition = new StringBuffer( 100 );
+
+        condition.setLength( 0 );
+        
+        // form the query based on the given User object instance
+        query.append( selectUserSql );
+        
+        if( user != null ) {
+            if( user.getId() >= 0 ) // id is unique, so it is sufficient to get a user
+                query.append( " and r.id = " + user.getId() );
+            else if( user.getName() != null ) // userName is unique, so it is sufficient to get a user
+                query.append( " and r.username = '" + user.getName() + "'" );
+            else {
+                if( user.getPassword() != null )
+                    condition.append( " and r.password = '" + user.getPassword() + "'" );
+
+                if( user.getEmail() != null )
+                    condition.append( " and r.email = '" + user.getEmail() + "'" );
+               
+                if( user.getFirstName() != null  )
+                    condition.append( " and r.firstname = '" + user.getFirstName() + "'" );
+             
+                if( user.getLastName() != null  )
+                    condition.append( " and r.lastname = '" + user.getLastName() + "'" );
+              
+                if( user.getPhone() != null )
+                    condition.append( " and r.phone = '" + user.getPhone() + "'" );
+                
+                if( condition.length() > 0 ) {
+                    query.append( condition );
+                }
+            }
+        }
+                
+        try {
+
+            stmt = conn.createStatement();
+
+            // retrieve the persistent User object
+            //
+            if( stmt.execute( query.toString() ) ) { // statement returned a result
+                ResultSet r = stmt.getResultSet();
+                return new ExperienceReportIterator( r, objectModel );
+            }
+        }
+        catch( Exception e ) {      // just in case...
+            throw new DTException( "RegisteredUserManager.restoreReviewerReports: Could not restore persistent ExperienceReports objects; Root cause: " + e );
+        }
+
+        throw new DTException( "RegisteredUserManager.restoreReviewerReports: Could not restore persistent ExperienceReports objects" );
+    }
+    
+    public Iterator<ExperienceReport> restoreReviewedReports( RegisteredUser user ) 
+            throws DTException
+    {
+        String       selectUserSql = "select er.id, er.reviewer_id, er.reviewed_id, er.rating, er.report, er.date from experience_report er, registered_user r where er.reviewed_id = r.id";              
+        Statement    stmt = null;
+        StringBuffer query = new StringBuffer( 100 );
+        StringBuffer condition = new StringBuffer( 100 );
+
+        condition.setLength( 0 );
+        
+        // form the query based on the given User object instance
+        query.append( selectUserSql );
+        
+        if( user != null ) {
+            if( user.getId() >= 0 ) // id is unique, so it is sufficient to get a user
+                query.append( " and r.id = " + user.getId() );
+            else if( user.getName() != null ) // userName is unique, so it is sufficient to get a user
+                query.append( " and r.username = '" + user.getName() + "'" );
+            else {
+                if( user.getPassword() != null )
+                    condition.append( " and r.password = '" + user.getPassword() + "'" );
+
+                if( user.getEmail() != null )
+                    condition.append( " and r.email = '" + user.getEmail() + "'" );
+               
+                if( user.getFirstName() != null  )
+                    condition.append( " and r.firstname = '" + user.getFirstName() + "'" );
+             
+                if( user.getLastName() != null  )
+                    condition.append( " and r.lastname = '" + user.getLastName() + "'" );
+              
+                if( user.getPhone() != null )
+                    condition.append( " and r.phone = '" + user.getPhone() + "'" );
+                
+                if( condition.length() > 0 ) {
+                    query.append( condition );
+                }
+            }
+        }
+                
+        try {
+
+            stmt = conn.createStatement();
+
+            // retrieve the persistent User object
+            //
+            if( stmt.execute( query.toString() ) ) { // statement returned a result
+                ResultSet r = stmt.getResultSet();
+                return new ExperienceReportIterator( r, objectModel );
+            }
+        }
+        catch( Exception e ) {      // just in case...
+            throw new DTException( "RegisteredUserManager.restoreReviewerReports: Could not restore persistent ExperienceReports objects; Root cause: " + e );
+        }
+
+        throw new DTException( "RegisteredUserManager.restoreReviewerReports: Could not restore persistent ExperienceReports objects" );
+    }
+    
+    
+    
     
     public void delete( RegisteredUser user ) 
             throws DTException

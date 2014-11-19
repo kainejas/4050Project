@@ -255,5 +255,34 @@ public class PersistenceImpl implements Persistence{
 		return bidManager.restoreBidder(bid);
 	}
 
+	@Override
+	public Iterator<Bid> restoreBids(RegisteredUser user) throws DTException {
+		return registeredUserManager.restoreBids(user);
+	}
+
+	@Override
+	public Iterator<ExperienceReport> restoreReviewerReports(RegisteredUser user)
+			throws DTException {
+		return registeredUserManager.restoreReviewerReports(user);
+	}
+	
+	@Override
+	public Iterator<ExperienceReport> restoreReviewedReports(RegisteredUser user)
+			throws DTException {
+		return registeredUserManager.restoreReviewedReports(user);
+	}
+
+	@Override
+	public RegisteredUser restoreReviewer(ExperienceReport er)
+			throws DTException {
+		return experienceReportManager.restoreReviewer(er);
+	}
+
+	@Override
+	public RegisteredUser restoreReviewed(ExperienceReport er)
+			throws DTException {
+		return experienceReportManager.restoreReviewed(er);
+	}
+
 	
 }

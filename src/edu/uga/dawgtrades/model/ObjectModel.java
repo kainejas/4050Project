@@ -1,5 +1,7 @@
 package edu.uga.dawgtrades.model;
 
+import java.util.Iterator;
+
 /**
  * This is the interface to the Object Model subsystem.  It includes operations to create, store, 
  * retrieve, and delete all entity classes in the DawgTrades data model.  For some of the classes, 
@@ -504,7 +506,7 @@ public interface ObjectModel
      * @return an iterator of Attributes of the Item
      * @throws DTException if there is a problem with locating the Attribute objects, or if the argument is not persistent
      */
-    public java.util.Iterator<Attribute> getAttribute( Item item ) throws DTException;
+    public java.util.Iterator<Attribute> getDescriber( Item item ) throws DTException;
     
     // owns: RegisteredUser (one) to Item (zero or more)
     /**
@@ -514,7 +516,7 @@ public interface ObjectModel
      * @return a RegisteredUser who owns the Item 
      * @throws DTException if there is a problem with locating the RegisteredUser object, or if the argument is not persistent
      */
-    public RegisteredUser getRegisteredUser( Item item ) throws DTException;
+    public RegisteredUser getOwner( Item item ) throws DTException;
     
     /**
      * Return Items owned by a RegisteredUser, traversing the <i>owns</i> association. The RegisteredUser must be persistent.
@@ -555,6 +557,34 @@ public interface ObjectModel
      */
     public AttributeType getAttributeType( Attribute attribute ) throws DTException;
 
+	Iterator<Bid> getBids(RegisteredUser user) throws DTException;
+
+ 
+
+	Iterator<ExperienceReport> getReviewedReports(RegisteredUser user)
+			throws DTException;
+
+	Iterator<ExperienceReport> getReviewerReports(RegisteredUser user)
+			throws DTException;
+
+	public Iterator<Attribute> findAttribute(Attribute attribute)
+			throws DTException;
+
+	public Iterator<AttributeType> findAttributeType(AttributeType attributeType)
+		throws DTException;
+
+	public RegisteredUser getBidder(Bid b)
+			throws DTException;
+
+	public Auction getAuction(Bid b)
+			throws DTException;
+
+
+	RegisteredUser getReviewer(ExperienceReport er) throws DTException;
+
+	public RegisteredUser getReviewed(ExperienceReport er) throws DTException;
+	
+	
 	
     //public Iterator<Attribute>         getHasType( AttributeType attributeType ) throws DTException;   
 

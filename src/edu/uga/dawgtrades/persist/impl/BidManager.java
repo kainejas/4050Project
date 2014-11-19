@@ -10,6 +10,7 @@ import java.util.Iterator;
 import edu.uga.dawgtrades.model.Auction;
 import edu.uga.dawgtrades.model.Bid;
 import edu.uga.dawgtrades.model.DTException;
+import edu.uga.dawgtrades.model.Item;
 import edu.uga.dawgtrades.model.ObjectModel;
 import edu.uga.dawgtrades.model.RegisteredUser;
 
@@ -242,6 +243,53 @@ public class BidManager {
 			            if( stmt.execute( query.toString() ) ) { // statement returned a result
 			                ResultSet r = stmt.getResultSet();
 			                return new AuctionIterator( r, objectModel ).next();
+			            }
+			        }
+			        catch( Exception e ) {      // just in case...
+			            throw new DTException( "BidManager.restoreAuction: Could not restore persistent Auction object; Root cause: " + e );
+			        }
+
+			        throw new DTException( "BidManager.restoreAuction: Could not restore persistent Auction object" );
+			    }
+	
+	public Item restoreItem(Bid bid) 
+			throws DTException {
+			
+			        String       selectPersonSql = "select i.id, i.name, i.owner_id, i.category_id from item i, bid b where b.item_id = i.id";              
+			        Statement    stmt = null;
+			        StringBuffer query = new StringBuffer( 100 );
+			        StringBuffer condition = new StringBuffer( 100 );
+
+			        condition.setLength( 0 );
+			        
+			        // form the query based on the given Person object instance
+			        query.append( selectPersonSql );
+			        
+			        if( bid != null ) {
+			             if( bid.getAmount() != 0 ) // userName is unique, so it is sufficient to get a bid
+			                condition.append( " and b.amount = '" + bid.getAmount() + "'" );
+			         
+			                if( bid.getRegisteredUser() != null )
+			                    condition.append( " and b.user_id = '" + bid.getRegisteredUser().getId() + "'" );
+			               
+			                if( bid.getAuction() != null  )
+			                    condition.append( " and b.auction_id = '" + bid.getAuction().getId() + "'" );
+
+			                if( condition.length() > 0 ) {
+			                    query.append( condition );
+			                }
+			            }
+			        
+			                
+			        try {
+
+			            stmt = conn.createStatement();
+
+			            // retrieve the persistent Person object
+			            //
+			            if( stmt.execute( query.toString() ) ) { // statement returned a result
+			                ResultSet r = stmt.getResultSet();
+			                return new ItemIterator( r, objectModel ).next();
 			            }
 			        }
 			        catch( Exception e ) {      // just in case...

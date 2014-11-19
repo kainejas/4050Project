@@ -354,12 +354,12 @@ public class ObjectModelImpl implements ObjectModel {
 	}
 
 	@Override
-	public Iterator<Attribute> getAttribute(Item item) throws DTException {
+	public Iterator<Attribute> getDescriber(Item item) throws DTException {
 		return persistence.restoreHasAttribute(item);
 	}
 
 	@Override
-	public RegisteredUser getRegisteredUser(Item item) throws DTException {
+	public RegisteredUser getOwner(Item item) throws DTException {
 		return persistence.restoreOwns(item);
 	}
 
@@ -373,7 +373,8 @@ public class ObjectModelImpl implements ObjectModel {
 	public Item getItem(Auction auction) throws DTException {
 		return persistence.restoreIsSoldAt(auction);
 	}
-
+	
+	
 	@Override
 	public Auction getAuction(Item item) throws DTException {
 		return persistence.restoreIsSoldAt(item);
@@ -384,5 +385,50 @@ public class ObjectModelImpl implements ObjectModel {
 			throws DTException {
 		return persistence.restoreHasType(attribute);
 	}
+	
+	@Override
+	public Iterator<Bid> getBids(RegisteredUser user)
+		throws DTException {
+		return persistence.restoreBids(user);
+	}
+	@Override
+	public Iterator<ExperienceReport> getReviewedReports(RegisteredUser user) throws DTException {
+		return persistence.restoreReviewedReports(user);
+	}
+	
+	@Override
+	public Iterator<ExperienceReport> getReviewerReports(RegisteredUser user) throws DTException {
+		return persistence.restoreReviewerReports(user);
+	}
 
+	@Override
+	public Iterator<Attribute> findAttribute(Attribute attribute) throws DTException {
+		return persistence.restoreAttribute(attribute);
+	}
+
+	@Override
+	public Iterator<AttributeType> findAttributeType(AttributeType attributeType)
+			throws DTException {
+		return persistence.restoreAttributeType(attributeType);
+	}
+
+	@Override
+	public RegisteredUser getBidder(Bid b) throws DTException {
+		return persistence.restoreBidder(b);
+	}
+
+	@Override
+	public Auction getAuction(Bid b) throws DTException {
+		return persistence.restoreAuction(b);
+	}
+	
+	@Override
+	public RegisteredUser getReviewer(ExperienceReport er) throws DTException {
+		return persistence.restoreReviewer(er);
+	}
+
+	@Override
+	public RegisteredUser getReviewed(ExperienceReport er) throws DTException {
+		return persistence.restoreReviewed(er);
+	}
 }

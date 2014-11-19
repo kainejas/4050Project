@@ -120,5 +120,14 @@ public interface Persistence {
 	
 
 	RegisteredUser restoreBidder(Bid bid) throws DTException;
+	
+	Iterator<Bid> restoreBids(RegisteredUser user) throws DTException;
+
+	Iterator<ExperienceReport> restoreReviewerReports(RegisteredUser user) throws DTException;
+
+	Iterator<ExperienceReport> restoreReviewedReports(RegisteredUser user) throws DTException;
+
+	RegisteredUser restoreReviewer(ExperienceReport er) throws DTException;
+	RegisteredUser restoreReviewed(ExperienceReport er) throws DTException;
 
 };
