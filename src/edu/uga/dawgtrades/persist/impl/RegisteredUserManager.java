@@ -30,8 +30,8 @@ class RegisteredUserManager
             throws DTException
     {						
 
-        String               insertUserSql = "insert into registered_user ( username, first_name, last_name, password, email, phone, isAdmin, canText ) values ( ?, ?, ?, ?, ?, ?, ?, ? )";              
-        String               updateUserSql = "update registered_user  set username = ?, first_name = ?, last_name = ?, password = ?, email = ?, phone = ?, isAdmin = ?, canText = ? where id = ?";              
+        String               insertUserSql = "insert into registered_user ( name, first_name, last_name, password, email, phone, isAdmin, canText ) values ( ?, ?, ?, ?, ?, ?, ?, ? )";              
+        String               updateUserSql = "update registered_user  set name = ?, first_name = ?, last_name = ?, password = ?, email = ?, phone = ?, isAdmin = ?, canText = ? where id = ?";              
         PreparedStatement    stmt;
         int                  inscnt;
         long                 userId;
@@ -46,7 +46,7 @@ class RegisteredUserManager
             if( user.getName() != null ) // user is unique, so it is sufficient to get a user
                 stmt.setString( 1, user.getName() );
             else 
-                throw new DTException( "RegisteredUserManager.save: can't save a User: userName undefined" );
+                throw new DTException( "RegisteredUserManager.save: can't save a User: name undefined" );
             
             if( user.getFirstName() != null ) // user is unique, so it is sufficient to get a user
                 stmt.setString( 2, user.getFirstName() );
@@ -128,8 +128,8 @@ class RegisteredUserManager
         if( modelUser != null ) {
             if( modelUser.getId() >= 0 ) // id is unique, so it is sufficient to get a user
                 query.append( " where id = " + modelUser.getId() );
-            else if( modelUser.getName() != null ) // userName is unique, so it is sufficient to get a person
-                query.append( " where username = '" + modelUser.getName() + "'" );
+            else if( modelUser.getName() != null ) // name is unique, so it is sufficient to get a person
+                query.append( " where name = '" + modelUser.getName() + "'" );
             else {
                 if( modelUser.getPassword() != null )
                     condition.append( "password = '" + modelUser.getPassword() + "'" );
@@ -201,8 +201,8 @@ class RegisteredUserManager
         if( user != null ) {
             if( user.getId() >= 0 ) // id is unique, so it is sufficient to get a user
                 query.append( " and r.id = " + user.getId() );
-            else if( user.getName() != null ) // userName is unique, so it is sufficient to get a user
-                query.append( " and r.username = '" + user.getName() + "'" );
+            else if( user.getName() != null ) // name is unique, so it is sufficient to get a user
+                query.append( " and r.name = '" + user.getName() + "'" );
             else {
                 if( user.getPassword() != null )
                     condition.append( " and r.password = '" + user.getPassword() + "'" );
@@ -259,8 +259,8 @@ class RegisteredUserManager
         if( user != null ) {
             if( user.getId() >= 0 ) // id is unique, so it is sufficient to get a user
                 query.append( " and r.id = " + user.getId() );
-            else if( user.getName() != null ) // userName is unique, so it is sufficient to get a user
-                query.append( " and r.username = '" + user.getName() + "'" );
+            else if( user.getName() != null ) // name is unique, so it is sufficient to get a user
+                query.append( " and r.name = '" + user.getName() + "'" );
             else {
                 if( user.getPassword() != null )
                     condition.append( " and r.password = '" + user.getPassword() + "'" );
@@ -317,8 +317,8 @@ class RegisteredUserManager
         if( user != null ) {
             if( user.getId() >= 0 ) // id is unique, so it is sufficient to get a user
                 query.append( " and r.id = " + user.getId() );
-            else if( user.getName() != null ) // userName is unique, so it is sufficient to get a user
-                query.append( " and r.username = '" + user.getName() + "'" );
+            else if( user.getName() != null ) // name is unique, so it is sufficient to get a user
+                query.append( " and r.name = '" + user.getName() + "'" );
             else {
                 if( user.getPassword() != null )
                     condition.append( " and r.password = '" + user.getPassword() + "'" );
@@ -375,8 +375,8 @@ class RegisteredUserManager
         if( user != null ) {
             if( user.getId() >= 0 ) // id is unique, so it is sufficient to get a user
                 query.append( " and r.id = " + user.getId() );
-            else if( user.getName() != null ) // userName is unique, so it is sufficient to get a user
-                query.append( " and r.username = '" + user.getName() + "'" );
+            else if( user.getName() != null ) // name is unique, so it is sufficient to get a user
+                query.append( " and r.name = '" + user.getName() + "'" );
             else {
                 if( user.getPassword() != null )
                     condition.append( " and r.password = '" + user.getPassword() + "'" );

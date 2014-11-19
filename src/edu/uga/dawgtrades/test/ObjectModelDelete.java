@@ -38,11 +38,12 @@ public class ObjectModelDelete
              System.err.println( "ObjectModelDelete: Unable to obtain a database connection" );
          }
          
+         // obtain a reference to the ObjectModel module      
+         objectModel = new ObjectModelImpl();
          // obtain a reference to Persistence module and connect it to the ObjectModel        
          persistence = new PersistenceImpl( conn, objectModel ); 
-         
-         // obtain a reference to the ObjectModel module      
-         objectModel = new ObjectModelImpl(persistence);
+         // connect the ObjectModel module to the Persistence module
+         objectModel.setPersistence(persistence);
          
          Iterator<RegisteredUser> userIter = null;
                   

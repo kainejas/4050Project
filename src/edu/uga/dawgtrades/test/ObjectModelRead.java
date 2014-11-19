@@ -33,13 +33,12 @@ public class ObjectModelRead {
       }
       
    
-
+      // obtain a reference to the ObjectModel module      
+      objectModel = new ObjectModelImpl();
       // obtain a reference to Persistence module and connect it to the ObjectModel        
       persistence = new PersistenceImpl( conn, objectModel ); 
-
-      // obtain a reference to the ObjectModel module   
       // connect the ObjectModel module to the Persistence module
-      objectModel = new ObjectModelImpl(persistence);
+      objectModel.setPersistence(persistence);
    
       
                
