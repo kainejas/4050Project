@@ -2,8 +2,10 @@ This directory contains a simple example illustrating how to implement
 an Object Layer module (subsystem) and an associated Persistence
 module.
 
-There are 2 subdirectories:
+There are 3 subdirectories:
 
+  sql
+		includes the structured query language file to create the database tables.
   src
          include the sources, placed in the following packages:
 
@@ -23,7 +25,7 @@ An ant build file is also included (build.xml).
 
 In order to create your own copy of the clubs example you need to:
 
-0.  Copy the entire Clubs directory to your system
+0.  Copy the entire DawgTrades directory to your system
 
 1.  Install the MySQL database system (may be already pre-installed on Linux)
 
