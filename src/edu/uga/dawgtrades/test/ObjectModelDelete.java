@@ -52,7 +52,7 @@ public class ObjectModelDelete
              // First: find the test User
              RegisteredUser testUser = null;
              RegisteredUser modelUser = objectModel.createRegisteredUser();
-             modelUser.setName( "TestUser" );
+             modelUser.setName( "obama" );
              userIter = objectModel.findRegisteredUser( modelUser );
              while( userIter.hasNext() ) {
                  testUser = userIter.next();
@@ -109,7 +109,7 @@ public class ObjectModelDelete
              // First: find test Item
              Item testItem = null;
              Item modelItem = objectModel.createItem();
-             modelItem.setName( "Heather" );
+             modelItem.setName( "name3" );
              //modelItem.setLastName( "Brooks" );
              Iterator<Item> itemIter = objectModel.findItem( modelItem );
              while( itemIter.hasNext() ) {
@@ -130,7 +130,7 @@ public class ObjectModelDelete
              // Third: find test Item's Attribute
              Attribute testAttribute = null;
              //modelItem.setLastName( "Brooks" );
-             Iterator<Attribute> attributeIter = objectModel.getAttributes( testItem );
+             Iterator<Attribute> attributeIter = objectModel.getAttribute( testItem );
              while( attributeIter.hasNext() ) {
                  testAttribute = attributeIter.next();
                  System.out.println( testAttribute );
@@ -139,8 +139,13 @@ public class ObjectModelDelete
              // Fourth: find test Attribute's AttributeType
              AttributeType testAttributeType = objectModel.getAttributeType( testAttribute );
              
-             objectModel.deleteItem( testItem );
-			 System.out.println( "Deleted the test Item object" );
+             // Fifth: delete test Item
+             if( testItem != null ) {
+                 objectModel.deleteItem( testItem );
+                 System.out.println( "Deleted the test Item object" );
+             }
+             else
+                 System.out.println( "Failed to find test Item" );
 
              // Sixth: delete test Attribute
              if( testAttribute != null ) {
@@ -171,7 +176,7 @@ public class ObjectModelDelete
              // First: find test Category
              Category testCategory = null;
              Category modelCategory = objectModel.createCategory();
-             modelCategory.setName( "Test" );
+             modelCategory.setName( "category3" );
              Iterator<Category> categoryIter = objectModel.findCategory( modelCategory );
              while( categoryIter.hasNext() ) {
                  testCategory = categoryIter.next();
@@ -186,14 +191,19 @@ public class ObjectModelDelete
              else
                  System.out.println( "Failed to find test Category" );
              
-
-             
+/*
+           
           // Delete test Membership object
              // First: find test Membership
-             Membership testMembership = objectModel.findMembership();
-             
+             Membership testMembership = null;
+             Membership modelMembership = objectModel.createMembership();
+             Date tempDate = new Date("4/13/1996");
+             modelMembership.setDate( tempDate );
+             Iterator<Membership> membershipIter = objectModel.findMembership( modelMembership );
+             while( membershipIter.hasNext() ) {
+                 testMembership = membershipIter.next();
                  System.out.println( testMembership );
-             
+             }
              
              // Second: delete test Membership
              if( testMembership != null ) {
@@ -203,7 +213,7 @@ public class ObjectModelDelete
              else
                  System.out.println( "Failed to find test Membership" );
         
-        
+*/       
 
          }
          catch( DTException dte ) {
