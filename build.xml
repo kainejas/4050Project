@@ -1,0 +1,33 @@
+<project name="DawgTradesBuilder" default="build">
+
+  <property name="src.dir"       value="src" />
+  <property name="class.dir"     value="classes" />
+
+
+  <!--
+     Available targets:
+     1. clean     - to clean all of the automatically generated files
+     2. compile   - to compile the Java sources into the "class.dir"
+  -->
+
+  <path id="classpath">
+      <fileset dir="jar/classes">
+          <include name="mysql-connector-java-5.1.34-bin.jar"/>
+      </fileset>
+  </path>
+
+  <target name="clean">
+      <echo>Cleaning the ${class.dir} directory</echo>
+      <delete verbose="true">
+          <fileset dir="${class.dir}" includes="**/*.class"/>
+      </delete>
+  </target>
+
+  <target name="compile">
+      <echo>Compile the source files</echo>
+      <javac srcdir="${src.dir}" destdir="${class.dir}">
+          <classpath refid="classpath"/>
+      </javac>
+  </target>	
+	
+</project>
