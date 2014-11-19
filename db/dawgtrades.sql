@@ -9,15 +9,16 @@ DROP TABLE IF EXISTS attribute;
 DROP TABLE IF EXISTS attribute_type;
 DROP TABLE IF EXISTS auction;
 DROP TABLE IF EXISTS bid;
-DROP TABLE IF EXISTS registered_user;
 DROP TABLE IF EXISTS item;
 DROP TABLE IF EXISTS experience_report;
+DROP TABLE IF EXISTS registered_user;
+
 
 
 CREATE TABLE `membership` (
   `id` int unsigned primary key auto_increment,
   `price` float DEFAULT NULL,
-  `date` date DEFAULT NULL,
+  `date` date DEFAULT NULL
 ) ENGINE=InnoDB;
 
 CREATE TABLE `category` (
@@ -99,7 +100,7 @@ CREATE TABLE `bid` (
 	`amount` FLOAT NOT NULL,
 	`user_id` INT UNSIGNED NOT NULL,
 	`auction_id` INT UNSIGNED NOT NULL,
-	FOREIGN KEY (auction_id) REFERENCES auction(id);
+	FOREIGN KEY (auction_id) REFERENCES auction(id)
 ) ENGINE=InnoDB;
 
 
