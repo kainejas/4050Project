@@ -24,8 +24,8 @@ public class CategoryManager {
 	}//end constructor
 	
 	public void save(Category category) throws DTException {
-		String 				insertCategorySql = "insert into category ( name, parentId ) values ( ?, ? )";
-		String 				updateCategorySql = "update category  set name = ?, set parentId = ? where id = ?";
+		String 				insertCategorySql = "insert into category ( name, parent_id ) values ( ?, ? )";
+		String 				updateCategorySql = "update category  set name = ?, set parent_id = ? where id = ?";
 		PreparedStatement 	stmt;
 		int					inscnt;
 		long				categoryId;

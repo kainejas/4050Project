@@ -35,7 +35,9 @@ public class ObjectModelImpl implements ObjectModel {
 	public Category createCategory(Category parent, String name)
 			throws DTException {
 		Category category = new CategoryImpl();
+		if(parent != null) 
 		category.setParentId(parent.getId());
+		
 		category.setName(name);
 		return category;
 	}
