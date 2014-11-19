@@ -442,4 +442,9 @@ public class ObjectModelImpl implements ObjectModel {
 		persistence.deleteMembership(membership);
 		
 	}
+	
+	@Override
+	public void setPersistence(Persistence persistence)  {
+		this.persistence = persistence;
+	}
 }

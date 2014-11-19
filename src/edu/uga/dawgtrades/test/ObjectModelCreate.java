@@ -41,11 +41,11 @@ public class ObjectModelCreate {
       }
       
       // obtain a reference to the ObjectModel module      
-      objectModel = new ObjectModelImpl(persistence);
+      objectModel = new ObjectModelImpl();
       // obtain a reference to Persistence module and connect it to the ObjectModel        
       persistence = new PersistenceImpl( conn, objectModel ); 
       // connect the ObjectModel module to the Persistence module
-     
+      objectModel.setPersistence(persistence);
       try {
     	  rUser1 = objectModel.createRegisteredUser("Ben", "Ben", "Pipkin", "password123", true, "bpipkin@email.com", "5551234567", true);
     	  objectModel.storeRegisteredUser(rUser1);
