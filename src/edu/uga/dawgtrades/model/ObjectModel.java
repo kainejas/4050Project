@@ -583,8 +583,10 @@ public interface ObjectModel
 	RegisteredUser getReviewer(ExperienceReport er) throws DTException;
 
 	public RegisteredUser getReviewed(ExperienceReport er) throws DTException;
+
+	Iterator<Attribute> getAttributes(Item item) throws DTException;
 	
-	
+	void deleteMembership(Membership membership)throws DTException;
 	
     //public Iterator<Attribute>         getHasType( AttributeType attributeType ) throws DTException;   
 

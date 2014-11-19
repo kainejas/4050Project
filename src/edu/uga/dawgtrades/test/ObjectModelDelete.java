@@ -130,7 +130,7 @@ public class ObjectModelDelete
              // Third: find test Item's Attribute
              Attribute testAttribute = null;
              //modelItem.setLastName( "Brooks" );
-             Iterator<Attribute> attributeIter = objectModel.getAttribute( testItem );
+             Iterator<Attribute> attributeIter = objectModel.getAttributes( testItem );
              while( attributeIter.hasNext() ) {
                  testAttribute = attributeIter.next();
                  System.out.println( testAttribute );
@@ -139,13 +139,8 @@ public class ObjectModelDelete
              // Fourth: find test Attribute's AttributeType
              AttributeType testAttributeType = objectModel.getAttributeType( testAttribute );
              
-             // Fifth: delete test Item
-             if( testItem != null ) {
-                 objectModel.deleteItem( testItem );
-                 System.out.println( "Deleted the test Item object" );
-             }
-             else
-                 System.out.println( "Failed to find test Item" );
+             objectModel.deleteItem( testItem );
+			 System.out.println( "Deleted the test Item object" );
 
              // Sixth: delete test Attribute
              if( testAttribute != null ) {
@@ -192,17 +187,13 @@ public class ObjectModelDelete
                  System.out.println( "Failed to find test Category" );
              
 
-  /*           
+             
           // Delete test Membership object
              // First: find test Membership
-             Membership testMembership = null;
-             Membership modelMembership = objectModel.createMembership();
-             modelMembership.setDate(  );
-             Iterator<Membership> membershipIter = objectModel.findMembership( modelMembership );
-             while( membershipIter.hasNext() ) {
-                 testMembership = membershipIter.next();
+             Membership testMembership = objectModel.findMembership();
+             
                  System.out.println( testMembership );
-             }
+             
              
              // Second: delete test Membership
              if( testMembership != null ) {
@@ -212,7 +203,7 @@ public class ObjectModelDelete
              else
                  System.out.println( "Failed to find test Membership" );
         
-    */    
+        
 
          }
          catch( DTException dte ) {

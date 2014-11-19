@@ -431,4 +431,15 @@ public class ObjectModelImpl implements ObjectModel {
 	public RegisteredUser getReviewed(ExperienceReport er) throws DTException {
 		return persistence.restoreReviewed(er);
 	}
+	
+	@Override
+	public Iterator<Attribute> getAttributes(Item item) throws DTException {
+		return persistence.restoreHasAttribute(item);
+	}
+
+	@Override
+	public void deleteMembership(Membership membership) throws DTException {
+		persistence.deleteMembership(membership);
+		
+	}
 }

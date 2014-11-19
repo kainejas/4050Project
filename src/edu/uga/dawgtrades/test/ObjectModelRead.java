@@ -65,7 +65,7 @@ public class ObjectModelRead {
               Iterator<Bid> bidIter = objectModel.getBids(user);
               while( bidIter != null && bidIter.hasNext()) {
             	  Bid bid = bidIter.next();
-            	  System.out.println("Bid id: " + bid.getId() + " amount: " + bid.getAmount() + " user: " + bid.getRegisteredUser().getId() + " auction: " + bid.getAuction().getId()  );
+            	  System.out.println("Bid id: " + bid.getId() + " amount: " + bid.getAmount() + " user_id: " + bid.getRegisteredUser().getId() + " auction_id: " + bid.getAuction().getId()  );
               }
               System.out.println();
               
@@ -125,6 +125,7 @@ public class ObjectModelRead {
         	  System.out.println("For Category: ");
         	  Category cat = objectModel.getCategory(attributeType);
         	  System.out.println("Category id: " + cat.getId() + " name: " + cat.getName() + " parent_id: " + cat.getParentId());
+        
           }
           
           System.out.println();
@@ -138,7 +139,7 @@ public class ObjectModelRead {
          
         	  System.out.println("   Selling Item: " );
         	  Item item= objectModel.getItem( a );
-              System.out.print("Item id: " + item.getId() + " name: " + item.getName() + " owner: " + item.getOwnerId() + " category: " + item.getCategoryId()  );
+              System.out.print("Item id: " + item.getId() + " name: " + item.getName() + " owner_id: " + item.getOwnerId() + " category_id: " + item.getCategoryId()  );
         	  System.out.println("Description: " + item.getDescription() + "\n");
              
           }
@@ -212,6 +213,14 @@ public class ObjectModelRead {
         	  
         	  System.out.println("  With Name: ");
         	  System.out.println(item.getName());
+        	  
+        	    System.out.println("    With Attributes : ");
+                Iterator<Attribute> attributesIter = objectModel.getAttributes(item);
+                while( attributesIter != null && attributesIter.hasNext()) {
+              	  Attribute a = attributesIter.next();
+              	  System.out.println("Attribute id: " + a.getId() + " value: " + a.getValue() + " item_id: " + a.getItemId() + " attribute_type_id: " + a.getAttributeType());
+                }
+            
         	  
         	  System.out.println("  With Description: ");
         	  System.out.println(item.getDescription());
