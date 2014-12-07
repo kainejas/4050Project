@@ -46,14 +46,15 @@ public class BidManager {
 				throw new DTException("BidManager.save: can't save a Bid: value undefined");
 		
 			if(bid.getRegisteredUser() != null)
-				stmt.setString(2, Long.toString(bid.getRegisteredUser().getId()));
-			else
-				stmt.setNull(2, java.sql.Types.INTEGER);
+				stmt.setLong(2, bid.getRegisteredUser().getId());
+            else
+                throw new DTException("BidManager.save: can't save a Bid: user undefined");
 			
 			if(bid.getAuction() != null)
-				stmt.setString(3, Long.toString(bid.getAuction().getId()));
-			else
-				stmt.setNull(3, java.sql.Types.INTEGER);
+				stmt.setLong(3, bid.getAuction().getId());
+            else
+                throw new DTException("BidManager.save: can't save a Bid: auction undefined");
+
 			
 			if(bid.isPersistent())
 				stmt.setLong(4, bid.getId());
@@ -99,23 +100,29 @@ public class BidManager {
 		if(bid != null){
 			if(bid.getId() >= 0)
 				query.append(" where id = " + bid.getId());
-			else if(bid.getAmount() != 0)
-				query.append(" where value = " + bid.getAmount() + "'");
-			else{
-				if(bid.getRegisteredUser() != null)
-					condition.append(" user_id = '" + bid.getRegisteredUser().getId() + "'");
-				
-				if(bid.getAuction() != null){
-					 if( condition.length() > 0 )
-                    	condition.append(" and ");
-					 condition.append(" auction_id = '" + bid.getAuction().getId() + "'");
-				}
-				if(condition.length() > 0){
-					query.append(" where ");
-					query.append(condition);
-				}
-			}
-		}
+            else {
+                if(bid.getAmount() != 0)
+                    condition.append(" amount = " + bid.getAmount() + "'");
+                
+                if(bid.getRegisteredUser() != null && bid.getRegisteredUser().isPersistent()) {
+                    if(condition.length() > 0)
+                        condition.append(" and ");
+                    condition.append(" user_id = '" + bid.getRegisteredUser().getId() + "'");
+                }
+                
+                if(bid.getAuction() != null && bid.getAuction().isPersistent()){
+                    if( condition.length() > 0 )
+                        condition.append(" and ");
+                    condition.append(" auction_id = '" + bid.getAuction().getId() + "'");
+                }
+                if(condition.length() > 0){
+                    query.append(" where ");
+                    query.append(condition);
+                }
+            }
+        }
+       
+    
 		
 		try{
 			stmt = conn.createStatement();
@@ -130,12 +137,12 @@ public class BidManager {
 		}
 		
 		throw new DTException("BidManager.restore: Could not restore persistent Bid object");
-	}
+    }
 	
 	public RegisteredUser restoreBidder(Bid bid) 
 		throws DTException {
 		
-		        String       selectPersonSql = "select r.id, r.username, r.first_name, r.last_name, r.password, r.email, r.phone, r.isAdmin, r.canText from registered_user r, bid b where b.user_id = r.id order by b.user_id desc";              
+		        String       selectPersonSql = "select r.id, r.name, r.firstname, r.lastname, r.password, r.email, r.phone, r.isAdmin, r.canText from user r, bid b where b.user_id = r.id";
 		        Statement    stmt = null;
 		        StringBuffer query = new StringBuffer( 100 );
 		        StringBuffer condition = new StringBuffer( 100 );
@@ -146,6 +153,10 @@ public class BidManager {
 		        query.append( selectPersonSql );
 		        
 		        if( bid != null ) {
+                    if (bid.getId() >= 0)
+                        query.append(" and b.id = " + bid.getId());
+                    else {
+
 		             if( bid.getAmount() != 0 ) // userName is unique, so it is sufficient to get a bid
 		                condition.append( " and b.amount = '" + bid.getAmount() + "'" );
 		         
@@ -158,7 +169,8 @@ public class BidManager {
 		                if( condition.length() > 0 ) {
 		                    query.append( condition );
 		                }
-		            }
+                    }
+                }
 		        
 		                
 		        try {
@@ -208,7 +220,7 @@ public class BidManager {
 	public Auction restoreAuction(Bid bid) 
 			throws DTException {
 			
-			        String       selectPersonSql = "select a.id, a.min_price, a.expiration, a.item_id from auction a, bid b where b.auction_id = a.id";              
+			        String       selectPersonSql = "select a.id, a.expiration, a.item_id, a.minPrice from auction a, bid b where b.auction_id = a.id";
 			        Statement    stmt = null;
 			        StringBuffer query = new StringBuffer( 100 );
 			        StringBuffer condition = new StringBuffer( 100 );
@@ -219,6 +231,9 @@ public class BidManager {
 			        query.append( selectPersonSql );
 			        
 			        if( bid != null ) {
+                            if(bid.getId() >= 0)
+                                condition.append(" and b.id = " + bid.getId());
+                            else {
 			             if( bid.getAmount() != 0 ) // userName is unique, so it is sufficient to get a bid
 			                condition.append( " and b.amount = '" + bid.getAmount() + "'" );
 			         
@@ -231,7 +246,8 @@ public class BidManager {
 			                if( condition.length() > 0 ) {
 			                    query.append( condition );
 			                }
-			            }
+                        }
+                    }
 			        
 			                
 			        try {
@@ -255,7 +271,7 @@ public class BidManager {
 	public Item restoreItem(Bid bid) 
 			throws DTException {
 			
-			        String       selectPersonSql = "select i.id, i.name, i.owner_id, i.category_id from item i, bid b where b.item_id = i.id";              
+			        String       selectPersonSql = "select i.id, i.name, i.user_id, i.category_id from item i, bid b where b.item_id = i.id";              
 			        Statement    stmt = null;
 			        StringBuffer query = new StringBuffer( 100 );
 			        StringBuffer condition = new StringBuffer( 100 );

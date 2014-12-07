@@ -27,24 +27,21 @@ public class MembershipManager {
 		PreparedStatement stmt = null;
 		int inscnt;
 		long membershipId;
-		
-		if(membership.getId() == -1)
-			throw new DTException("MembershipManager.save: Attempting to save a Membership without an ID");
-		
-		try{
+        
+        try{
 			
 			if(!membership.isPersistent())
 				stmt = conn.prepareStatement(insertMembershipSql);
 			else
 				stmt = conn.prepareStatement(updateMembershipSql);
 			
-			if(membership.getPrice() >= 0)
+			if(membership.getPrice() > 0)
 				stmt.setString(1, Float.toString(membership.getPrice()));
 			else
 				throw new DTException("MembershipManager.save: can't save a Mambership: price undefined");
             
 			if(membership.getDate() != null)
-				stmt.setDate(2, (java.sql.Date) membership.getDate());
+				stmt.setDate(2, new java.sql.Date( membership.getDate().getTime()));
 			else
 				throw new DTException("MembershipManager.save: can't save an Membership: date undefined");
 			
@@ -90,24 +87,27 @@ public class MembershipManager {
 		query.append(selectMembershipSql);
 		
 		if(membership != null){
-			if(membership.getId() >= 0)
+            if(membership.getId() >= 0)
 				query.append(" where id = " + membership.getId());
-			else {
-				if(membership.getPrice() >= 0)
-                    condition.append(" price = " + membership.getPrice() + "'");
-			
-				if(membership.getDate() != null){
-					if( condition.length() > 0 )
+            else {
+                if(membership.getPrice() >= 0)
+                    condition.append(" price = " + membership.getPrice());
+                
+                if(membership.getDate() != null){
+                    if( condition.length() > 0 )
                         condition.append(" and ");
                     condition.append(" date = '" + membership.getDate() + "'");
                 }
                 
                 if(condition.length() > 0){
-					query.append(" where ");
-					query.append(condition);
-				}
-			}
-		}
+                    query.append(" where ");
+                    query.append(condition);
+                }
+            }
+        }
+        else {
+            query.append(" ORDER BY date desc");
+        }
 		
 		try{
 			stmt = conn.createStatement();

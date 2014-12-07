@@ -22,6 +22,7 @@ import edu.uga.dawgtrades.model.Bid;
 import edu.uga.dawgtrades.model.Category;
 import edu.uga.dawgtrades.model.ExperienceReport;
 import edu.uga.dawgtrades.model.Item;
+import edu.uga.dawgtrades.model.ObjectModel;
 
 public interface Persistence {
 
@@ -129,5 +130,8 @@ public interface Persistence {
 
 	RegisteredUser restoreReviewer(ExperienceReport er) throws DTException;
 	RegisteredUser restoreReviewed(ExperienceReport er) throws DTException;
+    
+    void init();
+    void setObjectModel(ObjectModel objectModel);
 
 };

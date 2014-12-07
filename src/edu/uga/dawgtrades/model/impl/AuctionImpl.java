@@ -14,7 +14,9 @@ public class AuctionImpl extends Persistent implements Auction {
 	private long itemId;
 	
 	public AuctionImpl(Item item, float minPrice, Date expiration) {
+        if(item  != null)
 		this.itemId = item.getId();
+        else this.itemId = -1;
 		this.minPrice = minPrice;
 		this.expiration = expiration;
 		this.sellingPrice = minPrice;

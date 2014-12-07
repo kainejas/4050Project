@@ -38,8 +38,10 @@ public class ObjectModelRead {
       // obtain a reference to Persistence module and connect it to the ObjectModel        
       persistence = new PersistenceImpl( conn, objectModel ); 
       // connect the ObjectModel module to the Persistence module
-      objectModel.setPersistence(persistence);
-   
+            objectModel.setPersistence(persistence);
+            persistence.setObjectModel(objectModel);
+            persistence.init();
+
       
                
       try {
@@ -49,39 +51,50 @@ public class ObjectModelRead {
           Iterator<RegisteredUser> userIter = objectModel.findRegisteredUser( null );
           while( userIter.hasNext() ) {
               RegisteredUser user = userIter.next();
-              System.out.println( user );
+              System.out.println( "REGISTEREDUSER ID: " + user.getId() + "  Name: " + user.getName() + "  First Name: " + user.getFirstName() );
               Iterator<Item> itemIter = objectModel.getItem( user );
               
-              System.out.println("Owner of: " );
+              System.out.println("    Owner of: " );
               while( itemIter != null && itemIter.hasNext()) {
-            	  Item item = itemIter.next();
+                  try{
+                  Item item = itemIter.next();
+                
             	  System.out.println("Item id: " + item.getId() + " name: " + item.getName() + " owner: " + item.getOwnerId() + " category: " + item.getCategoryId()  );
             	  System.out.println("Description: " + item.getDescription() + "\n");
+                  }
+                  catch(Exception e) {
+                      e.printStackTrace();
+                  }
               }
               System.out.println();
               
-              System.out.println("Bidder of: ");
+              System.out.println("   Bidder of: ");
               Iterator<Bid> bidIter = objectModel.getBids(user);
               while( bidIter != null && bidIter.hasNext()) {
+                  try{
             	  Bid bid = bidIter.next();
-            	  System.out.println("Bid id: " + bid.getId() + " amount: " + bid.getAmount() + " user_id: " + bid.getRegisteredUser().getId() + " auction_id: " + bid.getAuction().getId()  );
+            	  System.out.println("BID id: " + bid.getId() + " amount: " + bid.getAmount() + " user_id: " + bid.getRegisteredUser().getId() + " auction_id: " + bid.getAuction().getId()  );
+                  }
+                  catch(Exception e) {
+                      e.printStackTrace();
+                  }
               }
               System.out.println();
               
-              System.out.println("Reviewed in: ");
+              System.out.println("   Reviewed in: ");
               Iterator<ExperienceReport> reviewedReportIter = objectModel.getReviewedReports( user );
               while(reviewedReportIter != null && reviewedReportIter.hasNext()) {
             	  ExperienceReport report = reviewedReportIter.next();
-            	  System.out.println("ReviewedReport id: " + report.getId() + " reviewer_id: " + report.getReviewer().getId() +" reviewed_id: " + report.getReviewed().getId() + " rating: " + report.getRating());
+            	  System.out.println("EXPERIENCEREPORT id: " + report.getId() + " reviewer_id: " + report.getReviewer().getId() +" reviewed_id: " + report.getReviewed().getId() + " rating: " + report.getRating());
             	  System.out.println("report: " + report.getReport());
               }
               System.out.println();
               
-              System.out.println("Reviewer of: ");
+              System.out.println("   Reviewer of: ");
               Iterator<ExperienceReport> reviewerReportIter = objectModel.getReviewerReports( user );
               while(reviewerReportIter != null && reviewerReportIter.hasNext()) {
             	  ExperienceReport report = reviewerReportIter.next();
-            	  System.out.println("ReviewerReport id: " + report.getId() + " reviewer_id: " + report.getReviewer().getId() +" reviewed_id: " + report.getReviewed().getId() + " rating: " + report.getRating());
+            	  System.out.println("EXPERIENCEREPORT id: " + report.getId() + " reviewer_id: " + report.getReviewer().getId() +" reviewed_id: " + report.getReviewed().getId() + " rating: " + report.getRating());
             	  System.out.println("report: " + report.getReport());
               }
               System.out.println();
@@ -94,33 +107,30 @@ public class ObjectModelRead {
           while( attributeIter.hasNext() ) {
               Attribute a = attributeIter.next();
               System.out.println( a );
+              System.out.println("ATTRIBUTE with Value of: " + a.getValue());
               
-              System.out.println("Value of: " );
-              System.out.println(a.getValue());
-              
-              System.out.println();
-              System.out.print( "   Describer of: " );
+              System.out.print( "    Describer of: " );
               Item item= objectModel.getItem( a );
-              System.out.print("Item id: " + item.getId() + " name: " + item.getName() + " owner: " + item.getOwnerId() + " category: " + item.getCategoryId()  );
+              System.out.print("ITEM id: " + item.getId() + " name: " + item.getName() + " owner: " + item.getOwnerId() + " category: " + item.getCategoryId()  );
         	  System.out.println("Description: " + item.getDescription() + "\n");
              
               System.out.println();
-              System.out.print("   With Type: ");
+              System.out.print("    With Type: ");
               AttributeType at = objectModel.getAttributeType(a);
-              System.out.print("AttributeType id: " + at.getId() + " name: " + at.getName() + " category: " + at.getCategoryId() );
+              System.out.print("ATTRIBUTETYPE id: " + at.getId() + " name: " + at.getName() + " category: " + at.getCategoryId() );
              
               
               System.out.println();
                        
           }
           System.out.println();
-          System.out.println("  Attribute Types: ");
+          System.out.println("Attribute Types: ");
           Iterator<AttributeType> attributeTypeIter = objectModel.findAttributeType(null);
           while( attributeTypeIter.hasNext() ) {
         	  AttributeType attributeType = attributeTypeIter.next();
         	  System.out.println( attributeType );
         	  
-        	  System.out.println("Name: " + attributeType.getName());
+        	  System.out.println("ATTRIBUTETYPE Name: " + attributeType.getName());
         	  System.out.println("For Category: ");
         	  Category cat = objectModel.getCategory(attributeType);
         	  System.out.println("Category id: " + cat.getId() + " name: " + cat.getName() + " parent_id: " + cat.getParentId());
@@ -128,13 +138,13 @@ public class ObjectModelRead {
           }
           
           System.out.println();
-          System.out.println("  Auctions: ");
+          System.out.println("Auctions: ");
           Iterator<Auction> auctionIter = objectModel.findAuction(null);
           while( auctionIter.hasNext() ) {
         	  Auction a = auctionIter.next();
         	  System.out.println( a );
         	  
-        	  System.out.println("Auction id: " + a.getId() + " min_price " + a.getMinPrice() + " expiration: " + a.getExpiration());
+        	  System.out.println("AUCTION id: " + a.getId() + " min_price " + a.getMinPrice() + " expiration: " + a.getExpiration());
          
         	  System.out.println("   Selling Item: " );
         	  Item item= objectModel.getItem( a );
@@ -145,11 +155,16 @@ public class ObjectModelRead {
           
           System.out.println();
           System.out.println("  Bids: ");
-          Iterator<Bid> bidIter = objectModel.findBid(null);
+          Iterator<Bid> bidIter =null;
+          try{
+        bidIter = objectModel.findBid(null);
+          }
+          catch(Exception e) {
+              e.printStackTrace();
+          }
           while( bidIter.hasNext() ) {
-        	  Bid b = bidIter.next();
-        	  System.out.println( b );
-        	  
+              Bid b = bidIter.next();
+             
         	  System.out.println("  For amount: ");
         	  System.out.println(b.getAmount());
         	  
@@ -159,6 +174,7 @@ public class ObjectModelRead {
         	  System.out.println("   Made for: " );
         	  Auction a = objectModel.getAuction( b );
         	  System.out.println("Auction id: " + a.getId() + " min_price " + a.getMinPrice() + " item_id: " + a.getItemId() + " expiration: " + a.getExpiration());
+             
           }
           
           System.out.println();

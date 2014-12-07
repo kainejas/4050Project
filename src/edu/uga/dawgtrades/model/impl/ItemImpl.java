@@ -11,13 +11,16 @@ public class ItemImpl extends Persistent implements Item {
 	private long ownerId;
 	private long categoryId;
 	
-	public ItemImpl(Category category, RegisteredUser user, String identifier,
+	public ItemImpl(Category category, RegisteredUser user,
 			String name, String description) {
-		this.categoryId = category.getId();
+		if (category != null)
+        this.categoryId = category.getId();
+        else this.categoryId = -1;
+        if(user != null)
 		this.ownerId = user.getId();
+        else this.ownerId = -1;
 		this.name = name;
 		this.description = description;
-		this.setId(Long.parseLong(identifier));
 	
 	}
 

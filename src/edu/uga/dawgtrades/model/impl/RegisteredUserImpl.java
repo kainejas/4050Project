@@ -45,11 +45,8 @@ public class RegisteredUserImpl extends Persistent implements RegisteredUser {
 
 	@Override
 	public void setName(String name) {
-	
-		//TODO Implement set name
-		//first set firstname to first half of string
-		//then set lastname to second half of string
-	}
+        this.username = name;
+    }
 
 	@Override
 	public String getFirstName() {

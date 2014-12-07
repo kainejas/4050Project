@@ -98,15 +98,15 @@ public class ObjectModelImpl implements ObjectModel {
 
 	@Override
 	public Item createItem(Category category, RegisteredUser user,
-			String identifier, String name, String description)
+            String name, String description)
 			throws DTException {
-		Item item = new ItemImpl(category, user, identifier,name,description);
+		Item item = new ItemImpl(category, user, name,description);
 		return item;
 	}
 
 	@Override
 	public Item createItem() {
-		Item item = new ItemImpl(null,null,"-1", null,null);
+		Item item = new ItemImpl(null,null, null,null);
 		item.setId(-1);
 		return item;
 		
@@ -303,9 +303,7 @@ public class ObjectModelImpl implements ObjectModel {
 
 	@Override
 	public Membership findMembership() throws DTException {
-	   Membership members = new MembershipImpl(0, null);
-	   members.setId(-1);
-		return persistence.restoreMembership(members).next();
+		return persistence.restoreMembership(null).next();
 	}
 
 	@Override

@@ -30,8 +30,8 @@ class ItemManager
     public void save( Item item )
             throws DTException
     {
-        String               insertItemSql = "insert into item ( user_id, name, description ) values ( ?, ?, ? )";
-        String               updateItemSql = "update item  set user_id = ?, name = ?, description = ? where id = ?";
+        String               insertItemSql = "insert into item ( user_id, name, description, category_id ) values ( ?, ?, ?, ? )";
+        String               updateItemSql = "update item set user_id = ?, name = ?, description = ?, category_id = ? where id = ?";
         PreparedStatement    stmt;
         int                  inscnt;
         long               itemId;
@@ -43,20 +43,22 @@ class ItemManager
             else
                 stmt = (PreparedStatement) conn.prepareStatement( updateItemSql );
 
+            
+            if( item.getOwnerId() != -1 )
+                stmt.setLong( 1, item.getOwnerId() );
+            else
+                throw new DTException( "ItemManager.save: can't save an Item: user_id undefined" );
+            
             if( item.getName() != null ) 
-                stmt.setString( 1, item.getName() );
+                stmt.setString( 2, item.getName() );
             else
                 throw new DTException( "ItemManager.save: can't save an Item: name undefined" );
             
             if( item.getDescription() != null )
-                stmt.setString( 2, item.getDescription() );
+                stmt.setString( 3, item.getDescription() );
             else
                 throw new DTException( "ItemManager.save: can't save an Item: description undefined" );
-            
-            if( item.getOwnerId() != -1 )
-                stmt.setLong( 3, item.getOwnerId() );
-            else
-                throw new DTException( "ItemManager.save: can't save an Item: user_id undefined" );
+           
             
             if( item.getCategoryId() != -1 )
                 stmt.setLong( 4, item.getCategoryId() );
@@ -98,7 +100,7 @@ class ItemManager
     public Iterator<Item> restore( Item modelItem )
             throws DTException
     {
-        String       selectItemSql = "select id, user_id, name, description from item";
+        String       selectItemSql = "select id, name, description, user_id, category_id from item";
         Statement    stmt = null;
         StringBuffer query = new StringBuffer( 100 );
         StringBuffer condition = new StringBuffer( 100 );
@@ -113,18 +115,26 @@ class ItemManager
                 query.append( " where id = " + modelItem.getId() );
             else {
                 
-                if( modelItem.getName() != null )
+                if( modelItem.getName() != null ) {
                     condition.append( " name = '" + modelItem.getName() + "'" );
+                }
+                
 
-                if( modelItem.getDescription() != null )
+                if( modelItem.getDescription() != null ) {
+                    if( condition.length() > 0 )
+                        condition.append(" and ");
                     condition.append( " description = '" + modelItem.getDescription() + "'" );
-                
-                if( modelItem.getOwnerId() != -1 )
+                }
+                if( modelItem.getOwnerId() != -1 ) {
+                    if( condition.length() > 0 )
+                        condition.append(" and ");
                     condition.append( " user_id = '" + modelItem.getOwnerId() + "'" );
-                
-                if( modelItem.getCategoryId() != -1)
+                }
+                if( modelItem.getCategoryId() != -1) {
+                    if( condition.length() > 0 )
+                        condition.append(" and ");
                     condition.append( " category_id = '" + modelItem.getCategoryId() + "'" );
-
+                }
                 if( condition.length() > 0 ) {
                     query.append(  " where " );
                     query.append( condition );
@@ -205,9 +215,6 @@ class ItemManager
                 if( item.getOwnerId() != -1  )
                     condition.append( " and i.user_id = '" + item.getOwnerId() + "'" );
                
-                if( item.getCategoryId() != -1  )
-                    condition.append( " and i.category_id = '" + item.getCategoryId() + "'" );
-                
                 if( condition.length() > 0 ) {
                     query.append( condition );
                 }
@@ -234,7 +241,7 @@ class ItemManager
     }
     
     public Iterator<Attribute> restoreHasAttribute(Item item) throws DTException{
-        String selectItemSql = "select a.id, a.value, a.item_id, a.attribute_type_id from item i, attribute a where a.item_id = i.id";
+        String selectItemSql = "select a.id, a.value, a.item_id, a.attributetype_id from item i, attribute a where a.item_id = i.id";
         Statement    stmt = null;
         StringBuffer query = new StringBuffer( 100 );
         StringBuffer condition = new StringBuffer( 100 );
@@ -285,7 +292,7 @@ class ItemManager
     }// end restoreHasAttribute()
     
     public RegisteredUser restoreOwns(Item item) throws DTException{
-        String selectItemSql = "select r.id, r.username, r.password, r.email, r.firstname, r.lastname, r.phone from item i, registered_user r where r.id = i.user_id";
+        String selectItemSql = "select r.id, r.name, r.password, r.email, r.firstname, r.lastname, r.phone, r.canText, r.isAdmin from item i, user r where r.id = i.user_id";
         Statement    stmt = null;
         StringBuffer query = new StringBuffer( 100 );
         StringBuffer condition = new StringBuffer( 100 );
@@ -336,7 +343,7 @@ class ItemManager
     }// end restoreOwns()
     
     public Auction restoreIsSoldAt(Item item) throws DTException {
-		String selectItemSql = "select a.id, a.min_price, a.expiration, a.item_id from item i, auction a where a.item_id = i.id";
+		String selectItemSql = "select a.id, a.minPrice, a.expiration, a.item_id from item i, auction a where a.item_id = i.id";
 		Statement stmt = null;
 		StringBuffer query = new StringBuffer(100);
 		StringBuffer condition = new StringBuffer(100);

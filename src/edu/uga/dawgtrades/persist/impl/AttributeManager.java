@@ -24,14 +24,11 @@ public class AttributeManager {
 	}
 	
 	public void save(Attribute attribute) throws DTException{
-		String insertAttributeSql = "insert into attribute (value, item_id, attribute_type_id) values (?, ?, ?)";
-		String updateAttributeSql = "update attribute set value = ?, item_id = ?, attribute_type_id = ? where id = ?";
+		String insertAttributeSql = "insert into attribute (value, item_id, attributetype_id) values (?, ?, ?)";
+		String updateAttributeSql = "update attribute set value = ?, item_id = ?, attribute_ype_id = ? where id = ?";
 		PreparedStatement stmt = null;
 		int inscnt;
 		long attributeId;
-		
-		if(attribute.getItemId() == -1)
-			throw new DTException("AttributeManager.save: Attempting to save an attribute without an item");
 		
 		try{
 			
@@ -47,13 +44,13 @@ public class AttributeManager {
 		
 			if(attribute.getItemId() != -1)
 				stmt.setString(2, Long.toString(attribute.getItemId()));
-			else
-				stmt.setNull(2, java.sql.Types.INTEGER);
+            else
+                throw new DTException("AttributeManager.save: can't save an Attribute: item undefined");
 			
 			if(attribute.getAttributeType() != -1)
 				stmt.setString(3, Long.toString(attribute.getAttributeType()));
-			else
-				stmt.setNull(3, java.sql.Types.INTEGER);
+            else
+                throw new DTException("AttributeManager.save: can't save an Attribute: attributetype undefined");
 			
 			if(attribute.isPersistent())
 				stmt.setLong(4, attribute.getId());
@@ -87,7 +84,7 @@ public class AttributeManager {
 	}
 
 	public Iterator<Attribute> restore(Attribute attribute) throws DTException{
-		String selectAttributeSql = "select id, value, item_id, attribute_type_id from attribute";
+		String selectAttributeSql = "select id, value, item_id, attributetype_id from attribute";
 		Statement stmt = null;
 		StringBuffer query = new StringBuffer(100);
 		StringBuffer condition = new StringBuffer(100);
@@ -110,7 +107,7 @@ public class AttributeManager {
 				if(attribute.getAttributeType() != -1) {
 					 if( condition.length() > 0 )
 	                    	condition.append(" and ");
-					condition.append("attribute_type_id = '" + attribute.getAttributeType() + "'");
+					condition.append("attributetype_id = '" + attribute.getAttributeType() + "'");
 				}
 				if(condition.length() > 0){
 					query.append(" where ");
@@ -178,7 +175,7 @@ public class AttributeManager {
 				if(attribute.getItemId() != 0)
 					condition.append(" and a.item_id = '" + attribute.getItemId() + "'");
 				if(attribute.getAttributeType() != 0)
-					condition.append(" and a.attribute_type_id = '" + attribute.getAttributeType() + "'");
+					condition.append(" and a.attributetype_id = '" + attribute.getAttributeType() + "'");
 				if(condition.length() > 0){
 					query.append(condition);
 				}
@@ -205,7 +202,7 @@ public class AttributeManager {
 	}
 
 	public AttributeType restoreHasType(Attribute attribute) throws DTException{
-		String selectTypeSql = "select at.id, at.name, at.category_id from attribute_type at, attribute a where a.attribute_type_id = at.id";
+		String selectTypeSql = "select at.id, at.name, at.category_id from attributetype at, attribute a where a.attributetype_id = at.id";
 		Statement stmt = null;
 		StringBuffer query = new StringBuffer(100);
 		StringBuffer condition = new StringBuffer(100);
@@ -223,7 +220,7 @@ public class AttributeManager {
 				if(attribute.getItemId() != -1)
 					condition.append(" and a.item_id = '" + attribute.getItemId() + "'");
 				if(attribute.getAttributeType() != -1)
-					condition.append(" and a.attribute_type_id = '" + attribute.getAttributeType() + "'");
+					condition.append(" and a.attributetype_id = '" + attribute.getAttributeType() + "'");
 				if(condition.length() > 0){
 					query.append(condition);
 				}

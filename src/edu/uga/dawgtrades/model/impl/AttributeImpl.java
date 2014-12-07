@@ -10,8 +10,12 @@ public class AttributeImpl extends Persistent implements Attribute {
 		private long attributeId;
 	public AttributeImpl(AttributeType attributeType, Item item,
 				String value) {
+            if(attributeType != null)
 			this.attributeId = attributeType.getId();
+            else this.attributeId = -1;
+            if(item != null)
 			this.itemId = item.getId();
+            else this.itemId = -1;
 			this.value = value;
 		}
 

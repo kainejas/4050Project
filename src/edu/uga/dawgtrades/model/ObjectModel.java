@@ -112,7 +112,7 @@ public interface ObjectModel
      * @return a new Item object, classified into the given category and owned by the given user
      * @throws DTException if there is a problem with the new object creation (e.g., the category or user is not persistent)
      */
-    public Item createItem( Category category, RegisteredUser user, String identifier, String name, String description ) throws DTException;
+    public Item createItem( Category category, RegisteredUser user, String name, String description ) throws DTException;
 
     /**
      * Create an empty Item object.  This method can be used to create an "empty" modelItem and also can be 

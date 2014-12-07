@@ -27,19 +27,31 @@ public class PersistenceImpl implements Persistence{
 	private ItemManager itemManager = null;
 	private MembershipManager membershipManager = null;
 	private RegisteredUserManager registeredUserManager = null;
-	
+    private Connection conn;
+    private ObjectModel objectModel;
 	public PersistenceImpl(Connection conn, ObjectModel objectModel){
-		attributeManager = new AttributeManager(conn, objectModel);
-		attributeTypeManager = new AttributeTypeManager(conn, objectModel);
-		auctionManager = new AuctionManager(conn, objectModel);
-		bidManager = new BidManager(conn, objectModel);
-		categoryManager = new CategoryManager(conn, objectModel);
-		experienceReportManager = new ExperienceReportManager(conn, objectModel);
-		itemManager = new ItemManager(conn, objectModel);
-		membershipManager = new MembershipManager(conn, objectModel);
-		registeredUserManager = new RegisteredUserManager(conn, objectModel);
-	}
+        this.conn = conn;
+        this.objectModel = objectModel;
+    }
 	
+    @Override
+    public void init() {
+        attributeManager = new AttributeManager(conn, objectModel);
+        attributeTypeManager = new AttributeTypeManager(conn, objectModel);
+        auctionManager = new AuctionManager(conn, objectModel);
+        bidManager = new BidManager(conn, objectModel);
+        categoryManager = new CategoryManager(conn, objectModel);
+        experienceReportManager = new ExperienceReportManager(conn, objectModel);
+        itemManager = new ItemManager(conn, objectModel);
+        membershipManager = new MembershipManager(conn, objectModel);
+        registeredUserManager = new RegisteredUserManager(conn, objectModel);
+
+        
+    }
+    @Override
+    public void setObjectModel(ObjectModel objectModel) {
+        this.objectModel = objectModel;
+    }
 	@Override
 	public void saveAttribute(Attribute attribute) throws DTException{
 		attributeManager.save(attribute);

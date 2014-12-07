@@ -25,8 +25,8 @@ public class AuctionManager {
 	}//end constructor
 	
 	public void save(Auction auction) throws DTException {
-		String 				insertAuctionSql = "insert into auction ( expiration, itemID, min_price, selling_price ) values ( ?, ?, ?, ? )";
-		String 				updateAuctionSql = "update auction  set expiration = ?, set item_id = ?, set min_price = ?, set selling_price = ? where id = ?";
+		String 				insertAuctionSql = "insert into auction ( expiration, item_id, minPrice ) values ( ?, ?, ? )";
+		String 				updateAuctionSql = "update auction set expiration = ?, set item_id = ?, set minPrice = ? where id = ?";
 		PreparedStatement 	stmt;
 		int					inscnt;
 		long				auctionId;
@@ -42,27 +42,22 @@ public class AuctionManager {
 				stmt = conn.prepareStatement(updateAuctionSql);
 			
 			if (auction.getExpiration() != null)
-				stmt.setDate(1, (Date) auction.getExpiration());
+				stmt.setDate(1, new java.sql.Date(auction.getExpiration().getTime()));
 			else
 				throw new DTException( "Auction.save: can't save an Auction: invalid expiration date");
 			
 			if (auction.getItemId() != -1)
-				stmt.setString( 2, Long.toString(auction.getItemId()));
-			else
-				stmt.setNull( 2, java.sql.Types.INTEGER);
+				stmt.setLong( 2, auction.getItemId());
+            else
+                throw new DTException( "Auction.save: can't save an Auction: invalid expiration date");
 			
 			if (auction.getMinPrice() >= 0)
 				stmt.setString(3, Float.toString(auction.getMinPrice()));
 			else
 				throw new DTException("AuctionManager.save: can't save an Auction: min price invalid");
 			
-			if (auction.getSellingPrice() >= 0)
-				stmt.setString(4, Float.toString(auction.getSellingPrice()));
-			else
-				throw new DTException("AuctionManager.save: can't save an Auction: selling price invalid");
-			
 			if (auction.isPersistent())
-				stmt.setLong(5, auction.getId());
+				stmt.setLong(4, auction.getId());
 			
 			inscnt = stmt.executeUpdate();
 			
@@ -93,7 +88,7 @@ public class AuctionManager {
 	}//end save()
 	
 	public Iterator<Auction> restore(Auction auction) throws DTException {
-		String selectAuctionSql = "select id, expiration, item_id, min_price, selling_price from auction";
+		String selectAuctionSql = "select id, expiration, item_id, minPrice from auction";
 		Statement stmt = null;
 		StringBuffer query = new StringBuffer(100);
 		StringBuffer condition = new StringBuffer(100);
@@ -102,7 +97,7 @@ public class AuctionManager {
 		
 		query.append(selectAuctionSql);
 		
-		if (auction != null) {
+        if (auction != null) {
 			if (auction.getId() >= 0)
 				query.append(" where id = " + auction.getId());
 			else {
@@ -111,7 +106,7 @@ public class AuctionManager {
 				if (condition.length() > 0)
 					query.append(condition);
 			}
-		}
+        }
 		
 		try {
 			stmt = conn.createStatement();
@@ -150,7 +145,7 @@ public class AuctionManager {
 	}//end restore
 	
 	public Item restoreIsSoldAt(Auction auction) throws DTException {
-		String selectAuctionSql = "select i.id, i.expiration, i.item_id, i.min_price, i.selling_price from item i, item a where a.item_id = i.id";
+		String selectAuctionSql = "select i.id, i.name, i.description, i.user_id, i.category_id from item i, auction a where a.item_id = i.id";
 		Statement stmt = null;
 		StringBuffer query = new StringBuffer(100);
 		StringBuffer condition = new StringBuffer(100);
@@ -173,9 +168,6 @@ public class AuctionManager {
 				if (auction.getMinPrice() > 0 ) {
 					condition.append(" and a.min_price = '" + auction.getMinPrice() + "'");
 				}
-				if (auction.getSellingPrice() > 0) {
-					condition.append(" and a.selling_price = '" + auction.getSellingPrice() + "'");
-				}
 				if (condition.length() > 0) {
 					query.append(condition);
 				}
@@ -189,9 +181,9 @@ public class AuctionManager {
 				return new ItemIterator( r, objectModel).next();
 			}
 		} catch (Exception e) {
-			throw new DTException("AuctionManager.restoreIsSoldAt: Could not restore persistent Item objects. Root cause: " + e);
+			throw new DTException("AuctionManager.restoreIsSoldAt: Could not restore persistent Item object. Root cause: " + e);
 		}
-		throw new DTException("AuctionManager.restoreIsSoldAt: Could not restore persistent Item objects.");
+		throw new DTException("AuctionManager.restoreIsSoldAt: Could not restore persistent Item object.");
 	}//end restoreIsSoldAt()
 	
 	public Bid restoreBids(Auction auction) throws DTException {
@@ -217,9 +209,6 @@ public class AuctionManager {
 				
 				if (auction.getMinPrice() > 0 ) {
 					condition.append(" and a.min_price = '" + auction.getMinPrice() + "'");
-				}
-				if (auction.getSellingPrice() > 0) {
-					condition.append(" and a.selling_price = '" + auction.getSellingPrice() + "'");
 				}
 				if (condition.length() > 0) {
 					query.append(condition);

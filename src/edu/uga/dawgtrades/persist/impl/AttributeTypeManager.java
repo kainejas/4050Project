@@ -24,8 +24,8 @@ public class AttributeTypeManager {
 	}
 	
 	public void saveAttributeType(AttributeType attributeType) throws DTException{
-		String insertAttributeTypeSql = "insert into attribute_type (name, category_id) values (?, ?)";
-		String updateAttributeTypeSql = "update attribute_type set name = ?, category_id = ? where id = ?";
+		String insertAttributeTypeSql = "insert into attributetype (name, category_id) values (?, ?)";
+		String updateAttributeTypeSql = "update attributetype set name = ?, category_id = ? where id = ?";
 		PreparedStatement stmt = null;
 		int inscnt;
 		long attributeTypeId;
@@ -45,8 +45,8 @@ public class AttributeTypeManager {
 			
 			if(attributeType.getCategoryId() != -1)
 				stmt.setLong(2, attributeType.getCategoryId());
-			else
-				stmt.setNull(2, java.sql.Types.INTEGER);
+            else
+                throw new DTException("AttributeTypeManager.save: can't save an AttributeType: category undefined");
 			
 			if(attributeType.isPersistent())
 				stmt.setLong(3, attributeType.getId());
@@ -80,7 +80,7 @@ public class AttributeTypeManager {
 	}
 	
 	public Iterator<AttributeType> restoreAttributeType(AttributeType attributeType) throws DTException{
-		String selectAttributeTypeSql = "select id, name, category_id from attribute_type";
+		String selectAttributeTypeSql = "select id, name, category_id from attributetype";
 		Statement stmt = null;
 		StringBuffer query = new StringBuffer(100);
 		StringBuffer condition = new StringBuffer(100);
@@ -146,7 +146,7 @@ public class AttributeTypeManager {
 	}
 	
 	public Category restoreIsDescribedBy(AttributeType attributeType) throws DTException{
-		String selectCategorySql = "select c.id, c.name, c.parent_id from category c, attribute_type at where at.category_id = c.id";
+		String selectCategorySql = "select c.id, c.name, c.parent_id from category c, attributetype at where at.category_id = c.id";
 		Statement stmt = null;
 		StringBuffer query = new StringBuffer(100);
 		StringBuffer condition = new StringBuffer(100);
@@ -189,7 +189,7 @@ public class AttributeTypeManager {
 	}
 	
 	public Iterator<Attribute> restoreHasType(AttributeType attributeType) throws DTException{
-		String selectCategorySql = "select a.id, a.value from attribute a, attribute_type at where a.attribute_type_id = at.id";
+		String selectCategorySql = "select a.id, a.value from attribute a, attributetype at where a.attribute_type_id = at.id";
 		Statement stmt = null;
 		StringBuffer query = new StringBuffer(100);
 		StringBuffer condition = new StringBuffer(100);

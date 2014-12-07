@@ -30,8 +30,8 @@ class RegisteredUserManager
             throws DTException
     {						
 
-        String               insertUserSql = "insert into registered_user ( name, first_name, last_name, password, email, phone, isAdmin, canText ) values ( ?, ?, ?, ?, ?, ?, ?, ? )";              
-        String               updateUserSql = "update registered_user  set name = ?, first_name = ?, last_name = ?, password = ?, email = ?, phone = ?, isAdmin = ?, canText = ? where id = ?";              
+        String               insertUserSql = "insert into user ( name, firstname, lastname, password, email, phone, isAdmin, canText ) values ( ?, ?, ?, ?, ?, ?, ?, ? )";
+        String               updateUserSql = "update user  set name = ?, firstname = ?, lastname = ?, password = ?, email = ?, phone = ?, isAdmin = ?, canText = ? where id = ?";
         PreparedStatement    stmt;
         int                  inscnt;
         long                 userId;
@@ -115,7 +115,7 @@ class RegisteredUserManager
     public Iterator<RegisteredUser> restore( RegisteredUser modelUser ) 
             throws DTException
     {
-        String       selectUserSql = "select id, name, first_name, last_name, password, email, phone, isAdmin, canText from registered_user";              
+        String       selectUserSql = "select id, name, firstname, lastname, password, email, phone, isAdmin, canText from user";
         Statement    stmt = null;
         StringBuffer query = new StringBuffer( 100 );
         StringBuffer condition = new StringBuffer( 100 );
@@ -143,13 +143,13 @@ class RegisteredUserManager
                 if( modelUser.getFirstName() != null ) {
                     if( condition.length() > 0 )
                         condition.append( " and " );
-                    condition.append( "first_name = '" + modelUser.getFirstName() + "'" );
+                    condition.append( "firstname = '" + modelUser.getFirstName() + "'" );
                 }
 
                 if( modelUser.getLastName() != null ) {
                     if( condition.length() > 0 )
                         condition.append( " and " );
-                    condition.append( "last_name = '" + modelUser.getLastName() + "'" );
+                    condition.append( "lastname = '" + modelUser.getLastName() + "'" );
                 }
       
 
@@ -158,6 +158,7 @@ class RegisteredUserManager
                         condition.append( " and " );
                     condition.append( "phone = '" + modelUser.getPhone() + "'" );
                 }
+                
 
                 if( condition.length() > 0 ) {
                     query.append(  " where " );
@@ -188,7 +189,7 @@ class RegisteredUserManager
     public Iterator<Item> restoreOwns( RegisteredUser user ) 
             throws DTException
     {
-        String       selectUserSql = "select i.id, i.name, i.description, i.user_id, i.category_id from registered_user r, item i where i.user_id = r.id";              
+        String       selectUserSql = "select i.id, i.name, i.description, i.user_id, i.category_id from user r, item i where i.user_id = r.id";
         Statement    stmt = null;
         StringBuffer query = new StringBuffer( 100 );
         StringBuffer condition = new StringBuffer( 100 );
@@ -246,7 +247,7 @@ class RegisteredUserManager
     public Iterator<Bid> restoreBids( RegisteredUser user ) 
             throws DTException
     {
-        String       selectUserSql = "select b.id, b.amount, b.user_id, b.auction_id from bid b, registered_user r where b.user_id = r.id order by b.user_id desc";              
+        String       selectUserSql = "select b.id, b.amount, b.user_id, b.auction_id from bid b, user r where b.user_id = r.id";
         Statement    stmt = null;
         StringBuffer query = new StringBuffer( 100 );
         StringBuffer condition = new StringBuffer( 100 );
@@ -304,7 +305,7 @@ class RegisteredUserManager
     public Iterator<ExperienceReport> restoreReviewerReports( RegisteredUser user ) 
             throws DTException
     {
-        String       selectUserSql = "select er.id, er.reviewer_id, er.reviewed_id, er.rating, er.report, er.date from experience_report er, registered_user r where er.reviewer_id = r.id";              
+        String       selectUserSql = "select er.id, er.reviewer, er.reviewed, er.rating, er.report, er.date from experiencereport er, user r where er.reviewer = r.id";
         Statement    stmt = null;
         StringBuffer query = new StringBuffer( 100 );
         StringBuffer condition = new StringBuffer( 100 );
@@ -362,7 +363,7 @@ class RegisteredUserManager
     public Iterator<ExperienceReport> restoreReviewedReports( RegisteredUser user ) 
             throws DTException
     {
-        String       selectUserSql = "select er.id, er.reviewer_id, er.reviewed_id, er.rating, er.report, er.date from experience_report er, registered_user r where er.reviewed_id = r.id";              
+        String       selectUserSql = "select er.id, er.reviewer, er.reviewed, er.rating, er.report, er.date from experiencereport er, user r where er.reviewed = r.id";              
         Statement    stmt = null;
         StringBuffer query = new StringBuffer( 100 );
         StringBuffer condition = new StringBuffer( 100 );
@@ -423,7 +424,7 @@ class RegisteredUserManager
     public void delete( RegisteredUser user ) 
             throws DTException
     {
-        String               deleteUserSql = "delete from registered_user where id = ?";              
+        String               deleteUserSql = "delete from user where id = ?";              
         PreparedStatement    stmt = null;
         int                  inscnt;
         

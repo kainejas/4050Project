@@ -24,8 +24,8 @@ public class ExperienceReportManager {
 	}
 	
 	public void save(ExperienceReport experienceReport) throws DTException{
-		String insertAttributeSql = "insert into experience_report (rating, report, reviewer_id, reviewed_id, date) values (?, ?, ?, ?, ?)";
-		String updateAttributeSql = "update experience_report set rating = ?, report = ?, reviewer_id = ?, reviewed_id = ?, date = ? where id = ?";
+		String insertAttributeSql = "insert into experiencereport (rating, report, reviewer, reviewed, date) values (?, ?, ?, ?, ?)";
+		String updateAttributeSql = "update experiencereport set rating = ?, report = ?, reviewer = ?, reviewed = ?, date = ? where id = ?";
 		PreparedStatement stmt = null;
 		int inscnt;
 		long experienceReportId;
@@ -64,7 +64,7 @@ public class ExperienceReportManager {
 				throw new DTException("ExperienceReportManager.save: can't save an ExperienceReport: reviewer undefined");
 		
 			if(experienceReport.getDate() != null)
-				stmt.setDate(5, (Date) experienceReport.getDate());
+				stmt.setDate(5, new java.sql.Date(experienceReport.getDate().getTime()));
 			else
 				throw new DTException("ExperienceReportManager.save: can't save an ExperienceReport: date undefined");
 		
@@ -101,7 +101,7 @@ public class ExperienceReportManager {
 	}
 
 	public Iterator<ExperienceReport> restore(ExperienceReport experienceReport) throws DTException{
-		String selectAttributeSql = "select id, reviewer_id, reviewed_id, rating, report, date from experience_report";
+		String selectAttributeSql = "select id, reviewer, reviewed, rating, report, date from experiencereport";
 		Statement stmt = null;
 		StringBuffer query = new StringBuffer(100);
 		StringBuffer condition = new StringBuffer(100);
@@ -111,17 +111,17 @@ public class ExperienceReportManager {
 		query.append(selectAttributeSql);
 		
 		if(experienceReport != null){
-			if(experienceReport.getId() >= 0)
+			if(experienceReport.getId() != -1)
 				query.append(" where id = " + experienceReport.getId());
 			else{
-				if(experienceReport.getReviewer().getId() != -1)
-					condition.append("reviewer_id = '" + experienceReport.getReviewer().getId() + "'");
-				if(experienceReport.getReviewed().getId() != -1){
+				if(experienceReport.getReviewer() != null && experienceReport.getReviewer().getId() != -1)
+					condition.append("reviewer = '" + experienceReport.getReviewer().getId() + "'");
+				if(experienceReport.getReviewed() != null && experienceReport.getReviewed().getId() != -1){
 	                    if( condition.length() > 0 )
 	                    	condition.append(" and ");
-					condition.append("reviewed_id = '" + experienceReport.getReviewed().getId() + "'");
+					condition.append("reviewed = '" + experienceReport.getReviewed().getId() + "'");
 				}
-				if(experienceReport.getRating() != 0){
+				if(experienceReport.getRating() >= 1 && experienceReport.getRating() <= 5){
 					 if( condition.length() > 0 )
 	                    	condition.append(" and ");
 					condition.append("rating = '" + experienceReport.getRating() + "'");
@@ -156,7 +156,7 @@ public class ExperienceReportManager {
 	
 	
 	public void delete(ExperienceReport experienceReport) throws DTException{
-		String deleteAttributeSql = "delete from experience_report where id = ?";
+		String deleteAttributeSql = "delete from experiencereport where id = ?";
 		PreparedStatement stmt = null;
 		int inscnt;
 		
@@ -179,7 +179,7 @@ public class ExperienceReportManager {
 	}
 
 	public RegisteredUser restoreReviewer(ExperienceReport experienceReport) throws DTException{
-		String selectItemSql = "select r.id, r.name, r.first_name, r.last_name, r.password, r.email, r.phone, r.isAdmin, r.canText from registered_user r, experience_report er where er.reviewer_id = r.id";
+		String selectItemSql = "select r.id, r.name, r.firstname, r.lastname, r.password, r.email, r.phone, r.isAdmin, r.canText from user r, experiencereport er where er.reviewer = r.id";
 		Statement stmt = null;
 		StringBuffer query = new StringBuffer(100);
 		StringBuffer condition = new StringBuffer(100);
@@ -193,7 +193,7 @@ public class ExperienceReportManager {
 				query.append(" and er.id = " + experienceReport.getId());
 			else{
 				 if(experienceReport.getReviewed().getId() != -1)
-					 condition.append(" and er.reviewed_id = '" + experienceReport.getReviewed().getId() + "'");
+					 condition.append(" and er.reviewed = '" + experienceReport.getReviewed().getId() + "'");
 				if(experienceReport.getRating() != 0)
 					condition.append(" and er.rating = '" + experienceReport.getRating() + "'");
 				if(experienceReport.getReport() != null)
@@ -227,7 +227,7 @@ public class ExperienceReportManager {
 	}
 	
 	public RegisteredUser restoreReviewed(ExperienceReport experienceReport) throws DTException{
-		String selectItemSql = "select r.id, r.name, r.first_name, r.last_name, r.password, r.email, r.phone, r.isAdmin, r.canText from registered_user r, experience_report er where er.reviewed_id = r.id";
+		String selectItemSql = "select r.id, r.name, r.firstname, r.lastname, r.password, r.email, r.phone, r.isAdmin, r.canText from user r, experiencereport er where er.reviewed = r.id";
 		Statement stmt = null;
 		StringBuffer query = new StringBuffer(100);
 		StringBuffer condition = new StringBuffer(100);
@@ -238,10 +238,10 @@ public class ExperienceReportManager {
 		
 		if(experienceReport != null){
 			if(experienceReport.getId() >= 0)
-				query.append("er.id = " + experienceReport.getId());
+				query.append(" and er.id = " + experienceReport.getId());
 			else{
 				 if(experienceReport.getReviewer().getId() != -1)
-					 condition.append(" and er.reviewer_id = '" + experienceReport.getReviewer().getId() + "'");
+					 condition.append(" and er.reviewer = '" + experienceReport.getReviewer().getId() + "'");
 				if(experienceReport.getRating() != 0)
 					condition.append(" and er.rating = '" + experienceReport.getRating() + "'");
 				if(experienceReport.getReport() != null)

@@ -43,17 +43,85 @@ public class ObjectModelDelete
          // obtain a reference to Persistence module and connect it to the ObjectModel        
          persistence = new PersistenceImpl( conn, objectModel ); 
          // connect the ObjectModel module to the Persistence module
-         objectModel.setPersistence(persistence);
+        objectModel.setPersistence(persistence);
+        persistence.setObjectModel(objectModel);
+        persistence.init();
+
          
          Iterator<RegisteredUser> userIter = null;
                   
          try {
              
+             // Delete test Item object along with it's Attribute, the Attribute's
+             // corresponding Attribute Type, and the Item's Auction object
+             // First: find test Item
+             Item testItem = null;
+             Item modelItem = objectModel.createItem();
+             modelItem.setName( "name1" );
+             //modelItem.setLastName( "Brooks" );
+             Iterator<Item> itemIter = objectModel.findItem( modelItem );
+             while( itemIter.hasNext() ) {
+                 testItem = itemIter.next();
+                 System.out.println( testItem );
+             }
+             
+             // Second: find test Item's Auction
+             Auction testAuction = null;
+             Auction modelAuction = objectModel.createAuction();
+             modelAuction.setItemId( testItem.getId() );
+             Iterator<Auction> auctionIter = objectModel.findAuction( modelAuction );
+             while( auctionIter.hasNext() ) {
+                 testAuction = auctionIter.next();
+                 System.out.println( testAuction );
+             }
+             
+             // Third: find test Item's Attributes
+             Attribute testAttribute = null;
+             //modelItem.setLastName( "Brooks" );
+             Iterator<Attribute> attributeIter = objectModel.getAttributes( testItem );
+             while( attributeIter.hasNext() ) {
+                 testAttribute = attributeIter.next();
+                 System.out.println( testAttribute );
+             }
+             
+             // Fourth: find test Attribute's AttributeType
+             AttributeType testAttributeType = objectModel.getAttributeType( testAttribute );
+             
+             // Sixth: delete test Attribute
+             if( testAttribute != null ) {
+                 objectModel.deleteAttribute( testAttribute );
+                 System.out.println( "Deleted the test Attribute object" );
+             }
+             else
+                 System.out.println( "Failed to find test Attribute" );
+
+             
+             objectModel.deleteItem( testItem );
+             System.out.println( "Deleted the test Item object" );
+             
+             
+             // Seventh: delete test AttributeType
+             if( testAttributeType != null ) {
+                 objectModel.deleteAttributeType( testAttributeType );
+                 System.out.println( "Deleted the test AttributeType object" );
+             }
+             else
+                 System.out.println( "Failed to find test AttributeType" );
+             
+             // Eighth: delete test Auction
+             if( testAuction != null ) {
+                 objectModel.deleteAuction( testAuction );
+                 System.out.println( "Deleted the test Auction object" );
+             }
+             else
+                 System.out.println( "Failed to find test Auction" );
+             
+             
 	     // Delete the test User object along with their bid and ExpirenceReport
              // First: find the test User
              RegisteredUser testUser = null;
              RegisteredUser modelUser = objectModel.createRegisteredUser();
-             modelUser.setName( "TestUser" );
+             modelUser.setName( "Ben" );
              userIter = objectModel.findRegisteredUser( modelUser );
              while( userIter.hasNext() ) {
                  testUser = userIter.next();
@@ -71,6 +139,7 @@ public class ObjectModelDelete
              }
              
              // Third: find test ExperienceReport
+            
              ExperienceReport testExperienceReport = null;
              ExperienceReport modelExperienceReport = objectModel.createExperienceReport();
              modelExperienceReport.setReviewer( testUser );
@@ -79,6 +148,7 @@ public class ObjectModelDelete
                  testExperienceReport = experienceReportIter.next();
                  System.out.println( testExperienceReport );
              }
+           
              
              // Fourth: delete the test User
              if( testUser != null ) {
@@ -105,74 +175,12 @@ public class ObjectModelDelete
                  System.out.println( "Failed to find test ExperienceReport" );
              
            
-	     // Delete test Item object along with it's Attribute, the Attribute's 
-         // corresponding Attribute Type, and the Item's Auction object
-             // First: find test Item
-             Item testItem = null;
-             Item modelItem = objectModel.createItem();
-             modelItem.setName( "Heather" );
-             //modelItem.setLastName( "Brooks" );
-             Iterator<Item> itemIter = objectModel.findItem( modelItem );
-             while( itemIter.hasNext() ) {
-                 testItem = itemIter.next();
-                 System.out.println( testItem );
-             }
-          
-             // Second: find test Item's Auction
-             Auction testAuction = null;
-             Auction modelAuction = objectModel.createAuction();
-             modelAuction.setItemId( testItem.getId() );
-             Iterator<Auction> auctionIter = objectModel.findAuction( modelAuction );
-             while( auctionIter.hasNext() ) {
-                 testAuction = auctionIter.next();
-                 System.out.println( testAuction );
-             }
-             
-             // Third: find test Item's Attribute
-             Attribute testAttribute = null;
-             //modelItem.setLastName( "Brooks" );
-             Iterator<Attribute> attributeIter = objectModel.getAttributes( testItem );
-             while( attributeIter.hasNext() ) {
-                 testAttribute = attributeIter.next();
-                 System.out.println( testAttribute );
-             }
-             
-             // Fourth: find test Attribute's AttributeType
-             AttributeType testAttributeType = objectModel.getAttributeType( testAttribute );
-             
-             objectModel.deleteItem( testItem );
-			 System.out.println( "Deleted the test Item object" );
-
-             // Sixth: delete test Attribute
-             if( testAttribute != null ) {
-                 objectModel.deleteAttribute( testAttribute );
-                 System.out.println( "Deleted the test Attribute object" );
-             }
-             else
-                 System.out.println( "Failed to find test Attribute" );
-             
-             // Seventh: delete test AttributeType
-             if( testAttributeType != null ) {
-                 objectModel.deleteAttributeType( testAttributeType );
-                 System.out.println( "Deleted the test AttributeType object" );
-             }
-             else
-                 System.out.println( "Failed to find test AttributeType" );
-             
-             // Eighth: delete test Auction
-             if( testAuction != null ) {
-                 objectModel.deleteAuction( testAuction );
-                 System.out.println( "Deleted the test Auction object" );
-             }
-             else
-                 System.out.println( "Failed to find test Auction" );
-
              
           // Delete test Category object
              // First: find test Category
              Category testCategory = null;
              Category modelCategory = objectModel.createCategory();
-             modelCategory.setName( "Test" );
+             modelCategory.setName( "category1" );
              Iterator<Category> categoryIter = objectModel.findCategory( modelCategory );
              while( categoryIter.hasNext() ) {
                  testCategory = categoryIter.next();
