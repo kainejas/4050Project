@@ -25,7 +25,7 @@ public class AttributeManager {
 	
 	public void save(Attribute attribute) throws DTException{
 		String insertAttributeSql = "insert into attribute (value, item_id, attributetype_id) values (?, ?, ?)";
-		String updateAttributeSql = "update attribute set value = ?, item_id = ?, attribute_ype_id = ? where id = ?";
+		String updateAttributeSql = "update attribute set value = ?, item_id = ?, attributetype_id = ? where id = ?";
 		PreparedStatement stmt = null;
 		int inscnt;
 		long attributeId;
