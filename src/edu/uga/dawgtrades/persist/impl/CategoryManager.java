@@ -93,17 +93,20 @@ public class CategoryManager {
 				query.append(" where id = " + category.getId());
 			else {
 				if (category.getName() != null) {
+          
 					if (condition.length() != 0)
 						condition.append(" and");
 					condition.append(" name = '" + category.getName() + "'");
 				}
-				if (category.getParentId() >= 0) {
+				if (category.getParentId() > 0) {
 					if (condition.length() != 0)
 						condition.append(" and");
 					condition.append(" parent_id = '" + category.getParentId() + "'");
 				}
 				if (condition.length() > 0)
 					query.append(" where " + condition);
+                System.out.println(query.toString());
+            
 			}
 		}
 		

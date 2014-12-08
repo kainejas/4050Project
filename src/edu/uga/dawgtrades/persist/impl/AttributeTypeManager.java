@@ -123,7 +123,7 @@ public class AttributeTypeManager {
 	}
 	
 	public void deleteAttributeType(AttributeType attributeType) throws DTException{
-		String deleteAttributeSql = "delete from attribute_type where id = ?";
+		String deleteAttributeSql = "delete from attributetype where id = ?";
 		PreparedStatement stmt = null;
 		int inscnt;
 		

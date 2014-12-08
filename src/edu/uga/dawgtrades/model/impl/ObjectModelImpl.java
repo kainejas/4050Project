@@ -37,6 +37,7 @@ public class ObjectModelImpl implements ObjectModel {
 		Category category = new CategoryImpl();
 		if(parent != null) 
 		category.setParentId(parent.getId());
+        else category.setParentId(-1);
 		
 		category.setName(name);
 		return category;
