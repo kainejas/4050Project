@@ -292,7 +292,7 @@ class ItemManager
     }// end restoreHasAttribute()
     
     public RegisteredUser restoreOwns(Item item) throws DTException{
-        String selectItemSql = "select r.id, r.name, r.password, r.email, r.firstname, r.lastname, r.phone, r.canText, r.isAdmin from item i, user r where r.id = i.user_id";
+        String selectItemSql = "select r.id, r.name, r.firstname, r.lastname, r.password, r.email, r.phone, r.canText, r.isAdmin from item i, user r where r.id = i.user_id";
         Statement    stmt = null;
         StringBuffer query = new StringBuffer( 100 );
         StringBuffer condition = new StringBuffer( 100 );
