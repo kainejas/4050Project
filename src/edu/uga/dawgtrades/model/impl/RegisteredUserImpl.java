@@ -19,8 +19,8 @@ public class RegisteredUserImpl extends Persistent implements RegisteredUser {
 							String lastName, 
 							String password, 
 							boolean isAdmin, 
-							String phone, 
-							String email, 
+							String email,
+							String phone,
 							boolean canText)
 	{
 		super(-1);

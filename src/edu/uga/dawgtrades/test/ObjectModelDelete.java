@@ -150,7 +150,7 @@ public class ObjectModelDelete
              // First: find test Item
              Item testItem = null;
              Item modelItem = objectModel.createItem();
-             modelItem.setRegisteredUser( testUser);
+             modelItem.setOwnerId( testUser.getId());
              //modelItem.setLastName( "Brooks" );
              Iterator<Item> itemIter = objectModel.findItem( modelItem );
              while( itemIter.hasNext() ) {
@@ -192,7 +192,7 @@ public class ObjectModelDelete
              
              // Seventh: delete test AttributeType
              if( testAttributeType != null ) {
-                 objectModel.deleteAttributeType( testAttribute );
+                 objectModel.deleteAttributeType( testAttributeType );
                  System.out.println( "Deleted the test AttributeType object" );
              }
              else
