@@ -45,7 +45,7 @@ public class CategoryManager {
 			if (category.getParentId() > 0)
 				stmt.setString( 2, Long.toString(category.getParentId()));
 			else
-				stmt.setNull( 2, java.sql.Types.NULL);
+				stmt.setNull( 2, java.sql.Types.INTEGER);
 			
 			if (category.isPersistent())
 				stmt.setLong(3, category.getId());
