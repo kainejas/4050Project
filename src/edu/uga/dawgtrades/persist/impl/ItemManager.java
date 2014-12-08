@@ -64,7 +64,8 @@ class ItemManager
                 stmt.setLong( 4, item.getCategoryId() );
             else
                 throw new DTException( "ItemManager.save: can't save an Item: category_id undefined" );
-
+            if(item.isPersistent())
+                stmt.setLong(5, item.getId());
 
             inscnt = stmt.executeUpdate();
 
