@@ -46,7 +46,8 @@ public class Login
         HttpSession    httpSession = null;
 
         httpSession = req.getSession();
-        if( httpSession == null ) {       // not logged in!
+        if( httpSession.getUser() == null ) {
+            // not logged in!
             res.sendRedirect("http://uml.cs.uga.edu:8080/login.html");
         }
         else {
