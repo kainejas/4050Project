@@ -83,11 +83,10 @@ public class Register extends HttpServlet{
 		user_name = req.getParameter("user_name");
 		password = req.getParameter("password");
 		//is_admin_str = req.getParameter("is_admin");
-		email = req.getParameter("email");
+		email = req.getParameter("email_address");
 		first_name = req.getParameter("first_name");
 		last_name = req.getParameter("last_name");
 		phone = req.getParameter("phone");
-		can_text_str = req.getParameter("can_text");
 
 		if(user_name == null || user_name.equals("")){
 			DawgTradesError.error(cfg, toClient, "Unspecified user name");
