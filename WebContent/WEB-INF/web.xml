@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE web-app
+    PUBLIC "-//SUN Microsystems, Inc. //DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>edu.uga.dawgtrades.Login</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>edu.uga.dawgtrades.Logout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>BrowseCategory</servlet-name>
+        <servlet-class>edu.uga.dawgtrades.BrowseCategory</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BrowseCategory</servlet-name>
+        <url-pattern>/BrowseCategory</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>DefineCategory</servlet-name>
+        <servlet-class>edu.uga.dawgtrades.DefineCategory</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DefineCategory</servlet-name>
+        <url-pattern>/DefineCategory</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>DeleteCategory</servlet-name>
+        <servlet-class>edu.uga.dawgtrades.DeleteCategory</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteCategory</servlet-name>
+        <url-pattern>/DeleteCategory</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>DeleteItem</servlet-name>
+        <servlet-class>edu.uga.dawgtrades.DeleteItem</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteItem</servlet-name>
+        <url-pattern>/DeleteItem</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>DeleteUser</servlet-name>
+        <servlet-class>edu.uga.dawgtrades.DeleteUser</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteUser</servlet-name>
+        <url-pattern>/DeleteUser</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>SetMembershipPrice</servlet-name>
+        <servlet-class>edu.uga.dawgtrades.SetMembershipPrice</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SetMembershipPrice</servlet-name>
+        <url-pattern>/SetMembershipPrice</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ShowMainWindow</servlet-name>
+        <servlet-class>edu.uga.dawgtrades.ShowMainWindow</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowMainWindow</servlet-name>
+        <url-pattern>/ShowMainWindow</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>UpdateCategory</servlet-name>
+        <servlet-class>edu.uga.dawgtrades.UpdateCategory</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateCategory</servlet-name>
+        <url-pattern>/UpdateCategory</url-pattern>
+    </servlet-mapping>
+    
+    
+
+</web-app>
