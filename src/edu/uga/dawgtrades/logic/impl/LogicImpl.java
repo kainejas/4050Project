@@ -90,7 +90,7 @@ public class LogicImpl implements Logic{
 	}
     
     @Override
-    public List<Item> browseCategoryItems(String category_name) throws DTExceptions{
+    public List<Item> browseCategoryItems(String category_name) throws DTException{
         return (new CtrlBrowseCategory(objectModel)).browseCategoryItems(category_name);
     }
 }
