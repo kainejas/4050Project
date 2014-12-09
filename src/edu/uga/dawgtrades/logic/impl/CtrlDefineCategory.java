@@ -30,7 +30,7 @@ public class CtrlDefineCategory {
 		modelParent = objectModel.createCategory();
 		modelParent.setId(parentId);
 		
-        parent = objectMode.findCategory(modelParent).next();
+        parent = objectModel.findCategory(modelParent).next();
 		
 
 		category = objectModel.createCategory(parent, category_name);
