@@ -6,18 +6,15 @@ import java.util.LinkedList;
 
 import edu.uga.dawgtrades.model.DTException;
 import edu.uga.dawgtrades.model.Category;
-import edu.uga.dawgtrades.persist.impl.CategoryManager;
 import edu.uga.dawgtrades.model.Auction;
 import edu.uga.dawgtrades.model.RegisteredUser;
 import edu.uga.dawgtrades.model.ObjectModel;
 
 public class CtrlPrintReport {
 	private ObjectModel objectModel = null;
-	private CategoryManager categoryManager = null;
 	
-	public CtrlPrintReport(ObjectModel objectModel, CategoryManager categoryManger){
+	public CtrlPrintReport(ObjectModel objectModel){
 		this.objectModel = objectModel;
-		this.categoryManager = categoryManager;
 	}
 	
 	public String printReport(String time_period) throws DTException{
@@ -65,7 +62,7 @@ public class CtrlPrintReport {
 		if(category == null)
 			throw new DTException("A category with this name does not exist: " + category_name);
 		
-		Iterator<Item> itemIter = categoryManager.restoreItems(category);
+		Iterator<Item> itemIter = objectModel.findItem(category);
 		while(itemIter != null && itemIter.hasNext()){
 			Item i = itemIter.next();
 			items.add(i);
