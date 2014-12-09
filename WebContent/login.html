@@ -80,7 +80,7 @@
 <p>
     <div class="container">
 
-      <form method=post class="form-signin" action"Login">
+      <form method=post class="form-signin" action="Login">
         <h2 class="form-signin-heading">Please login</h2>
         <input type="text" name="user_name" class="input-block-level" placeholder="Username">
         <input type="password" name="password" class="input-block-level" placeholder="Password">
