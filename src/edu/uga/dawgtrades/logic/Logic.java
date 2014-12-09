@@ -20,6 +20,6 @@ public interface Logic {
 	public long updateProfile(String user_name, String first_name, String last_name, String password, String email, String phone, boolean canText) throws DTException;
 	public long viewProfile(String user_name) throws DTException;
     
-    public List<Item> browseCategoryItems(String category_name);
+    public List<Item> browseCategoryItems(String category_name) throws DTException;
 	
 }
