@@ -59,7 +59,7 @@ public class Register extends HttpServlet{
 		Logic logic = null;
 		HttpSession httpSession;
 		Session session;
-		String ssid;
+		String ssid = null;
 
 		try{
 			resultTemplate = cfg.getTemplate(resultTemplateName);
