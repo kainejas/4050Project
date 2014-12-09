@@ -67,16 +67,9 @@ public class Register extends HttpServlet{
 		res.setContentType("text/html; charset=" + resultTemplate.getEncoding());
 
 		httpSession = req.getSession();
-		if(httpSession == null){
-			DawgTradesError.error(cfg, toClient, "Session expired or illegal; please log in");
-		return;
-		}
 
 		ssid = (String) httpSession.getAttribute("ssid");
-		if(ssid == null){
-		DawgTradesError.error(cfg, toClient, "Session expired or illegal...please log in");
-			return;
-		}
+
 
 		session = SessionManager.getSessionById(ssid);
 		objectModel = session.getObjectModel();
