@@ -74,8 +74,8 @@ public class Register extends HttpServlet{
 
 		ssid = (String) httpSession.getAttribute("ssid");
 		if(ssid == null){
-		//	DawgTradesError.error(cfg, toClient, "Session expired or illegal; please log in");
-		//	return;
+		DawgTradesError.error(cfg, toClient, "Session expired or illegal; please log in");
+			return;
 		}
 
 		session = SessionManager.getSessionById(ssid);
