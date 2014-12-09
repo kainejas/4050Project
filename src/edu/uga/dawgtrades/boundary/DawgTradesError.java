@@ -10,7 +10,7 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 
 public class DawgTradesError {
-    static  String   errorTemplateName = "ClubsError-Result.ftl";
+    static  String   errorTemplateName = "DawgTradesError-Result.ftl";
 
     public static void error( Configuration cfg, BufferedWriter toClient, Exception e )
             throws ServletException
