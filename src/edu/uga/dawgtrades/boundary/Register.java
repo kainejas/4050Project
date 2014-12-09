@@ -152,6 +152,18 @@ public class Register extends HttpServlet{
 			DawgTradesError.error(cfg, toClient, e);
 			return;
 		}
+        
+        try {
+            ssid = SessionManager.login( user_name, password );
+            System.out.println( "Obtained ssid: " + ssid );
+            httpSession.setAttribute( "ssid", ssid );
+            session = SessionManager.getSessionById( ssid );
+            System.out.println( "Connection: " + session.getConnection() );
+        }
+        catch ( Exception e ) {
+            DawgTradesError.error( cfg, toClient, e );
+            return;
+        }
 
 		Map<String, Object> root = new HashMap<String, Object>();
 
