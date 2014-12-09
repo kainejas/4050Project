@@ -25,7 +25,7 @@ import freemarker.template.TemplateException;
 public class Register extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	static String templateDir = "WEB-INF/templates";
-	static String resultTemplateName = "DefineCategory-Result.ftl";
+	static String resultTemplateName = "MainWindow.ftl";
 
 	private Configuration cfg;
 
