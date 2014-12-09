@@ -68,8 +68,8 @@ public class Register extends HttpServlet{
 
 		httpSession = req.getSession();
 		if(httpSession == null){
-		//	DawgTradesError.error(cfg, toClient, "Session expired or illegal; please log in");
-		//	return;
+			DawgTradesError.error(cfg, toClient, "Session expired or illegal; please log in");
+		return;
 		}
 
 		ssid = (String) httpSession.getAttribute("ssid");
@@ -81,8 +81,8 @@ public class Register extends HttpServlet{
 		session = SessionManager.getSessionById(ssid);
 		objectModel = session.getObjectModel();
         if(objectModel == null){
-		//	DawgTradesError.error(cfg, toClient, "Session expired or illegal; please log in");
-		//	return;
+			DawgTradesError.error(cfg, toClient, "Object model null.");
+			return;
 		}
 
 		logic = new LogicImpl(objectModel);
@@ -93,7 +93,6 @@ public class Register extends HttpServlet{
 		email = req.getParameter("email");
 		first_name = req.getParameter("first_name");
 		last_name = req.getParameter("last_name");
-		address = req.getParameter("address");
 		phone = req.getParameter("phone");
 		can_text_str = req.getParameter("can_text");
 
