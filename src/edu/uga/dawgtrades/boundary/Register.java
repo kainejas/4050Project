@@ -89,7 +89,7 @@ public class Register extends HttpServlet{
 
 		user_name = req.getParameter("user_name");
 		password = req.getParameter("password");
-		is_admin_str = req.getParameter("is_admin");
+		//is_admin_str = req.getParameter("is_admin");
 		email = req.getParameter("email");
 		first_name = req.getParameter("first_name");
 		last_name = req.getParameter("last_name");
@@ -135,15 +135,15 @@ public class Register extends HttpServlet{
 			DawgTradesError.error( cfg, toClient, "Unspecified email" );
 			return;
 		}
-		
+		/*
 		try{
-			is_admin = Boolean.parseBoolean(can_text_str);
+			//is_admin = Boolean.parseBoolean(can_text_str);
 		}
 		catch(Exception e){
 			DawgTradesError.error(cfg, toClient, "Invalid text status: " + is_admin_str);
 			return;
 		}
-
+        */
 		
 		try{
 			user_id = logic.register(user_name, first_name, last_name, password, is_admin, email, phone, can_text);
