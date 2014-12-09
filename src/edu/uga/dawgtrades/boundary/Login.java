@@ -47,10 +47,10 @@ public class Login
 
         httpSession = req.getSession();
         if( httpSession == null ) {       // not logged in!
-            res.sendRedirect("http://localhost:8080/login.html");
+            res.sendRedirect("http://uml.cs.uga.edu:8080/login.html");
         }
         else {
-            res.sendRedirect("http://localhost:8080/ShowMainWindow");
+            res.sendRedirect("http://uml.cs.uga.edu:8080/ShowMainWindow");
         }
         
         
