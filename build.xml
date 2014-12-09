@@ -58,6 +58,7 @@
           <fileset dir="${build.dir}" excludes="*.svn,**/web.xml,README"/>
           
       </war>
+      </target>
       
       <target name="deploy" depends="build">
           
