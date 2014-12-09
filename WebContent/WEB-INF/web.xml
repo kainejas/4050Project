@@ -95,7 +95,6 @@
         <url-pattern>/UpdateCategory</url-pattern>
     </servlet-mapping>
     
-    
     <servlet>
         <servlet-name>Register</servlet-name>
         <servlet-class>edu.uga.dawgtrades.boundary.Register</servlet-class>
@@ -103,6 +102,15 @@
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/Register</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Unregister</servlet-name>
+        <servlet-class>edu.uga.dawgtrades.boundary.Unregister</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Unregister</servlet-name>
+        <url-pattern>/Unregister</url-pattern>
     </servlet-mapping>
     
     
