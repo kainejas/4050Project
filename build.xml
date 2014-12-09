@@ -1,19 +1,34 @@
 <project name="DawgTradesBuilder" default="build">
 
   <property name="src.dir"       value="src" />
-  <property name="class.dir"     value="classes" />
+  
+  <property name="project.name"  value="team3" />
+  
+  <property name="build.dir"     value="WebContent" />
+  
+  <property name="class.dir"     value="${build.dir}/WEB-INF/classes" />
+
+<property name="deploy.dir"    value="/opt/jboss/standalone/deployments" />
 
 
-  <!--
-     Available targets:
-     1. clean     - to clean all of the automatically generated files
-     2. compile   - to compile the Java sources into the "class.dir"
-  -->
+
+<!--
+ 
+ Available targets:
+ 
+ 1. clean     - to clean all of the automatically generated files
+ 
+ 2. compile   - to compile the Java sources into the "class.dir"
+ 
+ 3. build     - to create the project WAR file
+ 
+ 4. deploy    - to deploy the project WAR file into "deploy.dir"
+ 
+ -->
 
   <path id="classpath">
       <fileset dir="jar/classes">
           <include name="mysql-connector-java-5.1.34-bin.jar"/>
-          <include name="jsp-api.jar"/>
           <include name="servlet-api.jar"/>
           <include name="freemarker.jar"/>
       </fileset>
@@ -22,8 +37,9 @@
   <target name="clean">
       <echo>Cleaning the ${class.dir} directory</echo>
       <delete verbose="true">
-          <fileset dir="${class.dir}" includes="**/*.class"/>
+          <fileset dir="${build.dir}/WEB-INF/classes" includes="**/*.class"/>
       </delete>
+    <delete file="${project.name}.war" />
   </target>
 
   <target name="compile">
@@ -31,6 +47,28 @@
       <javac srcdir="${src.dir}" destdir="${class.dir}">
           <classpath refid="classpath"/>
       </javac>
-  </target>	
+  </target>
+  
+  <target name="build" depends="compile">
+      
+      <echo>Building the war application archive</echo>
+      
+      <war destfile="${project.name}.war" webxml="${build.dir}/WEB-INF/web.xml">
+          
+          <fileset dir="${build.dir}" excludes="*.svn,**/web.xml,README"/>
+          
+      </war>
+      
+      <target name="deploy" depends="build">
+          
+          <echo>Deploying the war application archive</echo>
+          
+          <copy overwrite="yes" file="${project.name}.war" todir="${deploy.dir}"/>
+          
+          <chmod file="${deploy.dir}/${project.name}.war" perm="a+r"/>
+          
+      </target>
+
+  </target>
 	
 </project>
