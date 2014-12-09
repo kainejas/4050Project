@@ -94,7 +94,7 @@ public class Login
             try{
             httpSession.setAttribute( "ssid", ssid );
             }
-            catch(Exceotuib e) {
+            catch(Exception e) {
                 DawgTradesError.error(cfg, toClient, e);
             }
             session = SessionManager.getSessionById( ssid );
