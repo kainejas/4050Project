@@ -178,7 +178,7 @@ public class Register extends HttpServlet{
 
 		root.put("first_name", first_name);
 		root.put("last_name", last_name);
-		root.put("user_id", user_id);
+		root.put("user_name", user_name);
 
 		try{
 			resultTemplate.process(root, toClient);
