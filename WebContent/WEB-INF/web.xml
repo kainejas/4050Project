@@ -7,7 +7,7 @@
 <web-app>
     <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>edu.uga.dawgtrades.Login</servlet-class>
+        <servlet-class>edu.uga.dawgtrades.boundary.Login</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -16,7 +16,7 @@
     
     <servlet>
         <servlet-name>Logout</servlet-name>
-        <servlet-class>edu.uga.dawgtrades.Logout</servlet-class>
+        <servlet-class>edu.uga.dawgtrades.boundary.Logout</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
@@ -25,7 +25,7 @@
     
     <servlet>
         <servlet-name>BrowseCategory</servlet-name>
-        <servlet-class>edu.uga.dawgtrades.BrowseCategory</servlet-class>
+        <servlet-class>edu.uga.dawgtrades.boundary.BrowseCategory</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>BrowseCategory</servlet-name>
@@ -34,7 +34,7 @@
     
     <servlet>
         <servlet-name>DefineCategory</servlet-name>
-        <servlet-class>edu.uga.dawgtrades.DefineCategory</servlet-class>
+        <servlet-class>edu.uga.dawgtrades.boundary.DefineCategory</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DefineCategory</servlet-name>
@@ -43,7 +43,7 @@
     
     <servlet>
         <servlet-name>DeleteCategory</servlet-name>
-        <servlet-class>edu.uga.dawgtrades.DeleteCategory</servlet-class>
+        <servlet-class>edu.uga.dawgtrades.boundary.DeleteCategory</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DeleteCategory</servlet-name>
@@ -52,7 +52,7 @@
     
     <servlet>
         <servlet-name>DeleteItem</servlet-name>
-        <servlet-class>edu.uga.dawgtrades.DeleteItem</servlet-class>
+        <servlet-class>edu.uga.dawgtrades.boundary.DeleteItem</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DeleteItem</servlet-name>
@@ -61,7 +61,7 @@
     
     <servlet>
         <servlet-name>DeleteUser</servlet-name>
-        <servlet-class>edu.uga.dawgtrades.DeleteUser</servlet-class>
+        <servlet-class>edu.uga.dawgtrades.boundary.DeleteUser</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DeleteUser</servlet-name>
@@ -70,7 +70,7 @@
     
     <servlet>
         <servlet-name>SetMembershipPrice</servlet-name>
-        <servlet-class>edu.uga.dawgtrades.SetMembershipPrice</servlet-class>
+        <servlet-class>edu.uga.dawgtrades.boundary.SetMembershipPrice</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SetMembershipPrice</servlet-name>
@@ -79,7 +79,7 @@
     
     <servlet>
         <servlet-name>ShowMainWindow</servlet-name>
-        <servlet-class>edu.uga.dawgtrades.ShowMainWindow</servlet-class>
+        <servlet-class>edu.uga.dawgtrades.boundary.ShowMainWindow</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ShowMainWindow</servlet-name>
@@ -88,7 +88,7 @@
     
     <servlet>
         <servlet-name>UpdateCategory</servlet-name>
-        <servlet-class>edu.uga.dawgtrades.UpdateCategory</servlet-class>
+        <servlet-class>edu.uga.dawgtrades.boundary.UpdateCategory</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UpdateCategory</servlet-name>
