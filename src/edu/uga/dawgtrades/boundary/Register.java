@@ -68,7 +68,7 @@ public class Register extends HttpServlet{
 
 		httpSession = req.getSession();
 
-		ssid = (String) httpSession.getAttribute("ssid");
+//		ssid = (String) httpSession.getAttribute("ssid");
 
 
 		session = SessionManager.getSessionById(ssid);
