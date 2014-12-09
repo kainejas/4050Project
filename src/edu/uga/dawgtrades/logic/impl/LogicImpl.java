@@ -67,8 +67,8 @@ public class LogicImpl implements Logic{
 	}
 
 	@Override
-	public void unregister(String user_name) throws DTException {
-		(new CtrlUnregister(objectModel)).unregister(user_name);
+	public void unregister(RegisteredUser user) throws DTException {
+		(new CtrlUnregister(objectModel)).unregister(user);
 	}
 
 	@Override

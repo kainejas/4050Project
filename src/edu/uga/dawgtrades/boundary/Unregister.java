@@ -72,7 +72,7 @@ public class Unregister extends HttpServlet{
         }
         
         ssid = (String) httpSession.getAttribute( "ssid" );
-        if( ssid == null ) {       // assume not logged in!
+        if( ssid == null || ssid.equals("") ) {       // assume not logged in!
             DawgTradesError.error( cfg, toClient, "Session expired or illegal; please log in" );
             return;
         }
@@ -95,7 +95,7 @@ public class Unregister extends HttpServlet{
 		logic = new LogicImpl(objectModel);
         try {
             SessionManager.logout(session);
-        logic.unregister(person.getName());
+        logic.unregister(person);
         }
         catch(Exception e) {
             DawgTradesError.error(cfg, toClient, "Error deleting user: "  + person.getName() + "\t\n" + e.getMessage());

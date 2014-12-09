@@ -15,7 +15,7 @@ public interface Logic {
 	public List<Item> findItems(String category_name) throws DTException;
 	public long register(String user_name, String first_name, String last_name, String password, boolean isAdmin, String email, String phoneNumber, boolean canText) throws DTException;
 	public void setMembershipPrice(float value) throws DTException;
-	public void unregister(String user_name) throws DTException;
+	public void unregister(RegisteredUser user) throws DTException;
 	public long updateCategory(long categoryId, String category_name, long parentId) throws DTException;
 	public long updateProfile(String user_name, String first_name, String last_name, String password, String email, String phone, boolean canText) throws DTException;
 	public long viewProfile(String user_name) throws DTException;

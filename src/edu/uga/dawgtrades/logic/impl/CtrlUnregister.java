@@ -14,17 +14,8 @@ public class CtrlUnregister {
 		this.objectModel = objectModel;
 	}
 	
-	public void unregister(String user_name) throws DTException{
-        RegisteredUser user = null, modelUser = null;
-        Iterator<RegisteredUser> userIter = null;
+	public void unregister(RegisteredUser user) throws DTException{
         
-        modelUser = objectModel.createRegisteredUser();
-        modelUser.setName(user_name);
-        userIter = objectModel.findRegisteredUser(modelUser);
-        if (userIter.hasNext())
-            user = userIter.next();
-        else
-            throw new DTException("User not found: " + user_name);
         
         Iterator<Item> items = objectModel.getItem(user);
         if (items.hasNext()) {
