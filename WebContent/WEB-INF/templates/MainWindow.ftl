@@ -26,10 +26,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="Homepage">DawgTrades</a>
+          <a class="brand" href="ShowMainWindow">DawgTrades</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="Homepage">Home</a></li>
+              <li class="active"><a href="ShowMainWindow">Home</a></li>
               <li><a href="Logout">Logout</a></li>
               <li><a href="Contact">Contact</a></li>
             </ul>
