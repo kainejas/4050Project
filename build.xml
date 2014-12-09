@@ -13,6 +13,9 @@
   <path id="classpath">
       <fileset dir="jar/classes">
           <include name="mysql-connector-java-5.1.34-bin.jar"/>
+          <include name="jsp-api.jar"/>
+          <include name="servlet-api.jar"/>
+          <include name="freemarker.jar"/>
       </fileset>
   </path>
 

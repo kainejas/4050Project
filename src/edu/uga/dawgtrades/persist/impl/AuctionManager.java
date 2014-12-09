@@ -49,7 +49,7 @@ public class AuctionManager {
 			if (auction.getItemId() != -1)
 				stmt.setLong( 2, auction.getItemId());
             else
-                stmt.setNull(2, java.sql.types.INTEGER);
+                stmt.setNull(2, java.sql.Types.INTEGER);
             
 			if (auction.getMinPrice() >= 0)
 				stmt.setString(3, Float.toString(auction.getMinPrice()));
