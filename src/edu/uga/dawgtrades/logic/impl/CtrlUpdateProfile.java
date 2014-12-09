@@ -16,13 +16,13 @@ public class CtrlUpdateProfile {
 	public long updateProfile(String user_name, String first_name, String last_name, String password, String email, String phone, boolean canText) throws DTException{
         
         RegisteredUser user = null, modelUser = null;
-        Iterator userIter = null;
+        Iterator<RegisteredUser> userIter = null;
         
         modelUser = objectModel.createRegisteredUser();
         modelUser.setName(user_name);
         userIter = objectModel.findRegisteredUser(modelUser);
         if (!userIter.hasNext())
-            throw DTException("User not found: " + user_name);
+            throw new DTException("User not found: " + user_name);
         
         user = userIter.next();
         user.setFirstName(first_name);
@@ -32,7 +32,7 @@ public class CtrlUpdateProfile {
         user.setPhone(phone);
         user.setCanText(canText);
         
-        objectModel.storeRegisteredUser(objectModel);
+        objectModel.storeRegisteredUser(user);
         return user.getId();
         
 	}
