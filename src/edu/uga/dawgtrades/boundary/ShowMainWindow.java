@@ -57,8 +57,9 @@ public class ShowMainWindow
             resultTemplate = cfg.getTemplate( resultTemplateName );
         } 
         catch (IOException e) {
-            throw new ServletException( "Login.doPost: Can't load template in: " + templateDir + ": " + e.toString());
+            throw new ServletException( "ShowMainWindow.doPost: Can't load template in: " + templateDir + ": " + e.toString());
         }
+        
 
         // Prepare the HTTP response:
         // - Use the charset of template for the output
@@ -102,7 +103,7 @@ public class ShowMainWindow
 
         // Build the data-model
         //
-        root.put( "username", username );
+        root.put( "user_name", username );
 
         // Merge the data-model and the template
         //
