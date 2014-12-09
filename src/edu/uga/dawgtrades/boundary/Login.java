@@ -80,7 +80,7 @@ public class Login
 
         // Get the parameters
         //
-        username = req.getParameter( "username" );
+        username = req.getParameter( "user_name" );
         password = req.getParameter( "password" );
 
         if( username == null || password == null ) {
