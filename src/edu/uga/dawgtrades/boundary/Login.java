@@ -39,6 +39,24 @@ public class Login
                 "WEB-INF/templates"
                 );
     }
+    
+    public void doGet( HttpServletRequest req, HttpServletResponse res )
+    throws ServletException, IOException
+    {
+        HttpSession    httpSession = null;
+
+        httpSession = req.getSession();
+        if( httpSession == null ) {       // not logged in!
+            res.returnRedirect("http://localhost:8080/login.html");
+        }
+        else {
+            res.sendRedirect("http://localhost:8080/ShowMainWindow");
+        }
+        
+        
+    }
+    
+    
 
     public void doPost( HttpServletRequest req, HttpServletResponse res )
             throws ServletException, IOException
