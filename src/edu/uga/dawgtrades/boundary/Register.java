@@ -79,7 +79,7 @@ public class Register extends HttpServlet{
             conn = DbUtils.connect();
         }
         catch (Exception seq) {
-            DawgTradesError.error(cfg, toClient, "Unable to obtain a database connection\n" + seq.getStackTrace() );
+            DawgTradesError.error(cfg, toClient, "Unable to obtain a database connection\n" + seq.getMessage() );
         }
         
         
