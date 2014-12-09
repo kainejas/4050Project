@@ -111,7 +111,7 @@ public class Login
 
         // Build the data-model
         //
-        root.put( "username", username );
+        root.put( "user_name", username );
 
         // Merge the data-model and the template
         //
