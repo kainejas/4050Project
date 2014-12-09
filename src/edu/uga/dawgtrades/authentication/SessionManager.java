@@ -76,6 +76,9 @@ public class SessionManager
         
         objectModel = new ObjectModelImpl();
         persistence = new PersistenceImpl( conn, objectModel );
+        objectModel.setPersistence(persistence);
+        persistence.setObjectModel(objectModel);
+        persistence.init();
         
         loginRegisteredUser = objectModel.createRegisteredUser();
         loginRegisteredUser.setName( username );
