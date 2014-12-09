@@ -88,4 +88,9 @@ public class LogicImpl implements Logic{
 	public long viewProfile(String user_name) throws DTException {
 		return (new CtrlViewProfile(objectModel)).viewProfile(user_name);
 	}
+    
+    @Override
+    public List<Item> browseCategoryItems(String category_name){
+        return (new CtrlBrowseCategory(objectModel)).browseCategoryItems(category_name);
+    }
 }

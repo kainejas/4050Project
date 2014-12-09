@@ -19,5 +19,7 @@ public interface Logic {
 	public long updateCategory(long categoryId, String category_name, long parentId) throws DTException;
 	public long updateProfile(String user_name, String first_name, String last_name, String password, String email, String phone, boolean canText) throws DTException;
 	public long viewProfile(String user_name) throws DTException;
+    
+    public List<Item> browseCategoryItems(String category_name);
 	
 }
