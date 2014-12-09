@@ -61,7 +61,7 @@ public class ExperienceReportManager {
 			if(experienceReport.getReviewed().getId() != -1)
 				stmt.setString(4, Long.toString(experienceReport.getReviewed().getId()));
 			else
-				throw new DTException("ExperienceReportManager.save: can't save an ExperienceReport: reviewer undefined");
+				throw new DTException("ExperienceReportManager.save: can't save an ExperienceReport: reviewed undefined");
 		
 			if(experienceReport.getDate() != null)
 				stmt.setDate(5, new java.sql.Date(experienceReport.getDate().getTime()));

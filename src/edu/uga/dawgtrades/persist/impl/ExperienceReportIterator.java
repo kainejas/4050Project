@@ -63,7 +63,7 @@ public class ExperienceReportIterator
 				RegisteredUser reviewer = objectModel.createRegisteredUser();
 				reviewer.setId(reviewerId);
 				RegisteredUser reviewed = objectModel.createRegisteredUser();
-				reviewer.setId(reviewedId);
+				reviewed.setId(reviewedId);
 				experienceReport.setReviewer(reviewer);
 				experienceReport.setReviewed(reviewed);
 				try {

@@ -6,36 +6,41 @@ import edu.uga.dawgtrades.model.DTException;
 import edu.uga.dawgtrades.model.Category;
 import edu.uga.dawgtrades.model.ObjectModel;
 
-public class CtrlDefineCategory {
+public class CtrlUpdateCategory {
 	private ObjectModel objectModel = null;
 	
-	public CtrlDefineCategory(ObjectModel objectModel){
+	public CtrlUpdateCategory(ObjectModel objectModel){
 		this.objectModel = objectModel;
 	}
 	
-	public long defineCategory(String category_name, long parentId) throws DTException{
+	public long updateCategory(long categoryId, String category_name, long parentId) throws DTException{
 		Category category = null;
 		Category modelCategory = null;
 		Iterator<Category> categoryIter = null;
 		Category parent = null;
 		Category modelParent = null;
 		Iterator<Category> parentIter = null;
-		
+
 		modelCategory = objectModel.createCategory();
-		modelCategory.setName(category_name);
+		modelCategory.setId(categoryId);
 		categoryIter = objectModel.findCategory(modelCategory);
 		if(categoryIter.hasNext())
-			throw new DTException("A category with this name already exists: " + category_name);
+			category = categoryIter.next();
+		else
+			throw new DTException("Category not found: " + category_name);
 		 
 		modelParent = objectModel.createCategory();
 		modelParent.setId(parentId);
-		
-        parent = objectMode.findCategory(modelParent).next();
-		
+		parentIter = objectModel.findCategory(modelParent);
+		while(parentIter.hasNext()){
+			parent = parentIter.next();
+		}
 
-		category = objectModel.createCategory(parent, category_name);
+		category.setName(category_name);
+		category.setParentId(parent.getId());
 		objectModel.storeCategory(category);
 		
 		return category.getId();
 	}
+
 }
