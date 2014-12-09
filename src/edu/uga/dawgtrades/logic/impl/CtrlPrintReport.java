@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import edu.uga.dawgtrades.model.DTException;
 import edu.uga.dawgtrades.model.Category;
 import edu.uga.dawgtrades.model.Auction;
+import edu.uga.dawgtrades.model.Item;
 import edu.uga.dawgtrades.model.RegisteredUser;
 import edu.uga.dawgtrades.model.ObjectModel;
 
@@ -24,7 +25,7 @@ public class CtrlPrintReport {
         //number of ongoing auctions - done
         
         int userCount = 0;
-        Iterator<RegisteredUser> userIter = objectModel.findRegisteredUsers(null);
+        Iterator<RegisteredUser> userIter = objectModel.findRegisteredUser(null);
         RegisteredUser user = null;
         while(userIter.hasNext()) {
             user = userIter.next();
@@ -34,7 +35,10 @@ public class CtrlPrintReport {
         Iterator<Auction> auctionIter = objectModel.findAuction(null);
         
         if(!auctionIter.hasNext())
+        {
             //ERROR or something
+        }
+       
             
         Auction auction = null;
         int activeAuctions = 0;
@@ -52,21 +56,6 @@ public class CtrlPrintReport {
                 
         }
 
-		
-		modelCategory = objectModel.createCategory();
-		modelCategory.setName(category_name);
-		categoryIter = objectModel.findCategory(modelCategory);
-		while(categoryIter.hasNext()){
-			category = categoryIter.next();
-		}
-		if(category == null)
-			throw new DTException("A category with this name does not exist: " + category_name);
-		
-		Iterator<Item> itemIter = objectModel.findItem(category);
-		while(itemIter != null && itemIter.hasNext()){
-			Item i = itemIter.next();
-			items.add(i);
-		}
 		return userCount + " " + closedAuctions + " " + price + " " + activeAuctions;
 	}
 }

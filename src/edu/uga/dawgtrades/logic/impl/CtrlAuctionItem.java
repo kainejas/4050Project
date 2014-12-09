@@ -10,6 +10,9 @@ import edu.uga.dawgtrades.model.DTException;
 import edu.uga.dawgtrades.model.Category;
 import edu.uga.dawgtrades.persist.impl.CategoryManager;
 import edu.uga.dawgtrades.model.Auction;
+import edu.uga.dawgtrades.model.Attribute;
+import edu.uga.dawgtrades.model.AttributeType;
+import edu.uga.dawgtrades.model.Item;
 import edu.uga.dawgtrades.model.RegisteredUser;
 import edu.uga.dawgtrades.model.ObjectModel;
 
@@ -38,7 +41,7 @@ public class CtrlAuctionItem {
         
         float minPrice = 0.0f;
         try {
-            float minPrice = Float.parseFloat(min_price);
+            minPrice = Float.parseFloat(min_price);
         }
         catch(Exception e) {
             throw new DTException("Negative or non-numeric minimum price");
@@ -51,20 +54,17 @@ public class CtrlAuctionItem {
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
         
-        switch(duration) {
-            case "1 month":
+        if(duration.equals("1 month"))
                 c.add(Calendar.DATE, 30);
-                break;
                 
-            case "1 week":
+        else if(duration.equals( "1 week"))
                 c.add(Calendar.DATE, 7);
-                break;
-            case "1 day":
+                
+        else if(duration.equals( "1 day"))
                 c.add(Calendar.DATE, 1);
-                break;
-            default:
-                throw new DTException("Illegal duration");
-        }
+               
+        else    throw new DTException("Illegal duration");
+        
         dt = c.getTime();
         
         RegisteredUser modelOwner = objectModel.createRegisteredUser();

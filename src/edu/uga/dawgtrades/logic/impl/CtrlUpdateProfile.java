@@ -5,6 +5,7 @@ import java.util.Iterator;
 import edu.uga.dawgtrades.model.DTException;
 import edu.uga.dawgtrades.model.Category;
 import edu.uga.dawgtrades.model.ObjectModel;
+import edu.uga.dawgtrades.model.RegisteredUser;
 
 public class CtrlUpdateProfile {
 	private ObjectModel objectModel = null;

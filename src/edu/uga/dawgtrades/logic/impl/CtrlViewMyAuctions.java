@@ -32,8 +32,12 @@ public class CtrlViewMyAuctions {
         if(!itemIter.hasNext())
             return null;
         
+        Item item = null;
         while(itemIter.hasNext()) {
-            auctionList.add(itemIter.next());
+            item = itemIter.next();
+            Auction temp = objectModel.getAuction(item);
+            if(temp != null)
+            auctionList.add(temp);
         }
         
         return auctionList;
