@@ -156,7 +156,12 @@ public class Register extends HttpServlet{
         try {
             ssid = SessionManager.login( user_name, password );
             System.out.println( "Obtained ssid: " + ssid );
-            httpSession.setAttribute( "ssid", ssid );
+            try{
+                httpSession.setAttribute( "ssid", ssid );
+            }
+            catch(Exception e) {
+                DawgTradesError.error(cfg, toClient, e);
+            }
             session = SessionManager.getSessionById( ssid );
             System.out.println( "Connection: " + session.getConnection() );
         }
