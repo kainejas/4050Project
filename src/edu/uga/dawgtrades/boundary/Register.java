@@ -16,10 +16,14 @@ import edu.uga.dawgtrades.authentication.Session;
 import edu.uga.dawgtrades.authentication.SessionManager;
 import edu.uga.dawgtrades.logic.Logic;
 import edu.uga.dawgtrades.logic.impl.LogicImpl;
-import edu.uga.dawgtrades.model.ObjectModel;
+import edu.uga.dawgtrades.model.*;
+import edu.uga.dawgtrades.persist.*;
+import edu.uga.dawgtrades.persist.impl.*;
+import edu.uga.dawgtrades.model.impl.*;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import java.sql.Connection;
 
 
 public class Register extends HttpServlet{
@@ -50,6 +54,8 @@ public class Register extends HttpServlet{
 		boolean can_text = false;
 		long user_id = 0;
 		ObjectModel objectModel = null;
+        Persistence persistence = null;
+         Connection conn = null;
 		Logic logic = null;
 		HttpSession httpSession;
 		Session session;
@@ -68,18 +74,28 @@ public class Register extends HttpServlet{
 
 		httpSession = req.getSession();
 
-//		ssid = (String) httpSession.getAttribute("ssid");
-
-
-		session = SessionManager.getSessionById(ssid);
-		objectModel = session.getObjectModel();
+        // get a database connection
+        try {
+            conn = DbUtils.connect();
+        }
+        catch (Exception seq) {
+            DawgTradesError.error(cfg, toClient, "Unable to obtain a database connection" );
+        }
+        
+        
+        objectModel = new ObjectModelImpl();
+        persistence = new PersistenceImpl( conn, objectModel );
+        // connect the ObjectModel module to the Persistence module
+        objectModel.setPersistence(persistence);
+        persistence.setObjectModel(objectModel);
+        persistence.init();
         if(objectModel == null){
 			DawgTradesError.error(cfg, toClient, "Object model null.");
 			return;
 		}
 
 		logic = new LogicImpl(objectModel);
-
+        
 		user_name = req.getParameter("user_name");
 		password = req.getParameter("password");
 		//is_admin_str = req.getParameter("is_admin");
@@ -123,7 +139,7 @@ public class Register extends HttpServlet{
 			DawgTradesError.error( cfg, toClient, "Unspecified email" );
 			return;
 		}
-		/*
+		
 		try{
 			//is_admin = Boolean.parseBoolean(can_text_str);
 		}
@@ -131,13 +147,13 @@ public class Register extends HttpServlet{
 			DawgTradesError.error(cfg, toClient, "Invalid text status: " + is_admin_str);
 			return;
 		}
-        */
+        
 		
 		try{
 			user_id = logic.register(user_name, first_name, last_name, password, is_admin, email, phone, can_text);
 		}
 		catch(Exception e){
-			DawgTradesError.error(cfg, toClient, e);
+			DawgTradesError.error(cfg, toClient, "Error with logic register \n" + e);
 			return;
 		}
         
