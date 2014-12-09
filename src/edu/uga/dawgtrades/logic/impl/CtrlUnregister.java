@@ -20,7 +20,7 @@ public class CtrlUnregister {
         Iterator<Item> items = objectModel.getItem(user);
         if (items.hasNext()) {
         	if (!objectModel.getAuction(items.next()).getIsClosed())
-        		throw new DTException("Cannot unregister. " + user_name + " has item(s) currently being auctioned.");
+        		throw new DTException("Cannot unregister. " + user.getName() + " has item(s) currently being auctioned.");
         }
         
         objectModel.deleteRegisteredUser(user);
