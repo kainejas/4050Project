@@ -26,7 +26,7 @@ public class AuctionManager {
 	
 	public void save(Auction auction) throws DTException {
 		String 				insertAuctionSql = "insert into auction ( expiration, item_id, minPrice ) values ( ?, ?, ? )";
-		String 				updateAuctionSql = "update auction set expiration = ?, set item_id = ?, set minPrice = ? where id = ?";
+		String 				updateAuctionSql = "update auction set expiration = ?, item_id = ?, set minPrice = ? where id = ?";
 		PreparedStatement 	stmt;
 		int					inscnt;
 		long				auctionId;
@@ -49,8 +49,8 @@ public class AuctionManager {
 			if (auction.getItemId() != -1)
 				stmt.setLong( 2, auction.getItemId());
             else
-                throw new DTException( "Auction.save: can't save an Auction: invalid expiration date");
-			
+                stmt.setNull(2, java.sql.types.INTEGER);
+            
 			if (auction.getMinPrice() >= 0)
 				stmt.setString(3, Float.toString(auction.getMinPrice()));
 			else
