@@ -96,12 +96,12 @@ public class Register extends HttpServlet{
 		phone = req.getParameter("phone");
 		can_text_str = req.getParameter("can_text");
 
-		if(user_name == null){
+		if(user_name == null || user_name.equals("")){
 			DawgTradesError.error(cfg, toClient, "Unspecified user name");
 			return;
 		}
 
-		if(password == null){
+		if(password == null || password.equals("")){
 			DawgTradesError.error(cfg, toClient, "Unspecified password");
 			return;
 		}
@@ -114,23 +114,20 @@ public class Register extends HttpServlet{
 			return;
 		}
 
-		if( first_name == null ) {
+		if( first_name == null || first_name.equals("") ) {
 			DawgTradesError.error( cfg, toClient, "Unspecified first name" );
 			return;
 		}
 
-		if( last_name == null ) {
+		if( last_name == null || last_name.equals("")) {
 			DawgTradesError.error( cfg, toClient, "Unspecified last name" );
 			return;
 		}
 
-		if( address == null )
-			address = "";
-
-		if( phone == null )
+		if( phone == null || phone.equals("") )
 			phone = "";
 
-		if( email == null ) {
+		if( email == null  || email.equals("")) {
 			DawgTradesError.error( cfg, toClient, "Unspecified email" );
 			return;
 		}
