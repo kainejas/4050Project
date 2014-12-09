@@ -79,7 +79,7 @@
         <p>
         <div class="container" >
             
-            <form method=post class="form-signin" action="RegisterUser">
+            <form method=post class="form-signin" action="Register">
                 <h2 class="form-signin-heading">Please Complete the Form Below</h2>
                 <input type="text" name="user_name" class="input-block-level" placeholder="Username">
                     <input type="password" name="password" class="input-block-level" placeholder="Password">
