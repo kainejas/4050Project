@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 import edu.uga.dawgtrades.model.DTException;
 import edu.uga.dawgtrades.model.Item;
+import edu.uga.dawgtrades.model.Auction;
 import edu.uga.dawgtrades.model.Category;
 import edu.uga.dawgtrades.model.ObjectModel;
 
