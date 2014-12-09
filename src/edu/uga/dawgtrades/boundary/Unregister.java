@@ -26,7 +26,7 @@ import freemarker.template.TemplateException;
 import java.sql.Connection;
 
 
-public class Register extends HttpServlet{
+public class Unregister extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	static String templateDir = "WEB-INF/templates";
 	static String resultTemplateName = "Goodbye.ftl";
