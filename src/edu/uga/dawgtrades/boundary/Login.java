@@ -47,7 +47,7 @@ public class Login
 
         httpSession = req.getSession();
         if( httpSession == null ) {       // not logged in!
-            res.returnRedirect("http://localhost:8080/login.html");
+            res.sendRedirect("http://localhost:8080/login.html");
         }
         else {
             res.sendRedirect("http://localhost:8080/ShowMainWindow");
