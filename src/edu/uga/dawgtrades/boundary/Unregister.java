@@ -38,7 +38,7 @@ public class Unregister extends HttpServlet{
 		cfg.setServletContextForTemplateLoading(getServletContext(), "WEB-INF/templates");
 	}
 
-	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         
         Template       resultTemplate = null;
         HttpSession    httpSession = null;
