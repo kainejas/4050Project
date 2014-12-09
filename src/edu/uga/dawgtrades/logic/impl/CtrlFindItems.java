@@ -12,11 +12,9 @@ import edu.uga.dawgtrades.model.ObjectModel;
 
 public class CtrlFindItems {
 	private ObjectModel objectModel = null;
-	private CategoryManager categoryManager = null;
 	
-	public CtrlFindItems(ObjectModel objectModel, CategoryManager categoryManger){
+	public CtrlFindItems(ObjectModel objectModel){
 		this.objectModel = objectModel;
-		this.categoryManager = categoryManager;
 	}
 	
 	public List<Item> findItems(String category_name) throws DTException{
@@ -36,7 +34,7 @@ public class CtrlFindItems {
 		if(category == null)
 			throw new DTException("A category with this name does not exist: " + category_name);
 		
-		Iterator<Item> itemIter = categoryManager.restoreItems(category);
+		Iterator<Item> itemIter = objectModel.getItem(category);
 		while(itemIter != null && itemIter.hasNext()){
 			Item i = itemIter.next();
 			items.add(i);
