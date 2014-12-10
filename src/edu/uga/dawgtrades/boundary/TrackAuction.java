@@ -125,9 +125,10 @@ public class TrackAuction
               
                 auctionMap = new HashMap<String, String>();
                 auctionMap.put("id", ""+auc.getId());
+                 try{
                 auctionMap.put("amount", ""+auc.getMinPrice());
                 auctionMap.put("item_id", ""+auc.getItemId());
-               try{
+              
                 auctionMap.put("expiration", auc.getExpiration().toString());
                 
                 tempList.add(auctionMap);
