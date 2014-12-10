@@ -135,7 +135,7 @@ public class TrackAuction
             root.put("auctions", tempList);
         }
         catch(Exception e) {
-            DawgTradesError.error( cfg, toClient, "Error making tempList for Page   " + e.getStackTrace() );
+            DawgTradesError.error( cfg, toClient, "Error making tempList for Page   " + e.getMessage() );
         }
       
             
