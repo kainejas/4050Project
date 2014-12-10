@@ -44,10 +44,10 @@ public class CtrlAuctionItem {
             minPrice = Float.parseFloat(min_price);
         }
         catch(Exception e) {
-            throw new DTException("Negative or non-numeric minimum price");
+            throw new DTException("non-numeric minimum price");
         }
         if(minPrice <= 0.0f)
-            throw new DTException("Negative or non-numeric minimum price");
+            throw new DTException("Negative minimum price");
         
         
         Date dt = new Date();
