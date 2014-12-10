@@ -21,6 +21,7 @@ import edu.uga.dawgtrades.logic.Logic;
 import edu.uga.dawgtrades.logic.impl.LogicImpl;
 import edu.uga.dawgtrades.model.ObjectModel;
 import edu.uga.dawgtrades.model.AttributeType;
+import edu.uga.dawgtrades.model.RegisteredUser;
 import edu.uga.dawgtrades.model.Category;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
