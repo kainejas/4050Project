@@ -101,7 +101,6 @@ public class ViewMyAuctions
         }
         
         logic = new LogicImpl(objectModel);
-        List<Auction> auctionList = null;
         // Setup the data-model
         
         try {
@@ -111,28 +110,29 @@ public class ViewMyAuctions
              DawgTradesError.error( cfg, toClient, "Error logic.viewMyAuctions()    " + e.getMessage() );
         }
         Map<String, Object> root = new HashMap<String, Object>();
-        root.put("auctions", auctionList);
+        List<Map<String,String>> tempList = new ArrayList<Map<String, String>>();
+        HashMap<String, String> auctionMap = new HashMap<String, String>();
         root.put("user_name", person.getName());
             
-     /*
+     
         try {
           auctionList = logic.viewMyAuctions(person);
             Auction auc = null;
             int count = 0;
             while(auctionList.hasNext()) {
                 auc = auctionList.next();
-                Map<String, String> auctions = new HashMap<String, String>();
-                List<String>
-                root.put("auctions", auctionList);
-                root.put("user_name", person.getName());
-                auctions.put("id", auc.getId());
-                auctions.put("min_price", auc.getMinPrice());
-                auctions.put("item_id", auc.getItemId());
-                auctions.put("expiration", auc.getExpiration().toString());
+                auctionMap = new HashMap<String, String>();
+                auctionMap.put("id", auc.getId());
+                auctionMap.put("min_price", auc.getMinPrice());
+                auctionMap.put("item_id", auc.getItemId());
+                auctionMap.put("expiration", auc.getExpiration().toString());
+                tempList.add(auctionMap);
 
             }
+            
+            root.put("auctions", tempList);
         }
-      */
+      
             
     
         // Build the data-model
