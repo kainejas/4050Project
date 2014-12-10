@@ -28,7 +28,7 @@ import freemarker.template.TemplateException;
 public class BrowseCategory extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	static String templateDir = "WEB-INF/templates";
-	static String resultTemplateName = "DefineCategory-Result.ftl";
+	static String resultTemplateName = “BrowseCategory.ftl";
 	
 	private Configuration cfg;
 	
@@ -98,48 +98,30 @@ public class BrowseCategory extends HttpServlet{
 		
 		try{
 			rc = logic.browseCategory(category_name);
-			
-			categories = new LinkedList<List<Object>>();
-			root.put("sub-categories", categories);
-			
-			for(int j = 0; j < rc.size(); j++){
-				c = (Category) rc.get(j);
-				category = new LinkedList<Object>();
-				category.add(c.getId());
-				category.add(c.getName());
-				category.add(c.getParentId());
-				categories.add(category);
-			}
 		}
 		catch(Exception e){
 			DawgTradesError.error(cfg, toClient, e);
 		}
 			
-		if(categories == null){
+		if(rc == null){
 			try{
 				ri = logic.browseCategoryItems(category_name);
-				
-				items = new LinkedList<List<Object>>();
-				root.put("items", items);
-				
-				for(int j = 0; j < ri.size(); j++){
-					i = (Item) ri.get(j);
-					item = new LinkedList<Object>();
-					item.add(i.getId());
-					item.add(i.getName());
-					item.add(i.getDescription());
-					item.add(i.getOwnerId());
-					item.add(i.getCategoryId());
-					items.add(item);
-				}
 			}
 			catch(Exception e){
 				DawgTradesError.error(cfg, toClient, e);
 				return;
 			}
 		}
-		
-		root.put("category_name", category_name);
+
+		if (rc == null) {
+			for (int i = 0; i < ri.size(); i++) {
+				root.put(“item” + i + “_id”,ri.get(i).getId();
+				root.put(“item” + i + “_name”,ri.get(i).getName();
+			}
+		} else {
+			for (int i = 0; i < ri.size(); i++)
+				root.put(“category” + i + “_name“,rc.get(i).getName();
+		}
 		
 		try{
 			resultTemplate.process(root, toClient);
