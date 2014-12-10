@@ -7,7 +7,7 @@ import edu.uga.dawgtrades.model.DTException;
 
 import edu.uga.dawgtrades.model.ObjectModel;
 import edu.uga.dawgtrades.model.Auction;
-public class CtrTrackAuction {
+public class CtrlTrackAuction {
 	private ObjectModel objectModel = null;
 	
 	public CtrlTrackAuction(ObjectModel objectModel){
