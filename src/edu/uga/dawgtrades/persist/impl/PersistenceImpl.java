@@ -309,7 +309,7 @@ public class PersistenceImpl implements Persistence{
     
     @Override
     public Bid restoreBid(Auction auction) throws DTException {
-        return auctionmanager.restoreBids(auction);
+        return auctionManager.restoreBids(auction);
     }
     
 
