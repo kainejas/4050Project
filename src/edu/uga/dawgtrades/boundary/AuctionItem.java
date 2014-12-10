@@ -86,9 +86,10 @@ public class AuctionItem extends HttpServlet{
         }
         
         Category modelCat = objectModel.createCategory();
+        Category category = null;
         modelCat.setName(category_name);
         try {
-        Category category = objectModel.findCategory(modelCat).next();
+        category = objectModel.findCategory(modelCat).next();
         }
         catch(Exception e) {
             DawgTradesError.error( cfg, toClient, "Error findCategory in AuctionItem.java  " + e.getStackTrace());
