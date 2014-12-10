@@ -15,7 +15,7 @@
 <option value="1 week">1 week</option>
 <option value="1 month">1 month</option>
 </select>
-<input type=hidden name="category_name" value="{category}?html">
+<input type=hidden name="category_name" value="${category}?html">
 <p>Category Attibutes
 <#list attribute_types as attribute_type>
 <p>${attribute_type.name}: <input type=text name="${attribute_type.name?html}_value">
