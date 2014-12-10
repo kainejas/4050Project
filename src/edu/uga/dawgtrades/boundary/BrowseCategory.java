@@ -28,7 +28,7 @@ import freemarker.template.TemplateException;
 public class BrowseCategory extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	static String templateDir = "WEB-INF/templates";
-	static String resultTemplateName = “BrowseCategory.ftl";
+	static String resultTemplateName = "BrowseCategory.ftl";
 	
 	private Configuration cfg;
 	
