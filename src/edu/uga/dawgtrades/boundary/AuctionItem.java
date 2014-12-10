@@ -150,13 +150,22 @@ public class AuctionItem extends HttpServlet{
         min_price = req.getParameter("min_price");
         duration = req.getParameter("duration");
         category_name = req.getParameter("category_name");
-        
-        
-        Category modelCategory = objectModel.createCategory();
-        modelCategory.setName(category_name);
-        Category category = objectModel.findCategory(modelCategory).next();
-        Iterator<AttributeType> attrTypeIter = objectModel.getAttributeType(category);
+        Category modelCategory = null;
+        Category category =  null;
         ArrayList<String> stringList = new ArrayList<String>();
+        Iterator<AttributeType> attrTypeIter = null;
+        try{
+        
+        modelCategory = objectModel.createCategory();
+        modelCategory.setName(category_name);
+         category = objectModel.findCategory(modelCategory).next();
+        attrTypeIter = objectModel.getAttributeType(category);
+        }
+        catch(Exception e) {
+            DawgTradesError.error(cfg, toClient, "Error finding category or attribute type");
+            return;
+        }
+        
         String[] pairs = null;
         
         if(attrTypeIter != null) {
