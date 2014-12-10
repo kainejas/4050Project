@@ -6,7 +6,6 @@ import java.util.List;
 import edu.uga.dawgtrades.model.*;
 
 public interface Logic {
-	public long defineCategory(String categoryName, long parentId) throws DTException;
 	public List<Category> browseCategory(String category_name) throws DTException;
 	public long reAuctionItem(long auctionId, String username, Category category, String item_name, String desc, long minPrice, Date aucDuration) throws DTException;
 	public void deleteCategory(String category_name) throws DTException;
