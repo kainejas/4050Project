@@ -80,10 +80,7 @@ public class AuctionItem extends HttpServlet{
         logic = new LogicImpl(objectModel);
         
         String category_name = req.getParameter("category_name");
-        if(category_name == null) {
-            DawgTradesError.error(cfg, toClient, "Category name is null");
-            return;
-        }
+ 
         
         Category modelCat = objectModel.createCategory();
         Category category = null;
