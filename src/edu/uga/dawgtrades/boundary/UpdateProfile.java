@@ -61,6 +61,7 @@ public class UpdateProfile extends HttpServlet{
         String password = null;
         String email = null;
         String phone = null;
+        long user_id = 0;
 		ObjectModel objectModel = null;
 		Logic logic = null;
 		HttpSession httpSession;
@@ -126,7 +127,7 @@ public class UpdateProfile extends HttpServlet{
 
 		
 		try{
-			category_id = logic.updateProfile(user_name, first_name, last_name, password, email, phone, true);
+			user_id = logic.updateProfile(user_name, first_name, last_name, password, email, phone, true);
 		}
 		catch(Exception e){
 			DawgTradesError.error(cfg, toClient, e);
