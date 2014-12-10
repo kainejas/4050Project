@@ -6,6 +6,7 @@ import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -116,8 +117,7 @@ public class ViewMyAuctions
             
      
         try {
-          auctionList = logic.viewMyAuctions(person);
-            Auction auc = null;
+
             int count = 0;
             for(Auction auc: auctionList) {
               
