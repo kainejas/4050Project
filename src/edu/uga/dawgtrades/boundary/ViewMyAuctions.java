@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import edu.uga.dawgtrades.authentication.Session;
 import edu.uga.dawgtrades.authentication.SessionManager;
 import edu.uga.dawgtrades.model.RegisteredUser;
+import edu.uga.dawgtrades.model.Auction;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
