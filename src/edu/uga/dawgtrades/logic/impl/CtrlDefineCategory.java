@@ -42,6 +42,7 @@ public class CtrlDefineCategory {
 		objectModel.storeCategory(category);
 		
         for(AttributeType attributeType: at) {
+            attributeType.setCategory(category);
             objectModel.storeAttributeType(attributeType);
         }
         
