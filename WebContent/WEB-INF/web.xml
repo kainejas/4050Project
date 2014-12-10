@@ -113,6 +113,15 @@
         <url-pattern>/Unregister</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>ViewProfile</servlet-name>
+        <servlet-class>edu.uga.dawgtrades.boundary.ViewProfile</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewProfile</servlet-name>
+        <url-pattern>/ViewProfile</url-pattern>
+    </servlet-mapping>
+    
     
 
 </web-app>
