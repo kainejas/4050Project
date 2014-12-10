@@ -44,17 +44,17 @@
         <p>Auction Information:
         <table style="border: 1px black solid">
             <tr>
-                <th>Id</th>
-                <th>Amount</th>
-                <th>Item Id</th>
-                <th>Expiration</th>
+                <th style="border: 1px black solid">Id</th>
+                <th style="border: 1px black solid">Amount</th>
+                <th style="border: 1px black solid">Item Id</th>
+                <th style="border: 1px black solid">Expiration</th>
             </tr>
             <#list auctions as auction>
                 <tr>
-                <td> ${auction.id} </td>
-                <td> ${auction.amount} </td>
-                <td> ${auction.item_id} </td>
-                <td> ${auction.expiration} </td>
+                <td style="border: 1px black solid"> ${auction.id} </td>
+                <td style="border: 1px black solid"> ${auction.amount} </td>
+                <td style="border: 1px black solid"> ${auction.item_id} </td>
+                <td style="border: 1px black solid"> ${auction.expiration} </td>
                 </tr>
             </#list>
 
