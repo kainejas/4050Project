@@ -110,12 +110,8 @@ public class Login
         try {
             ssid = SessionManager.login( username, password );
             System.out.println( "Obtained ssid: " + ssid );
-            try{
             httpSession.setAttribute( "ssid", ssid );
-            }
-            catch(Exception e) {
-                DawgTradesError.error(cfg, toClient, e);
-            }
+            
             session = SessionManager.getSessionById( ssid );
             System.out.println( "Connection: " + session.getConnection() );
         } 
