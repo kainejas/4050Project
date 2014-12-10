@@ -131,6 +131,15 @@
         <url-pattern>/UpdateProfile</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>ViewMyAuctions</servlet-name>
+        <servlet-class>edu.uga.dawgtrades.boundary.ViewMyAuctions</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewMyAuctions</servlet-name>
+        <url-pattern>/ViewMyAuctions</url-pattern>
+    </servlet-mapping>
+    
     
 
 </web-app>

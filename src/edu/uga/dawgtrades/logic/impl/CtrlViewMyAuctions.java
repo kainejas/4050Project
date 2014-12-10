@@ -17,13 +17,10 @@ public class CtrlViewMyAuctions {
 		this.objectModel = objectModel;
 	}
 	
-	public List<Auction> viewMyAuctions(String user_name) throws DTException{
+	public List<Auction> viewMyAuctions(RegisteredUser user) throws DTException{
 		
         
-        RegisteredUser modelUser = objectModel.createRegisteredUser();
-        modelUser.setName(user_name);
-        
-        RegisteredUser user = objectModel.findRegisteredUser(modelUser).next();
+        RegisteredUser modelUser = objectModel.findRegisteredUser(user).next();
         
         Iterator<Item> itemIter = objectModel.getItem(user);
         

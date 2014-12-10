@@ -21,5 +21,7 @@ public interface Logic {
 	public long viewProfile(String user_name) throws DTException;
     
     public List<Item> browseCategoryItems(String category_name) throws DTException;
+    
+    public List<Auction> viewMyAuctions(RegisteredUser user) throws DTException;
 	
 }

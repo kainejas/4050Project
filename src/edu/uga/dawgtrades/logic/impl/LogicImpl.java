@@ -93,4 +93,9 @@ public class LogicImpl implements Logic{
     public List<Item> browseCategoryItems(String category_name) throws DTException{
         return (new CtrlBrowseCategory(objectModel)).browseCategoryItems(category_name);
     }
+    
+    @Override
+    public List<Auction> viewMyAuctions(RegisteredUser user) throws DTexception{
+        return (new CtrlViewMyAuctions(objectModel)).viewMyAuctions(user);
+    }
 }
