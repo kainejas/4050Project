@@ -126,9 +126,16 @@ public class TrackAuction
                 auctionMap = new HashMap<String, String>();
                 try{
                 auctionMap.put("id", ""+auc.getId());
-                
+                    Bid temp = objectMode.getBid(auc);
+                    if(temp != null){
+                       // DawgTradesError.error(cfg,toClient, "bid is null");
+                    
                 auctionMap.put("amount", ""+objectModel.getBid(auc).getAmount());
-                auctionMap.put("item_id", ""+auc.getItemId());
+                    }
+                    else {
+                        auctionMap.put("amount", "" + auc.getMinPrice());
+                    }
+                        auctionMap.put("item_id", ""+auc.getItemId());
               
                 auctionMap.put("expiration", auc.getExpiration().toString());
                 
