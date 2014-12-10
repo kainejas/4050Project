@@ -30,7 +30,7 @@ public class CtrlTrackAuction {
         }
         modelAuction = objectModel.createAuction();
         modelAuction.setId(id);
-        auctionIter = objectModel.findAuction(modelUser);
+        auctionIter = objectModel.findAuction(modelAuction);
         if (auctionIter != null || !auctionIter.hasNext())
             return null;
         
