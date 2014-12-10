@@ -45,10 +45,10 @@
         <ul>
             <#list auctions as auction>
                 <li>
-                ${auction.amount} , ${auction.item_id
+                ${auction.amount} and ${auction.item_id}
                 </li>
             </#list>
-                
+
         </ul>
 </p>
         
