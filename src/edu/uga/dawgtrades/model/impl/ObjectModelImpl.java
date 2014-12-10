@@ -451,6 +451,6 @@ public class ObjectModelImpl implements ObjectModel {
     
     @Override
     public Bid getBid(Auction auction) throws DTException {
-        persistence.restoreBid(auction);
+       return persistence.restoreBid(auction);
     }
 }
