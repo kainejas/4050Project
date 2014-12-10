@@ -38,7 +38,7 @@ public class AuctionItem extends HttpServlet{
 		cfg.setServletContextForTemplateLoading(getServletContext(), "WEB-INF/templates");
 	}
     
-    public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+    public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         Template resultTemplate = null;
         BufferedWriter toClient = null;
         String item_name = null;
