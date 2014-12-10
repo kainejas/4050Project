@@ -119,8 +119,8 @@ public class ViewMyAuctions
           auctionList = logic.viewMyAuctions(person);
             Auction auc = null;
             int count = 0;
-            while(auctionList.hasNext()) {
-                auc = auctionList.next();
+            for(Auction auc: auctionList) {
+              
                 auctionMap = new HashMap<String, String>();
                 auctionMap.put("id", ""+auc.getId());
                 auctionMap.put("min_price", ""+auc.getMinPrice());
