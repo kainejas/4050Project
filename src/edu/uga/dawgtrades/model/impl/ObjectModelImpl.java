@@ -448,4 +448,9 @@ public class ObjectModelImpl implements ObjectModel {
 	public void setPersistence(Persistence persistence)  {
 		this.persistence = persistence;
 	}
+    
+    @Override
+    public Bid getBid(Auction auction) throws DTException {
+        persistence.restoreBid(auction);
+    }
 }

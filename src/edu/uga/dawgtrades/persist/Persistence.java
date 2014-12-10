@@ -131,6 +131,8 @@ public interface Persistence {
 	RegisteredUser restoreReviewer(ExperienceReport er) throws DTException;
 	RegisteredUser restoreReviewed(ExperienceReport er) throws DTException;
     
+    Bid restoreBid(Auction auction) throws DTException;
+    
     void init();
     void setObjectModel(ObjectModel objectModel);
 

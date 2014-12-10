@@ -306,6 +306,12 @@ public class PersistenceImpl implements Persistence{
 			throws DTException {
 		return experienceReportManager.restoreReviewed(er);
 	}
+    
+    @Override
+    Bid restoreBid(Auction auction) throws DTException {
+        return auctionmanager.restoreBids(auction);
+    }
+    
 
 	
 }
