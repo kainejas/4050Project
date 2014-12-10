@@ -101,6 +101,7 @@ public class UpdateProfile extends HttpServlet{
         user_name = session.getUser().getName();
         first_name = req.getParameter("first_name");
         last_name = req.getParameter("last_name");
+        password = req.getParameter("password");
         email = req.getParameter("email");
         phone = req.getParameter("phone");
         
