@@ -73,12 +73,10 @@ public class SessionManager
         }
         
         s = new Session( conn );
-        
+        s.setObjectModel(objectModel);
         objectModel = new ObjectModelImpl();
         persistence = new PersistenceImpl( conn, objectModel );
         objectModel.setPersistence(persistence);
-        persistence.setObjectModel(objectModel);
-        persistence.init();
         
         loginRegisteredUser = objectModel.createRegisteredUser();
         loginRegisteredUser.setName( username );
@@ -132,7 +130,7 @@ public class SessionManager
         }
         session.setUser(person);
         
-        String ssid = secureHash( "CLUBS" + System.nanoTime() );
+        String ssid = secureHash( "DT" + System.nanoTime() );
         session.setSessionId( ssid );
         
         sessions.put( ssid, session );

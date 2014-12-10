@@ -32,6 +32,17 @@ public class PersistenceImpl implements Persistence{
 	public PersistenceImpl(Connection conn, ObjectModel objectModel){
         this.conn = conn;
         this.objectModel = objectModel;
+        
+        attributeManager = new AttributeManager(conn, objectModel);
+        attributeTypeManager = new AttributeTypeManager(conn, objectModel);
+        auctionManager = new AuctionManager(conn, objectModel);
+        bidManager = new BidManager(conn, objectModel);
+        categoryManager = new CategoryManager(conn, objectModel);
+        experienceReportManager = new ExperienceReportManager(conn, objectModel);
+        itemManager = new ItemManager(conn, objectModel);
+        membershipManager = new MembershipManager(conn, objectModel);
+        registeredUserManager = new RegisteredUserManager(conn, objectModel);
+
     }
 	
     @Override

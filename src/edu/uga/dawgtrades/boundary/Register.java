@@ -161,8 +161,6 @@ public class Register extends HttpServlet{
             System.out.println( "Obtained ssid: " + ssid );
             try{
                 httpSession.setAttribute( "ssid", ssid );
-                Session session = SessionManager.getSessionById(ssid);
-                session.setObjectModel(objectModel);
             }
             catch(Exception e) {
                 DawgTradesError.error(cfg, toClient, e);
