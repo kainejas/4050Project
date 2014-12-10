@@ -149,5 +149,14 @@
         <url-pattern>/AuctionItem</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>PickCategory</servlet-name>
+        <servlet-class>edu.uga.dawgtrades.boundary.PickCategory</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PickCategory</servlet-name>
+        <url-pattern>/PickCategory</url-pattern>
+    </servlet-mapping>
+    
 
 </web-app>
