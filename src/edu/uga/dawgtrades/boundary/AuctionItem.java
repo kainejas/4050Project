@@ -38,7 +38,65 @@ public class AuctionItem extends HttpServlet{
 		cfg.setServletContextForTemplateLoading(getServletContext(), "WEB-INF/templates");
 	}
     
-  
+    public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+        Template resultTemplate = null;
+        BufferedWriter toClient = null;
+        String item_name = null;
+        String description = null;
+        String min_price = null;
+        String duration = null;
+        ObjectModel objectModel = null;
+        Logic logic = null;
+        HttpSession httpSession;
+        Session session;
+        String ssid;
+        
+        try{
+            resultTemplate = cfg.getTemplate(resultTemplateName);
+        }
+        catch(IOException e){
+            throw new ServletException( "Can't load template in: " + templateDir + ": " + e.toString());
+        }
+        
+        toClient = new BufferedWriter(new OutputStreamWriter(res.getOutputStream(), resultTemplate.getEncoding()));
+        
+        res.setContentType("text/html; charset=" + resultTemplate.getEncoding());
+        
+        httpSession = req.getSession();
+        if(httpSession == null){
+            DawgTradesError.error(cfg, toClient, "Session expired or illegal; please log in");
+            return;
+        }
+        
+        ssid = (String) httpSession.getAttribute("ssid");
+        if(ssid == null){
+            DawgTradesError.error(cfg, toClient, "Session expired or illegal; please log in");
+            return;
+        }
+        
+        session = SessionManager.getSessionById(ssid);
+        
+        objectModel = session.getObjectModel();
+        if(objectModel == null){
+            DawgTradesError.error(cfg, toClient, "Session expired or illegal; please log in");
+            return;
+        }
+        
+        Map<String, Object> root = new HashMap<String, Object>();
+        
+        
+        try{
+            resultTemplate.process(root, toClient);
+            toClient.flush();
+        }
+        catch(TemplateException e){
+            throw new ServletException("Error while processing FreeMarker template", e);
+        }
+        
+        toClient.close();
+        
+        
+    }
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		Template resultTemplate = null;
