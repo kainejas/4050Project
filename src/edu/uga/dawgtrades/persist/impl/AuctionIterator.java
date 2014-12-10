@@ -44,9 +44,10 @@ public class AuctionIterator implements Iterator<Auction>{
 			
 			try {
 				ID = rs.getLong(1);
-				expirationDate = rs.getDate(2);
-				itemID = rs.getLong(3);
-				minPrice = rs.getFloat(4);
+                minPrice = rs.getFloat(2);
+				expirationDate = rs.getDate(3);
+				itemID = rs.getLong(4);
+				
 				
 				more = rs.next();
 			} catch (Exception e) {
