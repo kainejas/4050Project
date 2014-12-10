@@ -58,8 +58,8 @@
 
 <li>Define Category:
 <form type=post action="DefineCategory">
-<input type=text name="category_name">
-<input type=text name="parent_name">
+<p>Category Name<input type=text name="category_name">
+<p>Parent Name<input type=text name="parent_name">
 <p><p>
 AttributeType Names:
 <input type=text name="at_0">
