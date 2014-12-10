@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +20,8 @@ import edu.uga.dawgtrades.authentication.SessionManager;
 import edu.uga.dawgtrades.logic.Logic;
 import edu.uga.dawgtrades.logic.impl.LogicImpl;
 import edu.uga.dawgtrades.model.ObjectModel;
+import edu.uga.dawgtrades.model.AttributeType;
+import edu.uga.dawgtrades.model.RegisteredUser;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -163,6 +168,7 @@ public class AuctionItem extends HttpServlet{
 		}
 		
 		session = SessionManager.getSessionById(ssid);
+        RegisteredUser person = session.getUser();
 		objectModel = session.getObjectModel();
 		if(objectModel == null){
 			DawgTradesError.error(cfg, toClient, "Session expired or illegal; please log in");
