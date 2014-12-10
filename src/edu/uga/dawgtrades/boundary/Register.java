@@ -47,7 +47,6 @@ public class Register extends HttpServlet{
 		boolean is_admin = false;
 		String first_name = null;
 		String last_name = null;
-		String address = null;
 		String phone = null;
 		String email = null;
 		String can_text_str = null;
