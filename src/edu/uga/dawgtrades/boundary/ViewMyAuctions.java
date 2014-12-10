@@ -17,6 +17,7 @@ import edu.uga.dawgtrades.authentication.Session;
 import edu.uga.dawgtrades.authentication.SessionManager;
 import edu.uga.dawgtrades.model.RegisteredUser;
 import edu.uga.dawgtrades.model.Auction;
+import edu.uga.dawgtrades.model.ObjectModel;
 import edu.uga.dawgtrades.logic.*;
 import edu.uga.dawgtrades.logic.impl.*;
 import freemarker.template.Configuration;

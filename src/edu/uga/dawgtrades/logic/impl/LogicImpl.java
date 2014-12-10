@@ -95,7 +95,7 @@ public class LogicImpl implements Logic{
     }
     
     @Override
-    public List<Auction> viewMyAuctions(RegisteredUser user) throws DTexception{
+    public List<Auction> viewMyAuctions(RegisteredUser user) throws DTException{
         return (new CtrlViewMyAuctions(objectModel)).viewMyAuctions(user);
     }
 }
