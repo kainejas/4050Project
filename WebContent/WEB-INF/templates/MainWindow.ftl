@@ -43,7 +43,7 @@
         <h1>Welcome ${user_name}!</h1>
         <p>You may:
         <ol>
-            <li>
+        <li> Browse Category: 
                 <form type=post action="BrowseCategory">
                     <input type=text name="category_name">
                     <input type=submit value="Submit">
