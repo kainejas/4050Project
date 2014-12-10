@@ -73,22 +73,19 @@ public class Register extends HttpServlet{
 		res.setContentType("text/html; charset=" + resultTemplate.getEncoding());
 
 		httpSession = req.getSession();
-
-        // get a database connection
-        try {
-            conn = DbUtils.connect();
-        }
-        catch (Exception seq) {
-            DawgTradesError.error(cfg, toClient, "Unable to obtain a database connection\n" + seq.getMessage() );
+        if(httpSession == null){
+            DawgTradesError.error(cfg, toClient, "Session expired or illegal; please log in");
+            return;
         }
         
+        ssid = (String) httpSession.getAttribute("ssid");
+        if(ssid == null){
+            DawgTradesError.error(cfg, toClient, "Session expired or illegal; please log in");
+            return;
+        }
         
-        objectModel = new ObjectModelImpl();
-        persistence = new PersistenceImpl( conn, objectModel );
-        // connect the ObjectModel module to the Persistence module
-        objectModel.setPersistence(persistence);
-        persistence.setObjectModel(objectModel);
-        persistence.init();
+        session = SessionManager.getSessionById(ssid);
+        objectModel = session.getObjectModel();
         if(objectModel == null){
 			DawgTradesError.error(cfg, toClient, "Object model null.");
 			return;
