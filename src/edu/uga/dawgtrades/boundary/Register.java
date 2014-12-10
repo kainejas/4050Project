@@ -87,7 +87,6 @@ public class Register extends HttpServlet{
         persistence = new PersistenceImpl( conn, objectModel );
         // connect the ObjectModel module to the Persistence module
         objectModel.setPersistence(persistence);
-        persistence.setObjectModel(objectModel);
         persistence.init();
         if(objectModel == null){
 			DawgTradesError.error(cfg, toClient, "Object model null.");

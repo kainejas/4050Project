@@ -41,8 +41,7 @@ public class Session
 
         Persistence persistence = new PersistenceImpl(conn, objectModel); 
         objectModel.setPersistence( persistence ); 
-        persistence.setObjectModel(objectModel);
-        persistence.init();
+        objectModel.setPersistence(persistence);
         extendExpiration();
     }
     
