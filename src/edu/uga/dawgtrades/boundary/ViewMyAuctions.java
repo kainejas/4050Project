@@ -118,7 +118,7 @@ public class ViewMyAuctions
      
         try {
 
-            int count = 0;
+            
             for(Auction auc: auctionList) {
               
                 auctionMap = new HashMap<String, String>();

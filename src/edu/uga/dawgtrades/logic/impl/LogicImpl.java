@@ -98,4 +98,8 @@ public class LogicImpl implements Logic{
     public List<Auction> viewMyAuctions(RegisteredUser user) throws DTException{
         return (new CtrlViewMyAuctions(objectModel)).viewMyAuctions(user);
     }
+    @Override
+    public long createAuctionItem(String category_name, String user, String item_name, String description, String min_price, String duration, String[] values ) throws DTException {
+        return (new CtrlAuctionItem(objectModel)).auctionItem(category_name, user, item_name, description, min_price, duration, values);
+    }
 }
