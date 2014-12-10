@@ -25,6 +25,9 @@ public class CtrlUpdateProfile {
         if (!userIter.hasNext())
             throw new DTException("User not found: " + user_name);
         
+        if(password == null || password.equals(""))
+            password = user.getPassword();
+        
         user = userIter.next();
         user.setFirstName(first_name);
         user.setLastName(last_name);
