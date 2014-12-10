@@ -25,7 +25,7 @@ public class ViewProfile
     private static final long serialVersionUID = 1L;
     
     static  String  templateDir = "WEB-INF/templates";
-    static  String  resultTemplateName = "MainWindow.ftl";
+    static  String  resultTemplateName = "ViewProfile.ftl";
 
     private Configuration  cfg; 
 
