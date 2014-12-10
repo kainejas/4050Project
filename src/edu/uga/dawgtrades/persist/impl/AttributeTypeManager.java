@@ -116,7 +116,7 @@ public class AttributeTypeManager {
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			throw new DTException("AttributeTypeManager.restore: Could not restore persistent AttributeType object; Root cause: " + e);
+			throw new DTException("AttributeTypeManager.restore: Could not restore persistent AttributeType object; Root cause: " + e + query.toString());
 		}
 		
 		throw new DTException("AttributeManager.restore: Could not restore persistent AttributeType object");
