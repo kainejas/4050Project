@@ -191,7 +191,7 @@ public class AuctionItem extends HttpServlet{
 		}
 		
 		try{
-            logic.createAuctionItem(category_name, item_name, user_name, description, min_price,duration.toString(), pairs);
+            logic.createAuctionItem(category_name, user_name, item_name, description, min_price,duration.toString(), pairs);
 		}
 		catch(Exception e){
 			DawgTradesError.error(cfg, toClient, e);
