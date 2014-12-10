@@ -94,7 +94,7 @@ public class AttributeTypeManager {
 				query.append(" where id = " + attributeType.getId());
 			else{
 				if(attributeType.getName() != null)
-					condition.append("name = " + attributeType.getName() + "'");
+					condition.append("name = '" + attributeType.getName() + "'");
 				if(attributeType.getCategoryId() != 0) {
 					if(condition.length() > 0)
 						condition.append(" and ");
