@@ -591,7 +591,6 @@ public interface ObjectModel
 	void deleteMembership(Membership membership)throws DTException;
 
 	public void setPersistence(Persistence persistence);
-    category
 
     public Bid getBid(Auction auction) throws DTException;
 
