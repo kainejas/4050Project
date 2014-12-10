@@ -133,7 +133,7 @@ public class ViewMyAuctions
             root.put("auctions", tempList);
         }
         catch(Exception e) {
-            awgTradesError.error( cfg, toClient, "Error making tempList for Page   " + e.getStackTrace() );
+            DawgTradesError.error( cfg, toClient, "Error making tempList for Page   " + e.getStackTrace() );
         }
       
             
