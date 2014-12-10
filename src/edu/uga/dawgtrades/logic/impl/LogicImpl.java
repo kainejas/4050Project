@@ -107,4 +107,9 @@ public class LogicImpl implements Logic{
     public List<Auction> trackAuction(String auction_id) throws DTException {
         return (new CtrlTrackAuction(objectModel)).trackAuction(auction_id);
     }
+    
+    @Override
+    public long defineCategory(String category_name, String parent_name, List<AttributeType> atList) throws DTException {
+        return (new CtrlDefineCategory(objectModel)).defineCategory(category_name, parent_name, atList);
+    }
 }

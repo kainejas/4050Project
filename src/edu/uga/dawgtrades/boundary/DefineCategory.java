@@ -99,9 +99,23 @@ public class DefineCategory extends HttpServlet{
 			DawgTradesError.error(cfg, toClient, "Non-positive parent_id: " + parent_id);
 			return;
 		}
+        
+        
+        int count = 0;
+        String input ="at_" + count;
+        String val = req.getParameter(input);
+        List<AttributeType> atList = new ArrayList<AttributeType>();
+        while(val != null) {
+            AttributeType modelAt = objectModel.createAttributeType();
+            modelAt.setName(val);
+            atList.add(modelAt);
+            
+            val=req.getParameter("at_"+count);
+            count++;
+        }
 		
 		try{
-			category_id = logic.defineCategory(category_name, parent_id);
+			category_id = logic.defineCategory(category_name, parent_id,atList);
 		}
 		catch(Exception e){
 			DawgTradesError.error(cfg, toClient, e);
@@ -111,7 +125,9 @@ public class DefineCategory extends HttpServlet{
 		Map<String, Object> root = new HashMap<String, Object>();
 		
 		root.put("category_name", category_name);
-		root.put("category_id", new Long(category_id));
+		root.put("category_id", category_id);
+        root.put("category_parent", parent_id_str);
+        root.put("category_ats", atList.size());
 		
 		try{
 			resultTemplate.process(root, toClient);

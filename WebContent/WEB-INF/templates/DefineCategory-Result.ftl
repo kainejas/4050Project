@@ -40,55 +40,23 @@
 
     <div class="container">
 
-        <h1>Welcome ${user_name}!</h1>
-        <p>You may:
-        <ol>
-        <li> Browse Category:
-                <form type=post action="BrowseCategory">
-                    <input type=text name="category_name">
-                    <input type=submit value="Submit">
-                </form>
-            </li>
-            <li>Track Auction:
-                <form type=post action="TrackAuction">
-                    <input type=text name="auction_id">
-                    <input type=submit value="Submit">
-                </form>
-</li>
+        <h1>Define Category Confirmation</h1>
+        <p>Category Information:
+        <table style="border: 1px black solid;width:auto">
+            <tr>
+                <th style="border: 1px black solid">Id</th>
+                <th style="border: 1px black solid">Parent_Id</th>
+                <th style="border: 1px black solid">Name</th>
+                <th style="border: 1px black solid">AttributeTypes</th>
+            </tr>
+                <tr>
+                <td style="border: 1px black solid"> ${category_id} </td>
+                <td style="border: 1px black solid"> ${category_parent} </td>
+                <td style="border: 1px black solid"> ${category_name} </td>
+                <td style="border: 1px black solid"> ${category_ats} </td>
+                </tr>
 
-<li>Define Category:
-<form type=post action="DefineCategory">
-<input type=text name="category_name">
-<input type=text name="parent_id">
-<p><p>
-AttributeType Names:
-<input type=text name="at_0">
-<input type=text name="at_1">
-<input type=text name="at_2">
-<input type=text name="at_3">
-<input type=submit value="Submit">
-</form>
-</li>
-
-            <li>
-                View your <a href="ViewProfile"> profile</a>
-            </li>
-            <li>
-               <a href="ViewMyAuctions">View your auctions</a>
-            </li>
-            <li>
-                Create a new <a href="AuctionItem">
-                    auction</a>
-            </li>
-            <li>
-                Unregister your <a href="Unregister">
-                    account</a>
-            </li>
-            
-            <li>
-                <a href="Logout"> Logout</a> from the DawgTrades system.
-            </li>
-        </ol>
+        </table>
 </p>
         
     </div> <!-- /container -->

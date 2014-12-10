@@ -1,10 +1,12 @@
 package edu.uga.dawgtrades.logic.impl;
 
 import java.util.Iterator;
+import java.util.List;
 
 import edu.uga.dawgtrades.model.DTException;
 import edu.uga.dawgtrades.model.Category;
 import edu.uga.dawgtrades.model.ObjectModel;
+import edu.uga.dawgtrades.model.AttributeType;
 
 public class CtrlDefineCategory {
 	private ObjectModel objectModel = null;
@@ -13,7 +15,7 @@ public class CtrlDefineCategory {
 		this.objectModel = objectModel;
 	}
 	
-	public long defineCategory(String category_name, long parentId) throws DTException{
+	public long defineCategory(String category_name, long parentId, List<AttributeType> at) throws DTException{
 		Category category = null;
 		Category modelCategory = null;
 		Iterator<Category> categoryIter = null;
@@ -36,6 +38,11 @@ public class CtrlDefineCategory {
 		category = objectModel.createCategory(parent, category_name);
 		objectModel.storeCategory(category);
 		
+        for(attributeType: at) {
+            objectModel.storeAttributeType(at);
+        }
+        
+        
 		return category.getId();
 	}
 }

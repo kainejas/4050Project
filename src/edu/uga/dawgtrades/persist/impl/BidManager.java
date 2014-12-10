@@ -119,12 +119,14 @@ public class BidManager {
                     query.append(" where ");
                     query.append(condition);
                 }
+                query.append( " ORDER BY id DESC");
             }
         }
        
     
 		
 		try{
+            
 			stmt = conn.createStatement();
 			if(stmt.execute(query.toString())){
 				ResultSet r = stmt.getResultSet();

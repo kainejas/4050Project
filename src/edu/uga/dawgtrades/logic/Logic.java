@@ -29,4 +29,6 @@ public interface Logic {
     
     
     public List<Auction> trackAuction(String auction_id) throws DTException;
+    
+    public long defineCategory(String category_name, String parent_name, List<AttributeType> atList) throws DTException;
 }
