@@ -128,7 +128,13 @@ public class TrackAuction
                 auctionMap.put("amount", ""+auc.getMinPrice());
                 auctionMap.put("item_id", ""+auc.getItemId());
                 auctionMap.put("expiration", auc.getExpiration().toString());
+                try{
                 tempList.add(auctionMap);
+                }
+                catch(Exception e) {
+                    DawgTradesError.error( cfg, toClient, "Here?   " + e.getStackTrace().toString() );
+                    return;
+                }
 
             }
             
@@ -136,6 +142,7 @@ public class TrackAuction
         }
         catch(Exception e) {
             DawgTradesError.error( cfg, toClient, "Error making tempList for Page   " + e.getStackTrace().toString() );
+            return;
         }
       
             
