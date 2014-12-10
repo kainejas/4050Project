@@ -152,7 +152,7 @@ public class AuctionItem extends HttpServlet{
         category_name = req.getParameter("category_name");
         
         
-        Category modelCategory = objectMode.createCategory();
+        Category modelCategory = objectModel.createCategory();
         modelCategory.setName(category_name);
         Category category = objectModel.findCategory(modelCategory).next();
         Iterator<AttributeType> attrTypeIter = objectModel.getAttributeType(category);
