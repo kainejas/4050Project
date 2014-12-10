@@ -40,7 +40,7 @@
 
     <div class="container">
 
-        <h1>Profile Page:  ${user_name}!</h1>
+        <h1>Profile Page:  ${user_name}!  <a href="UpdateProfile">Update Profile</a></h1>
         <p>User Information:
         <ul>
             <li>
