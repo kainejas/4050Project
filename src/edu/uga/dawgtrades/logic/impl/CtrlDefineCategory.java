@@ -15,7 +15,7 @@ public class CtrlDefineCategory {
 		this.objectModel = objectModel;
 	}
 	
-	public long defineCategory(String category_name, long parentId, List<AttributeType> at) throws DTException{
+	public long defineCategory(String category_name, String parent_name, List<AttributeType> at) throws DTException{
 		Category category = null;
 		Category modelCategory = null;
 		Iterator<Category> categoryIter = null;
@@ -28,12 +28,12 @@ public class CtrlDefineCategory {
 		categoryIter = objectModel.findCategory(modelCategory);
 		if(categoryIter.hasNext())
 			throw new DTException("A category with this name already exists: " + category_name);
-		 
+        if(parent_name != null) {
 		modelParent = objectModel.createCategory();
-		modelParent.setId(parentId);
+		modelParent.setName(parent_name);
 		
         parent = objectModel.findCategory(modelParent).next();
-		
+        }
 
 		category = objectModel.createCategory(parent, category_name);
 		objectModel.storeCategory(category);
