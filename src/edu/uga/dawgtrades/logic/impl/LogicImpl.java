@@ -13,11 +13,6 @@ public class LogicImpl implements Logic{
 		this.objectModel = objectModel;
 	}
 	
-	@Override
-	public long defineCategory(String category_name, long parent_id) throws DTException{
-		CtrlDefineCategory ctrlDefineCategory = new CtrlDefineCategory(objectModel);
-		return ctrlDefineCategory.defineCategory(category_name, parent_id);
-	}
 
 	@Override
 	public List<Category> browseCategory(String category_name)
