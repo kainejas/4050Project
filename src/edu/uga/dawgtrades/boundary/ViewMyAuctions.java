@@ -128,6 +128,8 @@ public class ViewMyAuctions
                 auctionMap.put("expiration", auc.getExpiration().toString());
                 tempList.add(auctionMap);
 
+            } catch(Exception e) {
+                awgTradesError.error( cfg, toClient, "Error making tempList for Page   " + e.getMessage() );
             }
             
             root.put("auctions", tempList);
