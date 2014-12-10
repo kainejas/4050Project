@@ -106,6 +106,7 @@ public class ViewMyAuctions
         //
         Map<String, Object> root = new HashMap<String, Object>();
         root.put("auctions", auctionList);
+        root.put("user_name", person.getName());
      /*
         try {
           auctionList = logic.viewMyAuctions(person);
