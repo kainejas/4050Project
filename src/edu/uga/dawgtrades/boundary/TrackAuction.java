@@ -124,8 +124,9 @@ public class TrackAuction
             for(Auction auc: auctionList) {
               
                 auctionMap = new HashMap<String, String>();
+                try{
                 auctionMap.put("id", ""+auc.getId());
-                 try{
+                
                 auctionMap.put("amount", ""+auc.getMinPrice());
                 auctionMap.put("item_id", ""+auc.getItemId());
               
@@ -143,7 +144,7 @@ public class TrackAuction
             root.put("auctions", tempList);
         }
         catch(Exception e) {
-            DawgTradesError.error( cfg, toClient, "Error making tempList for Page   " + e.getStackTrace().toString() );
+            DawgTradesError.error( cfg, toClient, "Error making tempList for Page   size:" + auctionList.size() );
             return;
         }
       
