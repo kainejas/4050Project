@@ -26,4 +26,7 @@ public interface Logic {
     
     
     public long createAuctionItem(String category_name, String user, String item_name, String description, String min_price, String duration, String[] values ) throws DTException;
+    
+    
+    public List<Auction> trackAuction(String auction_id) throws DTException;
 }

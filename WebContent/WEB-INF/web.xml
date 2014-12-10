@@ -158,5 +158,13 @@
         <url-pattern>/PickCategory</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>TrackAuction</servlet-name>
+        <servlet-class>edu.uga.dawgtrades.boundary.TrackAuction</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TrackAuction</servlet-name>
+        <url-pattern>/TrackAuction</url-pattern>
+    </servlet-mapping>
 
 </web-app>
