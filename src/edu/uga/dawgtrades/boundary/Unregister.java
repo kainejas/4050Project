@@ -94,8 +94,9 @@ public class Unregister extends HttpServlet{
 
 		logic = new LogicImpl(objectModel);
         try {
-            SessionManager.logout(session);
+            
         logic.unregister(person);
+        SessionManager.logout(session);
         }
         catch(Exception e) {
             DawgTradesError.error(cfg, toClient, "Error deleting user: "  + person.getName() + "\t\n" + e.getMessage());
