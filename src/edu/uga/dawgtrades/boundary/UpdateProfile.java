@@ -22,7 +22,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 
-public class UpdateCategory extends HttpServlet{
+public class UpdateProfile extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	static String templateDir = "WEB-INF/templates";
 	static String resultTemplateName = "ViewProfile.ftl";
