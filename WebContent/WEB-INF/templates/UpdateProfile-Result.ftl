@@ -39,20 +39,28 @@
     </div>
 
     <div class="container">
+<h1>Updated Information for  ${user_name}!  <a href="UpdateProfile">Update Profile</a></h1>
+<p>User Information:
+<ul>
+<li>
+Username: ${user_name}
+</li>
+<li>
+is_admin: ${is_admin}
+</li>
+<li>
+Full Name: ${first_name} ${last_name}
+</li>
+<li>
+Phone Number: ${phone}    can_text: ${can_text}
+</li>
+<li>
+Email: ${email}
+</li>
 
-        <h1>Updated Profile:   ${user_name}! </h1>
-        <p>
-        <form action="UpdateProfile">
-            Password: <input type=text name="password" value="">
-            First Name: <input type=text name="first_name" value="${first_name}">
-            Last Name: <input type=text name="last_name" value="${last_name}">
-            Email: <input type=text name="email" value="${email}">
-            Phone: <input type=text name="phone" value="${phone}">
-
-            <input type=submit value="Submit">
-        </form>
+</ul>
 </p>
-        
+
     </div> <!-- /container -->
 
     <!-- Le javascript

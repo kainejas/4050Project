@@ -25,7 +25,7 @@ import freemarker.template.TemplateException;
 public class UpdateProfile extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	static String templateDir = "WEB-INF/templates";
-	static String resultTemplateName = "ViewProfile.ftl";
+	static String resultTemplateName = "UpdateProfile-Result.ftl";
 	
 	private Configuration cfg;
 	
