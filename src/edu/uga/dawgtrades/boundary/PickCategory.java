@@ -98,8 +98,10 @@ public class PickCategory extends HttpServlet{
         
         
         Map<String, Object> root = new HashMap<String, Object>();
+        root.put("user_name", session.getUser().getName());
         if(category_name != null && category != null) {
             root.put("category", category_name);
+            
         List<Map<String,String>> tempList = new ArrayList<Map<String, String>>();
         HashMap<String, String> attributeTypeMap = new HashMap<String, String>();
         
