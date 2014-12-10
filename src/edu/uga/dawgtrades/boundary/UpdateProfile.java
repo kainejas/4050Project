@@ -141,6 +141,7 @@ public class UpdateProfile extends HttpServlet{
         root.put("last_name", last_name);
         root.put("email", email);
         root.put("phone", phone);
+        root.put("can_text", true);
 		
 		try{
 			resultTemplate.process(root, toClient);
