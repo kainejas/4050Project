@@ -7,7 +7,7 @@ import edu.uga.dawgtrades.model.DTException;
 
 import edu.uga.dawgtrades.model.ObjectModel;
 import edu.uga.dawgtrades.model.Auction;
-public class CtrlViewProfile {
+public class CtrTrackAuction {
 	private ObjectModel objectModel = null;
 	
 	public CtrlTrackAuction(ObjectModel objectModel){
@@ -16,7 +16,7 @@ public class CtrlViewProfile {
 	
 	public List<Auction> trackAuction(String auction_id) throws DTException{
         
-        Auction modelAuction = null
+        Auction modelAuction = null;
         Iterator<Auction> auctionIter = null;
         List<Auction> auctionList = new LinkedList<Auction>();
         
