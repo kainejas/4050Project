@@ -104,11 +104,16 @@ public class ViewMyAuctions
         List<Auction> auctionList = null;
         // Setup the data-model
         
-        
+        try {
         auctionList = logic.viewMyAuctions(person);
+        }
+        catch(Exception e) {
+             DawgTradesError.error( cfg, toClient, "Error logic.viewMyAuctions()" );
+        }
         Map<String, Object> root = new HashMap<String, Object>();
         root.put("auctions", auctionList);
         root.put("user_name", person.getName());
+            
      /*
         try {
           auctionList = logic.viewMyAuctions(person);
