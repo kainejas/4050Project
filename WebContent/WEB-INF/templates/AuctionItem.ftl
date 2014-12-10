@@ -15,6 +15,7 @@
 <option value="1 week">1 week</option>
 <option value="1 month">1 month</option>
 </select>
+<input type=hidden name="category_name" value="{category}">
 <p><input type=submit value="Submit">
 
 </form>

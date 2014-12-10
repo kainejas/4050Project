@@ -99,7 +99,7 @@ public class PickCategory extends HttpServlet{
         
         Map<String, Object> root = new HashMap<String, Object>();
         if(category_name != null && category != null) {
-            root.put("category", "true");
+            root.put("category", category_name);
         List<Map<String,String>> tempList = new ArrayList<Map<String, String>>();
         HashMap<String, String> attributeTypeMap = new HashMap<String, String>();
         

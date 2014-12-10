@@ -105,6 +105,7 @@ public class AuctionItem extends HttpServlet{
         String description = null;
         String min_price = null;
         String duration = null;
+        String category_name;
 		ObjectModel objectModel = null;
 		Logic logic = null;
 		HttpSession httpSession;
@@ -148,7 +149,31 @@ public class AuctionItem extends HttpServlet{
         description = req.getParameter("description");
         min_price = req.getParameter("min_price");
         duration = req.getParameter("duration");
+        category_name = req.getParameter("category_name");
         
+        
+        Category modelCategory = objectMode.createCategory();
+        modelCategory.setName(category_name);
+        Category category = objectModel.findCategory(modelCategory).next();
+        Iterator<AttributeType> attrTypeIter = objectModel.getAttributeType(category);
+        ArrayList<String> stringList = new ArrayList<String>();
+        String[] pairs = null;
+        
+        if(attrTypeIter != null) {
+            while(attrTypeIter.hasNext()) {
+                AttributeType at = attrTypeIter.next();
+                String name = at.getName();
+                String val = req.getParameter(name+"_value");
+                if(val != null) {
+                    stringList.add(name+","+val);
+                }
+                
+            }
+            pairs = new String[stringList.size()];
+            pairs = stringList.toArray(pairs);
+            
+            
+        }
 		
 		if(item_name == null){
 			DawgTradesError.error(cfg, toClient, "Unspecified item name");
@@ -156,7 +181,7 @@ public class AuctionItem extends HttpServlet{
 		}
 		
 		try{
-			logic.deleteItem(item_name);
+            logic.createAuctionItem(category_name, item_name, session.getUser().getName(), item_name, description, duration.toString(), pairs);
 		}
 		catch(Exception e){
 			DawgTradesError.error(cfg, toClient, e);
