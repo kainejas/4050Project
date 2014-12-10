@@ -167,13 +167,6 @@
         <url-pattern>/TrackAuction</url-pattern>
     </servlet-mapping>
     
-    <servlet-name>DefineCategory</servlet-name>
-    <servlet-class>edu.uga.dawgtrades.boundary.DefineCategory</servlet-class>
-</servlet>
-<servlet-mapping>
-    <servlet-name>DefineCategory</servlet-name>
-    <url-pattern>/DefineCategory</url-pattern>
-</servlet-mapping>
 
 
 </web-app>
