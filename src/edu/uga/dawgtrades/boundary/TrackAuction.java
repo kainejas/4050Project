@@ -144,7 +144,7 @@ public class TrackAuction
             root.put("auctions", tempList);
         }
         catch(Exception e) {
-            DawgTradesError.error( cfg, toClient, "Error making tempList for Page   size:" + auctionList.size() + " id: " + auction_id );
+            DawgTradesError.error( cfg, toClient, "Error making tempList for Page  id: " + auction_id );
             return;
         }
       
