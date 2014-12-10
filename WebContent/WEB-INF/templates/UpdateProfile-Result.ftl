@@ -46,9 +46,6 @@
 Username: ${user_name}
 </li>
 <li>
-is_admin: ${is_admin}
-</li>
-<li>
 Full Name: ${first_name} ${last_name}
 </li>
 <li>
