@@ -123,7 +123,15 @@ public class ViewMyAuctions
               
                 auctionMap = new HashMap<String, String>();
                 auctionMap.put("id", ""+auc.getId());
-                auctionMap.put("amount", ""+auc.getMinPrice());
+                Bid temp = objectModel.getBid(auc);
+                if(temp != null){
+                    // DawgTradesError.error(cfg,toClient, "bid is null");
+                    
+                    auctionMap.put("amount", ""+objectModel.getBid(auc).getAmount());
+                }
+                else {
+                    auctionMap.put("amount", "" + auc.getMinPrice());
+                }
                 auctionMap.put("item_id", ""+auc.getItemId());
                 auctionMap.put("expiration", auc.getExpiration().toString());
                 tempList.add(auctionMap);
