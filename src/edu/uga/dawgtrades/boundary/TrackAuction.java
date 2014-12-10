@@ -107,7 +107,9 @@ public class TrackAuction
         String auction_id="";
         try {
              auction_id = req.getParameter("auction_id");
-            auctionList = logic.trackAuction(auction_id);
+            Auction modelAuction = objectModel.createAuction();
+            auction.setId(Long.parseLong(auction_id));
+            auctionList = objectModel.findAuction(modelAuction);
         }
         catch(Exception e) {
              DawgTradesError.error( cfg, toClient, "Error logic.trackAuction("+auction_id+")    " + e.getMessage() );
