@@ -26,13 +26,16 @@ public class CtrlDefineCategory {
 		modelCategory = objectModel.createCategory();
 		modelCategory.setName(category_name);
 		categoryIter = objectModel.findCategory(modelCategory);
-		if(categoryIter.hasNext())
+		if(categoryIter != null && categoryIter.hasNext())
 			throw new DTException("A category with this name already exists: " + category_name);
         if(parent_name != null) {
 		modelParent = objectModel.createCategory();
 		modelParent.setName(parent_name);
-		
+            try{
         parent = objectModel.findCategory(modelParent).next();
+            }catch(Exception e) {
+                
+            }
         }
 
 		category = objectModel.createCategory(parent, category_name);
