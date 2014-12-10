@@ -41,7 +41,7 @@ public class DefineCategory extends HttpServlet{
 		Template resultTemplate = null;
 		BufferedWriter toClient = null;
 		String category_name = null;
-		String parent_id_str;
+		String parent_name;
 		long parent_id;
 		long category_id = 0;
 		ObjectModel objectModel = null;
