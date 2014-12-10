@@ -136,7 +136,7 @@ public class AuctionItem extends HttpServlet{
 		}
 		
 		session = SessionManager.getSessionById(ssid);
-
+        RegisteredUser person = session.getUser();
 		objectModel = session.getObjectModel();
 		if(objectModel == null){
 			DawgTradesError.error(cfg, toClient, "Session expired or illegal; please log in");
@@ -190,7 +190,7 @@ public class AuctionItem extends HttpServlet{
 		}
 		
 		try{
-            logic.createAuctionItem(category_name, item_name, session.getUser().getName(), description, min_price,duration.toString(), pairs);
+            logic.createAuctionItem(category_name, item_name, person.getName(), description, min_price,duration.toString(), pairs);
 		}
 		catch(Exception e){
 			DawgTradesError.error(cfg, toClient, e);
