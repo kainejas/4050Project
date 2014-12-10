@@ -16,15 +16,16 @@
 <option value="1 month">1 month</option>
 </select>
 <input type=hidden name="category_name" value="{category}">
+<p>Category Attibutes
+<#list attribute_types as attribute_type>
+<p>${attribute_type.name}: <input type=text name="${attribute_type.name?html}_value">
+</#list>
+
 <p><input type=submit value="Submit">
 
 </form>
 
 
-Category Attibutes
-<#list attribute_types as attribute_type>
-<p>${attribute_type.name}: <input type=text name="${attribute_type.name?html}_value">
-</#list>
 
 <#else>
 <form method=post action="PickCategory">
