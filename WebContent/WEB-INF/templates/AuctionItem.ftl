@@ -15,6 +15,7 @@
 <option value="1 week">1 week</option>
 <option value="1 month">1 month</option>
 </select>
+<p><input type=submit value="Submit">
 
 </form>
 
@@ -29,7 +30,7 @@ Category Attibutes
 
 <p>Enter Item Category: <input type=text name="category_name">
 
-<p><input type=submit>
+<p><input type=submit value="Submit">
 
 </form>
 
