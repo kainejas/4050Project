@@ -5,7 +5,7 @@
 
 <h1>Create a New Auction</h1>
 
-<#if !category_id??>
+<#if !category_name??>
 <form method=get action="AuctionItem">
 
 <p>Enter Item Category: <input type=text name="category_name">
