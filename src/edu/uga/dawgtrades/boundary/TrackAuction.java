@@ -19,6 +19,7 @@ import edu.uga.dawgtrades.authentication.SessionManager;
 import edu.uga.dawgtrades.model.RegisteredUser;
 import edu.uga.dawgtrades.model.Auction;
 import edu.uga.dawgtrades.model.ObjectModel;
+import edu.uga.dawgtrades.model.Bid;
 import edu.uga.dawgtrades.logic.*;
 import edu.uga.dawgtrades.logic.impl.*;
 import freemarker.template.Configuration;
@@ -126,7 +127,7 @@ public class TrackAuction
                 auctionMap = new HashMap<String, String>();
                 try{
                 auctionMap.put("id", ""+auc.getId());
-                    Bid temp = objectMode.getBid(auc);
+                    Bid temp = objectModel.getBid(auc);
                     if(temp != null){
                        // DawgTradesError.error(cfg,toClient, "bid is null");
                     
