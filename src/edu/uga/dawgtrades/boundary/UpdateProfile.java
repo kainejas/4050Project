@@ -55,11 +55,12 @@ public class UpdateCategory extends HttpServlet{
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		Template resultTemplate = null;
 		BufferedWriter toClient = null;
-		String category_name = null;
-		String parent_id_str;
-		long parent_id;
-		String category_id_str;
-		long category_id = 0;
+        String first_name = null;
+        String last_name = null;
+        String user_name = null;
+        String password = null;
+        String email = null;
+        String phone = null;
 		ObjectModel objectModel = null;
 		Logic logic = null;
 		HttpSession httpSession;
@@ -97,42 +98,31 @@ public class UpdateCategory extends HttpServlet{
 		}
 		
 		logic = new LogicImpl(objectModel);
-        user_name = req.getParameter("user_name");
+        user_name = session.getUser().getName();
         first_name = req.getParameter("first_name");
         last_name = req.getParameter("last_name");
         email = req.getParameter("email");
         phone = req.getParameter("phone");
         
-		if(category_name == null){
-			DawgTradesError.error(cfg, toClient, "Unspecified category name");
+		if(first_name == null){
+			DawgTradesError.error(cfg, toClient, "Unspecified first name");
 			return;
 		}
-		
-		try{
-			parent_id = Long.parseLong(parent_id_str);
-		}
-		catch(Exception e){
-			DawgTradesError.error(cfg, toClient, "parent_id should be a number and is: " + parent_id_str);
-			return;
-		}
-		
-		if(parent_id <= 0){
-			DawgTradesError.error(cfg, toClient, "Non-positive parent_id: " + parent_id);
-			return;
-		}
-		
-		try{
-			category_id = Long.parseLong(category_id_str);
-		}
-		catch(Exception e){
-			DawgTradesError.error(cfg, toClient, "category_id should be a number and is: " + parent_id_str);
-			return;
-		}
-		
-		if(category_id <= 0){
-			DawgTradesError.error(cfg, toClient, "Non-positive category_id: " + category_id);
-			return;
-		}
+        if(last_name == null){
+            DawgTradesError.error(cfg, toClient, "Unspecified last name");
+            return;
+        }
+
+        if(email == null){
+            DawgTradesError.error(cfg, toClient, "Unspecified email");
+            return;
+        }
+
+        if(phone == null){
+            DawgTradesError.error(cfg, toClient, "Unspecified phone");
+            return;
+        }
+
 		
 		try{
 			category_id = logic.updateProfile(user_name, first_name, last_name, password, email, phone, true);
