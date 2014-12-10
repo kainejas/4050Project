@@ -42,7 +42,7 @@
 
         <h1>View My Auctions:  ${user_name}!  <a href="UpdateProfile">Update Profile</a></h1>
         <p>Auction Information:
-        <table>
+        <table style="border: 1px black solid">
             <tr>
                 <th>Id</th>
                 <th>Amount</th>
@@ -51,7 +51,7 @@
             </tr>
             <#list auctions as auction>
                 <tr>
-                <td> {$auction.id} </td>
+                <td> ${auction.id} </td>
                 <td> ${auction.amount} </td>
                 <td> ${auction.item_id} </td>
                 <td> ${auction.expiration} </td>
