@@ -5,7 +5,7 @@
 
 <h1>Create a New Auction</h1>
 
-<#if (category = "true")>
+<#if (category)??>
 <form method=post action="AuctionItem">
 <p>Item Name: <input type=text name="item_name">
 <p>Description<input type=text name="description">
