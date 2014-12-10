@@ -90,7 +90,7 @@ public class SessionManager
              System.out.println( "password: " + knownRegisteredUser.getPassword() );
              System.out.println( "email: " + knownRegisteredUser.getEmail() ); 
              loginRegisteredUser = null;
-            if(knownRegisteredUser.getPassword().equals(loginRegisteredUser.getPassword())
+            if(knownRegisteredUser.getPassword().equals(loginRegisteredUser.getPassword()))
              return createSession( s, knownRegisteredUser );
         } 
         else {
