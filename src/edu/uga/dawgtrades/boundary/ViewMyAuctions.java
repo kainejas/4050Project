@@ -122,9 +122,9 @@ public class ViewMyAuctions
             while(auctionList.hasNext()) {
                 auc = auctionList.next();
                 auctionMap = new HashMap<String, String>();
-                auctionMap.put("id", auc.getId());
-                auctionMap.put("min_price", auc.getMinPrice());
-                auctionMap.put("item_id", auc.getItemId());
+                auctionMap.put("id", ""+auc.getId());
+                auctionMap.put("min_price", ""+auc.getMinPrice());
+                auctionMap.put("item_id", ""+auc.getItemId());
                 auctionMap.put("expiration", auc.getExpiration().toString());
                 tempList.add(auctionMap);
 
@@ -133,7 +133,7 @@ public class ViewMyAuctions
             root.put("auctions", tempList);
         }
         catch(Exception e) {
-            awgTradesError.error( cfg, toClient, "Error making tempList for Page   " + e.getMessage() );
+            awgTradesError.error( cfg, toClient, "Error making tempList for Page   " + e.getStackTrace() );
         }
       
             
