@@ -94,7 +94,6 @@ public class Unregister extends HttpServlet{
 
 		logic = new LogicImpl(objectModel);
         try {
-            
         logic.unregister(person);
         SessionManager.logout(session);
         }

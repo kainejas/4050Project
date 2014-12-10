@@ -46,7 +46,7 @@ public class Login
         HttpSession    httpSession = null;
 
         httpSession = req.getSession();
-        if( httpSession == null || (String) httpSession.getAttribute( "ssid" ) == null ) {
+        if( httpSession == null || SessionManager.getSessionById((String)httpSession.getAttribute( "ssid") ) == null ) {
             // not logged in!
             res.sendRedirect("http://uml.cs.uga.edu:8080/team3/login.html");
         }
