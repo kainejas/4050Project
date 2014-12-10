@@ -31,10 +31,8 @@ public class CtrlTrackAuction {
         modelAuction = objectModel.createAuction();
         modelAuction.setId(id);
         auctionIter = objectModel.findAuction(modelAuction);
-        if (auctionIter != null || !auctionIter.hasNext())
-            return null;
         
-        while(auctionIter.hasNext() ) {
+        while(auctionIter != null && auctionIter.hasNext() ) {
             Auction auc = auctionIter.next();
             auctionList.add(auc);
         }
