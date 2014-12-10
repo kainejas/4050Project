@@ -72,7 +72,7 @@ public class CtrlAuctionItem {
         Iterator<RegisteredUser> ownerIter = objectModel.findRegisteredUser(modelOwner);
         
         if(!ownerIter.hasNext())
-            throw new DTException("No user found when creating auction");
+            throw new DTException("No user found when creating auction " + user);
         
         
         Item item = objectModel.createItem(cat,ownerIter.next(), item_name, description);
