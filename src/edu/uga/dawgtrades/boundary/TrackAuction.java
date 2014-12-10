@@ -104,8 +104,9 @@ public class TrackAuction
         logic = new LogicImpl(objectModel);
         // Setup the data-model
         List<Auction> auctionList = null;
+        String auction_id="";
         try {
-            String auction_id = req.getParameter("auction_id");
+             auction_id = req.getParameter("auction_id");
             auctionList = logic.trackAuction(auction_id);
         }
         catch(Exception e) {
