@@ -114,9 +114,9 @@ public class BrowseCategory extends HttpServlet{
 		}
 
 		if (rc == null) {
-			for (int i = 0; i < ri.size(); i++) {
-				root.put("item" + i + "_id",ri.get(i).getId());
-				root.put("item" + i + "_name",ri.get(i).getName());
+			for (int k = 0; k < ri.size(); k++) {
+				root.put("item" + k + "_id",ri.get(k).getId());
+				root.put("item" + k + "_name",ri.get(k).getName());
 			}
 		} else {
 			for (int j = 0; j < ri.size(); j++)
