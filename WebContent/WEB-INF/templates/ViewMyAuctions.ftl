@@ -42,14 +42,23 @@
 
         <h1>View My Auctions:  ${user_name}!  <a href="UpdateProfile">Update Profile</a></h1>
         <p>Auction Information:
-        <ul>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Amount</th>
+                <th>Item Id</th>
+                <th>Expiration</th>
+            </tr>
             <#list auctions as auction>
-                <li>
-                ${auction.amount} and ${auction.item_id}
-                </li>
+                <tr>
+                <td> {$auction.id} </td>
+                <td> ${auction.amount} </td>
+                <td> ${auction.item_id} </td>
+                <td> ${auction.expiration} </td>
+                </tr>
             </#list>
 
-        </ul>
+        </table>
 </p>
         
     </div> <!-- /container -->
