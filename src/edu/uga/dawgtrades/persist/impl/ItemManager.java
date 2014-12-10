@@ -344,7 +344,7 @@ class ItemManager
     }// end restoreOwns()
     
     public Auction restoreIsSoldAt(Item item) throws DTException {
-		String selectItemSql = "select a.id, a.minPrice, a.expiration, a.item_id from item i, auction a where a.item_id = i.id";
+		String selectItemSql = "select a.id, a.expiration, a.item_id, a.minPrice from item i, auction a where a.item_id = i.id";
 		Statement stmt = null;
 		StringBuffer query = new StringBuffer(100);
 		StringBuffer condition = new StringBuffer(100);
