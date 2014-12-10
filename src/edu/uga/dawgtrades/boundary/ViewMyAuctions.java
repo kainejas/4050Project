@@ -103,7 +103,9 @@ public class ViewMyAuctions
         logic = new LogicImpl(objectModel);
         List<Auction> auctionList = null;
         // Setup the data-model
-        //
+        
+        
+        auctionList = logic.viewMyAuctions(person);
         Map<String, Object> root = new HashMap<String, Object>();
         root.put("auctions", auctionList);
         root.put("user_name", person.getName());
