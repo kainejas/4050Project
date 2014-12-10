@@ -123,7 +123,7 @@ public class ViewMyAuctions
               
                 auctionMap = new HashMap<String, String>();
                 auctionMap.put("id", ""+auc.getId());
-                auctionMap.put("min_price", ""+auc.getMinPrice());
+                auctionMap.put("amount", ""+auc.getMinPrice());
                 auctionMap.put("item_id", ""+auc.getItemId());
                 auctionMap.put("expiration", auc.getExpiration().toString());
                 tempList.add(auctionMap);
