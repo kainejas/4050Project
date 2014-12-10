@@ -73,7 +73,6 @@ public class SessionManager
         }
         
         s = new Session( conn );
-        s.setObjectModel(objectModel);
         objectModel = new ObjectModelImpl();
         persistence = new PersistenceImpl( conn, objectModel );
         objectModel.setPersistence(persistence);
