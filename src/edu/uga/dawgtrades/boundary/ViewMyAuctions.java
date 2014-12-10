@@ -102,7 +102,7 @@ public class ViewMyAuctions
         
         logic = new LogicImpl(objectModel);
         // Setup the data-model
-        
+        List<Auction> auctionList = null;
         try {
             auctionList = logic.viewMyAuctions(person);
         }
