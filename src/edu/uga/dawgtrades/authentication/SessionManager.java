@@ -97,7 +97,7 @@ public class SessionManager
            // log.error( "SessionManager.login: Invalid UserName or Password for: " + username );
             throw new DTException( "SessionManager.login: Invalid User Name or Password" );
         }
-        throw new DTException( "SessionManager.login: Invalid User Name or Password" );
+
         
     }
     
