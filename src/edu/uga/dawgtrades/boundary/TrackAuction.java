@@ -127,8 +127,9 @@ public class TrackAuction
                 auctionMap.put("id", ""+auc.getId());
                 auctionMap.put("amount", ""+auc.getMinPrice());
                 auctionMap.put("item_id", ""+auc.getItemId());
+               try{
                 auctionMap.put("expiration", auc.getExpiration().toString());
-                try{
+                
                 tempList.add(auctionMap);
                 }
                 catch(Exception e) {
