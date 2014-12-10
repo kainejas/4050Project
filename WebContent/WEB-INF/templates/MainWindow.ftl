@@ -44,7 +44,10 @@
         <p>You may:
         <ol>
             <li>
-                Browse all <a href="BrowseCategories"> categories</a>
+                <form type=post action="BrowseCategory">
+                    <input type=text name="category_name">
+                    <input type=submit value="Submit">
+                </form>
             </li>
             <li>
                 View your <a href="ViewProfile"> profile</a>
