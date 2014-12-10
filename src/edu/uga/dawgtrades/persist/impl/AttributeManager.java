@@ -102,12 +102,12 @@ public class AttributeManager {
 				if(attribute.getItemId() != -1){
 					 if( condition.length() > 0 )
 	                    	condition.append(" and ");
-					condition.append("item_id = '" + attribute.getItemId() + "'");
+					condition.append("item_id = " + attribute.getItemId() );
 				}
 				if(attribute.getAttributeType() != -1) {
 					 if( condition.length() > 0 )
 	                    	condition.append(" and ");
-					condition.append("attributetype_id = '" + attribute.getAttributeType() + "'");
+					condition.append("attributetype_id = " + attribute.getAttributeType());
 				}
 				if(condition.length() > 0){
 					query.append(" where ");
