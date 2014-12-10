@@ -44,20 +44,20 @@
         <p>You may:
         <ol>
         <li> Browse Category:
-                <form type=post action="BrowseCategory">
+                <form method=post action="BrowseCategory">
                     <input type=text name="category_name">
                     <input type=submit value="Submit">
                 </form>
             </li>
             <li>Track Auction:
-                <form type=post action="TrackAuction">
+                <form action="TrackAuction">
                     <input type=text name="auction_id">
                     <input type=submit value="Submit">
                 </form>
 </li>
 
 <li>Define Category:
-<form type=post action="DefineCategory">
+<form method=post action="DefineCategory">
 <p>Category Name<input type=text name="category_name">
 <p>Parent Name<input type=text name="parent_name">
 <p><p>
