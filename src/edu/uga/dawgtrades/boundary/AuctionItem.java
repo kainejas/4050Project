@@ -95,15 +95,13 @@ public class AuctionItem extends HttpServlet{
             DawgTradesError.error( cfg, toClient, "Error findCategory in AuctionItem.java  " + e.getStackTrace());
             return;
         }
-        if(category == null) {
-            DawgTradesError.error(cfg, toClient, "Category is null");
-            return;
-        }
+
         
         Iterator<AttributeType> attrTypeIter = null;
         
         
         Map<String, Object> root = new HashMap<String, Object>();
+        if(category != null) {
         List<Map<String,String>> tempList = new ArrayList<Map<String, String>>();
         HashMap<String, String> attributeTypeMap = new HashMap<String, String>();
         
@@ -124,7 +122,7 @@ public class AuctionItem extends HttpServlet{
             DawgTradesError.error( cfg, toClient, "Error making tempList for AuctionItem Page   " + e.getStackTrace() );
             return;
         }
-        
+        }
         
         try{
             resultTemplate.process(root, toClient);

@@ -43,7 +43,7 @@
         <h1>Welcome ${user_name}!</h1>
         <p>You may:
         <ol>
-        <li> Browse Category: 
+        <li> Browse Category:
                 <form type=post action="BrowseCategory">
                     <input type=text name="category_name">
                     <input type=submit value="Submit">
@@ -56,7 +56,7 @@
                 View your 'tracking' <a href="ViewTracking"> auctions</a>
             </li>
             <li>
-                Create a new <a href="CreateAuction">
+                Create a new <a href="AuctionItem">
                     auction</a>
             </li>
             <li>
