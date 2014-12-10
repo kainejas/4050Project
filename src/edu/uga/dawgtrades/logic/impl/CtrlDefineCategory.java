@@ -38,7 +38,7 @@ public class CtrlDefineCategory {
 		category = objectModel.createCategory(parent, category_name);
 		objectModel.storeCategory(category);
 		
-        for(attributeType: at) {
+        for(AttributeType attributeType: at) {
             objectModel.storeAttributeType(at);
         }
         
