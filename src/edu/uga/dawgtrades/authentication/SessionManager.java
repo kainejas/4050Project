@@ -90,12 +90,14 @@ public class SessionManager
              System.out.println( "password: " + knownRegisteredUser.getPassword() );
              System.out.println( "email: " + knownRegisteredUser.getEmail() ); 
              loginRegisteredUser = null;
+            if(knownRegisteredUser.getPassword().equals(loginRegisteredUser.getPassword())
              return createSession( s, knownRegisteredUser );
         } 
         else {
            // log.error( "SessionManager.login: Invalid UserName or Password for: " + username );
             throw new DTException( "SessionManager.login: Invalid User Name or Password" );
         }
+        throw new DTException( "SessionManager.login: Invalid User Name or Password" );
         
     }
     
