@@ -40,7 +40,7 @@
 
     <div class="container">
 
-        <h1>View My Auctions:  ${user_name}!  <a href="UpdateProfile">Update Profile</a></h1>
+        <h1>View ${user_name}'s' Auctions! </h1>
         <p>Auction Information:
         <table style="border: 1px black solid">
             <tr>
