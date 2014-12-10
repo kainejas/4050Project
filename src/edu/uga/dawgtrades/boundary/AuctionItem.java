@@ -21,7 +21,7 @@ import edu.uga.dawgtrades.logic.Logic;
 import edu.uga.dawgtrades.logic.impl.LogicImpl;
 import edu.uga.dawgtrades.model.ObjectModel;
 import edu.uga.dawgtrades.model.AttributeType;
-import edu.uga.dawgtrades.model.RegisteredUser;
+import edu.uga.dawgtrades.model.Category;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -98,7 +98,6 @@ public class AuctionItem extends HttpServlet{
         Map<String, Object> root = new HashMap<String, Object>();
         List<Map<String,String>> tempList = new ArrayList<Map<String, String>>();
         HashMap<String, String> attributeTypeMap = new HashMap<String, String>();
-        root.put("user_name", person.getName());
         
         try {
             
@@ -168,7 +167,7 @@ public class AuctionItem extends HttpServlet{
 		}
 		
 		session = SessionManager.getSessionById(ssid);
-        RegisteredUser person = session.getUser();
+
 		objectModel = session.getObjectModel();
 		if(objectModel == null){
 			DawgTradesError.error(cfg, toClient, "Session expired or illegal; please log in");
