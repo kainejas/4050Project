@@ -79,12 +79,9 @@ public class UpdateProfile extends HttpServlet{
 		}
 		
 		logic = new LogicImpl(objectModel);
-        user_name = req.getParameter("user_name");
-        first_name = req.getParameter("first_name");
-        last_name = req.getParameter("last_name");
-        email = req.getParameter("email");
-        phone = req.getParameter("phone");
-        
+        category_name = req.getParameter("category_name");
+        parent_id_str = req.getParameter("parent_id");
+        category_id_str = req.getParameter("category_id");
 		if(category_name == null){
 			DawgTradesError.error(cfg, toClient, "Unspecified category name");
 			return;

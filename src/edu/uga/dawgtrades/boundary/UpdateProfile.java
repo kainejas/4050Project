@@ -25,7 +25,7 @@ import freemarker.template.TemplateException;
 public class UpdateCategory extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	static String templateDir = "WEB-INF/templates";
-	static String resultTemplateName = "DefineCategory-Result.ftl";
+	static String resultTemplateName = "ViewProfile.ftl";
 	
 	private Configuration cfg;
 	
@@ -33,6 +33,24 @@ public class UpdateCategory extends HttpServlet{
 		cfg = new Configuration();
 		cfg.setServletContextForTemplateLoading(getServletContext(), "WEB-INF/templates");
 	}
+    
+    public void doGet( HttpServletRequest req, HttpServletResponse res )
+    throws ServletException, IOException
+    {
+        HttpSession    httpSession = null;
+        
+        httpSession = req.getSession();
+        if( httpSession == null || SessionManager.getSessionById((String)httpSession.getAttribute( "ssid") ) == null ) {
+            // not logged in!
+            res.sendRedirect("http://uml.cs.uga.edu:8080/team3/login.html");
+        }
+        else {
+            res.sendRedirect("http://uml.cs.uga.edu:8080/team3/UpdateProfile.html");
+        }
+        
+        
+    }
+    
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		Template resultTemplate = null;
@@ -79,11 +97,12 @@ public class UpdateCategory extends HttpServlet{
 		}
 		
 		logic = new LogicImpl(objectModel);
-		
-		category_name = req.getParameter("category_name");
-		parent_id_str = req.getParameter("parent_id");
-		category_id_str = req.getParameter("category_id");
-		
+        user_name = req.getParameter("user_name");
+        first_name = req.getParameter("first_name");
+        last_name = req.getParameter("last_name");
+        email = req.getParameter("email");
+        phone = req.getParameter("phone");
+        
 		if(category_name == null){
 			DawgTradesError.error(cfg, toClient, "Unspecified category name");
 			return;
@@ -125,8 +144,11 @@ public class UpdateCategory extends HttpServlet{
 		
 		Map<String, Object> root = new HashMap<String, Object>();
 		
-		root.put("category_name", category_name);
-		root.put("category_id", new Long(category_id));
+		root.put("user_name", user_name);
+		root.put("first_name", first_name);
+        root.put("last_name", last_name);
+        root.put("email", email);
+        root.put("phone", phone);
 		
 		try{
 			resultTemplate.process(root, toClient);

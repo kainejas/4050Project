@@ -40,7 +40,7 @@
 
     <div class="container">
 
-        <h1>Update Profile:   ${user_name}! </h1>
+        <h1>Updated Profile:   ${user_name}! </h1>
         <p>
         <form action="UpdateProfile">
             Password: <input type=text name="password" value="">
