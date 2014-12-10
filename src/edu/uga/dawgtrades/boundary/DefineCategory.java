@@ -83,26 +83,14 @@ public class DefineCategory extends HttpServlet{
 		logic = new LogicImpl(objectModel);
 		
 		category_name = req.getParameter("category_name");
-		parent_id_str = req.getParameter("parent_id");
+		parent_name = req.getParameter("parent_name");
 		
 		if(category_name == null){
 			DawgTradesError.error(cfg, toClient, "Unspecified category name");
 			return;
 		}
 		
-		try{
-			parent_id = Long.parseLong(parent_id_str);
-		}
-		catch(Exception e){
-			DawgTradesError.error(cfg, toClient, "parent_id should be a number and is: " + parent_id_str);
-			return;
-		}
 		
-		if(parent_id <= 0){
-			DawgTradesError.error(cfg, toClient, "Non-positive parent_id: " + parent_id);
-			return;
-		}
-        
         
         int count = 0;
         String input ="at_" + count;
@@ -118,7 +106,7 @@ public class DefineCategory extends HttpServlet{
         }
 		
 		try{
-			category_id = logic.defineCategory(category_name, parent_id,atList);
+			category_id = logic.defineCategory(category_name, parent_name,atList);
 		}
 		catch(Exception e){
 			DawgTradesError.error(cfg, toClient, e);
@@ -129,7 +117,7 @@ public class DefineCategory extends HttpServlet{
 		
 		root.put("category_name", category_name);
 		root.put("category_id", category_id);
-        root.put("category_parent", parent_id_str);
+        root.put("category_parent", parent_name);
         root.put("category_ats", atList.size());
 		
 		try{
