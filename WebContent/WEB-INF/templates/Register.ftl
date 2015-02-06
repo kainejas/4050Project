@@ -7,7 +7,7 @@
                     <meta name="author" content="">
                         
                         <!-- Le styles -->
-                        <link href="../assets/css/bootstrap.css" rel="stylesheet">
+                        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.css" rel="stylesheet">
                             <style type="text/css">
                                 body {
                                     padding-top: 40px;
@@ -41,7 +41,7 @@
                                 }
                                 
                                 </style>
-                            <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
+                            <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-responsive.css" rel="stylesheet">
                                 
                                 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
                                 <!--[if lt IE 9]>
@@ -49,11 +49,11 @@
                                  <![endif]-->
                                 
                                 <!-- Fav and touch icons -->
-                                <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-                                    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-                                        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-                                            <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-                                                <link rel="shortcut icon" href="../assets/ico/favicon.png">
+                                <link rel="apple-touch-icon-precomposed" sizes="144x144" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/ico/apple-touch-icon-144-precomposed.png">
+                                    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/ico/apple-touch-icon-114-precomposed.png">
+                                        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/ico/apple-touch-icon-72-precomposed.png">
+                                            <link rel="apple-touch-icon-precomposed" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/ico/apple-touch-icon-57-precomposed.png">
+                                                <link rel="shortcut icon" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/ico/favicon.png">
                                                     </head>
     
     <body>
@@ -90,7 +90,7 @@
                         <label class="checkbox">
                             <input type="checkbox" value="text"> Opt to recieve text message notifications?
                                 </label>
-                        <button class="btn btn-large btn-inverse" type="submit">Sign in</button>
+                        <button class="btn btn-large btn-inverse" type="submit">Register</button>
                         <button class="btn btn-large btn-inverse" type="reset">Reset</button>
                         </form>
             
@@ -99,19 +99,19 @@
         <!-- Le javascript
          ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="../assets/js/jquery.js"></script>
-        <script src="../assets/js/bootstrap-transition.js"></script>
-        <script src="../assets/js/bootstrap-alert.js"></script>
-        <script src="../assets/js/bootstrap-modal.js"></script>
-        <script src="../assets/js/bootstrap-dropdown.js"></script>
-        <script src="../assets/js/bootstrap-scrollspy.js"></script>
-        <script src="../assets/js/bootstrap-tab.js"></script>
-        <script src="../assets/js/bootstrap-tooltip.js"></script>
-        <script src="../assets/js/bootstrap-popover.js"></script>
-        <script src="../assets/js/bootstrap-button.js"></script>
-        <script src="../assets/js/bootstrap-collapse.js"></script>
-        <script src="../assets/js/bootstrap-carousel.js"></script>
-        <script src="../assets/js/bootstrap-typeahead.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/jquery.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap-transition.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap-alert.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap-modal.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap-dropdown.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap-scrollspy.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap-tab.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap-tooltip.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap-popover.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap-button.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap-collapse.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap-carousel.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap-typeahead.js"></script>
         
     </body>
 </html>
